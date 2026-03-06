@@ -19,6 +19,9 @@ const DEFAULT_OPTIONS = {
   defaultMessage: 'Copied to clipboard.',
   useAlert: false,
   trimText: true,
+  successClass: 'is_copied',
+  successLabel: 'COPIED',
+  successDuration: 1600,
   onSuccess: null,
   onError: null,
 };
@@ -28,6 +31,7 @@ export function copyPlugin(userOptions = {}) {
     ...DEFAULT_OPTIONS,
     ...userOptions,
   };
+  const feedbackTimers = new WeakMap();
 
   return {
     name: 'copy',
@@ -80,9 +84,22 @@ export function copyPlugin(userOptions = {}) {
             });
           }
 
+          applyCopySuccessFeedback(el, options, feedbackTimers);
+          dispatchCopyEvent('weave:copy-success', {
+            el,
+            text,
+            message,
+          });
+
           ctx.logger.log('copy success', { el, text });
         } catch (error) {
           ctx.logger.error('copy failed', error);
+
+          dispatchCopyEvent('weave:copy-error', {
+            el,
+            text,
+            error,
+          });
 
           if (typeof options.onError === 'function') {
             options.onError({
@@ -198,4 +215,82 @@ function fallbackCopyText(text) {
   } finally {
     document.body.removeChild(textarea);
   }
+}
+
+function applyCopySuccessFeedback(el, options, feedbackTimers) {
+  if (!supportsCopyButtonFeedback(el)) return;
+
+  const successClass =
+    el.dataset.copySuccessClass ||
+    el.getAttribute('data-copy-success-class') ||
+    options.successClass;
+  const successLabel =
+    el.dataset.copySuccessLabel ||
+    el.getAttribute('data-copy-success-label') ||
+    options.successLabel;
+  const successDuration = parseSuccessDuration(el, options);
+
+  if (!el.dataset.copyOriginalLabel) {
+    el.dataset.copyOriginalLabel = getElementLabel(el);
+  }
+
+  const timerId = feedbackTimers.get(el);
+  if (timerId) {
+    window.clearTimeout(timerId);
+  }
+
+  setElementLabel(el, successLabel);
+  el.classList.add(successClass);
+  el.setAttribute('aria-live', 'polite');
+
+  const nextTimerId = window.setTimeout(() => {
+    setElementLabel(el, el.dataset.copyOriginalLabel || '');
+    el.classList.remove(successClass);
+    feedbackTimers.delete(el);
+  }, successDuration);
+
+  feedbackTimers.set(el, nextTimerId);
+}
+
+function supportsCopyButtonFeedback(el) {
+  if (!el) return false;
+
+  return (
+    el.tagName === 'BUTTON' ||
+    el.tagName === 'A' ||
+    el.getAttribute('role') === 'button'
+  );
+}
+
+function getElementLabel(el) {
+  if (el.dataset.copyLabel) {
+    return el.dataset.copyLabel;
+  }
+
+  return (el.textContent || '').trim();
+}
+
+function setElementLabel(el, value) {
+  el.textContent = value;
+}
+
+function parseSuccessDuration(el, options) {
+  const rawValue =
+    el.dataset.copySuccessDuration ||
+    el.getAttribute('data-copy-success-duration');
+  const parsedValue = Number.parseInt(rawValue, 10);
+
+  if (Number.isNaN(parsedValue)) {
+    return options.successDuration;
+  }
+
+  return parsedValue;
+}
+
+function dispatchCopyEvent(name, detail) {
+  if (typeof window === 'undefined' || typeof window.dispatchEvent !== 'function') {
+    return;
+  }
+
+  window.dispatchEvent(new CustomEvent(name, { detail }));
 }
