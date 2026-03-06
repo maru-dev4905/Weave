@@ -1,16 +1,32 @@
-# React + Vite
+# WEAVE Docs App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`apps/docs`는 WEAVE 문서 사이트와 컴포넌트 데모를 위한 React + Vite 애플리케이션입니다.
 
-Currently, two official plugins are available:
+현재 역할은 다음과 같습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `@weave/wv` 패키지 동작 확인
+- plugin 예제 페이지 제공
+- 향후 component gallery 확장
+- starter kit generator UI 연결
 
-## React Compiler
+프로젝트 전체 기술 개요는 루트의 `README.md`를 참고하면 됩니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 개발
 
-## Expanding the ESLint configuration
+루트에서 실행:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+pnpm dev
+```
+
+docs 앱만 실행:
+
+```bash
+pnpm --filter docs dev
+```
+
+## 빌드
+
+```bash
+pnpm --filter docs build
+```
