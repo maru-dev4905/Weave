@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "../_settings/scales" as *;
+
+@mixin respond($key) {
+  @if map.has-key($breakpoints, $key) {
+    @media (max-width: map.get($breakpoints, $key)) {
+      @content;
+    }
+  } @else {
+    @warn "No breakpoint found for `#{$key}`.";
+  }
+}

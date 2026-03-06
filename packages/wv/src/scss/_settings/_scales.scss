@@ -1,0 +1,32 @@
+$intervalSizes:
+  [300, 280, 260, 240, 200, 180, 160, 150, 140, 130, 120, 100, 90, 80, 70, 64, 60, 50, 40, 36, 30,
+  24, 20, 16, 12, 10, 8, 6, 4, 0];
+$fontSizes:
+  [200, 180, 160, 140, 130, 120, 100, 80, 72, 68, 64, 60, 56, 52, 50, 48, 44, 40, 36, 32, 30, 28,
+  25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 14, 11, 12, 10];
+$fontWeight: (
+  'heavy': 900,
+  'exBold': 800,
+  'bold': 700,
+  'semibold': 600,
+  'medium': 500,
+  'regular': 400,
+  'light': 300,
+  'exLight': 200,
+  'thin': 100,
+);
+$breakpoints: (
+  wd: 1600px,
+  // window desktop
+  ds: 1440px,
+  // desktop (standard)
+  nb: 1280px,
+  // notebook
+  tb: 1024px,
+  // tablet
+  md: 768px,
+  // mobile display
+  mp: 500px, // mobile small
+);
+
+$zIndex: 20;

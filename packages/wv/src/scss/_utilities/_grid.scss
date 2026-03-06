@@ -1,0 +1,77 @@
+@mixin grid_base() {
+  .grid_lay {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    grid-column-gap: 2.5rem !important;
+  }
+
+  .grid_col {
+    grid-column: var(--colST) / var(--colED) !important;
+  }
+
+  @for $i from 1 through 12 {
+    .colST#{$i} {
+      grid-column-start: #{$i} !important;
+    }
+    .colST-#{$i} {
+      grid-column-start: -#{$i} !important;
+    }
+    .colED#{$i} {
+      grid-column-end: #{$i} !important;
+    }
+    .colED-#{$i} {
+      grid-column-end: -#{$i} !important;
+    }
+    .rowST#{$i} {
+      grid-row-start: #{$i} !important;
+    }
+    .rowST-#{$i} {
+      grid-row-start: -#{$i} !important;
+    }
+    .rowED#{$i} {
+      grid-row-end: #{$i} !important;
+    }
+    .rowED-#{$i} {
+      grid-row-end: -#{$i} !important;
+    }
+  }
+}
+
+@mixin grid_md() {
+  .md_grid_lay {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-column-gap: 20px !important;
+  }
+
+  .md_grid_col {
+    grid-column: var(--mdColST) / var(--mdColED) !important;
+  }
+
+  @for $i from 1 through 12 {
+    .md_colST#{$i} {
+      grid-column-start: #{$i} !important;
+    }
+    .md_colST-#{$i} {
+      grid-column-start: -#{$i} !important;
+    }
+    .md_colED#{$i} {
+      grid-column-end: #{$i} !important;
+    }
+    .md_colED-#{$i} {
+      grid-column-end: -#{$i} !important;
+    }
+    .md_rowST#{$i} {
+      grid-row-start: #{$i} !important;
+    }
+    .md_rowST-#{$i} {
+      grid-row-start: -#{$i} !important;
+    }
+    .md_rowED#{$i} {
+      grid-row-end: #{$i} !important;
+    }
+    .md_rowED-#{$i} {
+      grid-row-end: -#{$i} !important;
+    }
+  }
+}

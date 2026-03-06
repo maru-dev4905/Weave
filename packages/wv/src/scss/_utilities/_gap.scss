@@ -1,0 +1,26 @@
+@use '../_settings/scales' as *;
+@use '../_tools/functions' as *;
+
+@mixin gap_base() {
+  @each $size in $intervalSizes {
+    .gap#{$size} {
+      gap: rem10($size) !important;
+    }
+  }
+
+  .gap0 {
+    gap: 0 !important;
+  }
+}
+
+@mixin gap_md() {
+  @each $size in $intervalSizes {
+    .md_gap#{$size} {
+      gap: rem10($size) !important;
+    }
+  }
+
+  .md_gap0 {
+    gap: 0 !important;
+  }
+}

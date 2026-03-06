@@ -1,0 +1,13 @@
+{
+  "name": "weave",
+  "private": true,
+  "packageManager": "pnpm@latest",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "preview": "pnpm -r preview"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1"
+  }
+}

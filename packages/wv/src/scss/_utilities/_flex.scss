@@ -1,0 +1,151 @@
+@mixin flex_base() {
+  .fd_col {
+    flex-direction: column !important;
+  }
+
+  .fd_col_rvs {
+    flex-direction: column-reverse !important;
+  }
+
+  .fd_row {
+    flex-direction: row !important;
+  }
+
+  .fd_row_rvs {
+    flex-direction: row-reverse !important;
+  }
+
+  .al_start {
+    align-items: flex-start !important;
+  }
+
+  .al_center {
+    align-items: center !important;
+  }
+
+  .al_end {
+    align-items: flex-end !important;
+  }
+
+  .jtf_start {
+    justify-content: flex-start !important;
+  }
+
+  .jtf_center {
+    justify-content: center !important;
+  }
+
+  .jtf_end {
+    justify-content: flex-end !important;
+  }
+
+  .jtf_bet {
+    justify-content: space-between !important;
+  }
+
+  .jtf_aro {
+    justify-content: space-around !important;
+  }
+
+  .fd_wrap {
+    flex-wrap: wrap !important;
+  }
+
+  .fd_nowrap {
+    flex-wrap: nowrap !important;
+  }
+
+  .fd_center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  @for $i from 0 through 12 {
+    .fx_#{$i} {
+      flex: #{$i} !important;
+    }
+  }
+
+  @for $i from 0 through 12 {
+    .fx_order#{$i} {
+      order: #{$i} !important;
+    }
+  }
+}
+
+@mixin flex_md() {
+  .md_fd_col {
+    flex-direction: column !important;
+  }
+
+  .md_fd_col_rvs {
+    flex-direction: column-reverse !important;
+  }
+
+  .md_fd_row {
+    flex-direction: row !important;
+  }
+
+  .md_fd_row_rvs {
+    flex-direction: row-reverse !important;
+  }
+
+  .md_al_start {
+    align-items: flex-start !important;
+  }
+
+  .md_al_center {
+    align-items: center !important;
+  }
+
+  .md_al_end {
+    align-items: flex-end !important;
+  }
+
+  .md_jtf_start {
+    justify-content: flex-start !important;
+  }
+
+  .md_jtf_center {
+    justify-content: center !important;
+  }
+
+  .md_jtf_end {
+    justify-content: flex-end !important;
+  }
+
+  .md_jtf_bet {
+    justify-content: space-between !important;
+  }
+
+  .md_jtf_aro {
+    justify-content: space-around !important;
+  }
+
+  .md_fd_wrap {
+    flex-wrap: wrap !important;
+  }
+
+  .md_fd_nowrap {
+    flex-wrap: nowrap !important;
+  }
+
+  .md_fd_center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  @for $i from 0 through 12 {
+    .md_fx_#{$i} {
+      flex: #{$i} !important;
+    }
+  }
+
+  @for $i from 0 through 12 {
+    .md_fx_order#{$i} {
+      order: #{$i} !important;
+    }
+  }
+}

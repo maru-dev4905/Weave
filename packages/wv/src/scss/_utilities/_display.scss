@@ -1,0 +1,60 @@
+@mixin display_base() {
+  .dp_b {
+    display: block !important;
+  }
+
+  .dp_ib {
+    display: inline-block !important;
+  }
+
+  .dp_i {
+    display: inline !important;
+  }
+
+  .dp_f {
+    display: flex !important;
+  }
+
+  .dp_if {
+    display: inline-flex !important;
+  }
+
+  .dp_n {
+    display: none !important;
+  }
+
+  .dp_g {
+    display: grid !important;
+  }
+
+  .dp_ig {
+    display: inline-grid !important;
+  }
+}
+
+@mixin display_md() {
+  .md_dp_b {
+    display: block !important;
+  }
+  .md_dp_ib {
+    display: inline-block !important;
+  }
+  .md_dp_i {
+    display: inline !important;
+  }
+  .md_dp_f {
+    display: flex !important;
+  }
+  .md_dp_if {
+    display: inline-flex !important;
+  }
+  .md_dp_n {
+    display: none !important;
+  }
+  .md_dp_g {
+    display: grid !important;
+  }
+  .md_dp_ig {
+    display: inline-grid !important;
+  }
+}

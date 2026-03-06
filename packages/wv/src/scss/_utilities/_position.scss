@@ -1,0 +1,43 @@
+@mixin position_base() {
+  .pos_re {
+    position: relative !important;
+  }
+
+  .pos_ab {
+    position: absolute !important;
+  }
+
+  .pos_fx {
+    position: fixed !important;
+  }
+
+  .pos_sk {
+    position: sticky !important;
+  }
+
+  .pos_st {
+    position: static !important;
+  }
+}
+
+@mixin position_md() {
+  .md_pos_re {
+    position: relative !important;
+  }
+
+  .md_pos_ab {
+    position: absolute !important;
+  }
+
+  .md_pos_fx {
+    position: fixed !important;
+  }
+
+  .md_pos_sk {
+    position: sticky !important;
+  }
+
+  .md_pos_st {
+    position: static !important;
+  }
+}

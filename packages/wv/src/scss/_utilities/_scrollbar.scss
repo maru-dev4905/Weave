@@ -1,0 +1,19 @@
+.scrollbar_custom::-webkit-scrollbar {
+  width: 6px;
+  height: 20px;
+}
+
+.scrollbar_custom::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.scrollbar_custom::-webkit-scrollbar-thumb {
+  background-color: #b8b8b8;
+  border-radius: 4px;
+  border: 10px solid #fff;
+}
+
+.scrollLock {
+  overflow: hidden !important;
+  touch-action: none;
+}

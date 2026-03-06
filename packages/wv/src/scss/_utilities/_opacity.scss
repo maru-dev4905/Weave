@@ -1,0 +1,15 @@
+@mixin opacity_base() {
+  @for $op from 0 through 10 {
+    .op_#{$op} {
+      opacity: calc(#{$op} / 10) !important;
+    }
+  }
+}
+
+@mixin opacity_md() {
+  @for $op from 0 through 10 {
+    .md_op_#{$op} {
+      opacity: calc(#{$op} / 10) !important;
+    }
+  }
+}

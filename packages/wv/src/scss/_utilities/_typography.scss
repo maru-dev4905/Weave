@@ -1,0 +1,243 @@
+@use '../_settings/scales' as *;
+@use '../_tools/mixins' as *;
+@use '../_tools/functions' as *;
+
+@mixin typography_base() {
+  @each $size in $fontSizes {
+    .fs_#{$size} {
+      font-size: rem10($size) !important;
+    }
+  }
+
+  @each $name, $weight in $fontWeight {
+    .fw_#{$name} {
+      font-weight: $weight !important;
+    }
+  }
+
+  .lih64 {
+    line-height: rem10(64px) !important;
+  }
+
+  .lih42 {
+    line-height: rem10(42px) !important;
+  }
+
+  .lih36 {
+    line-height: rem10(36px) !important;
+  }
+
+  .lih30 {
+    line-height: rem10(30px) !important;
+  }
+
+  .lih24 {
+    line-height: rem10(24px) !important;
+  }
+
+  .lih20 {
+    line-height: rem10(20px) !important;
+  }
+
+  .lih220per {
+    line-height: 220% !important;
+  }
+
+  .lih170per {
+    line-height: 170% !important;
+  }
+
+  .lih160per {
+    line-height: 160% !important;
+  }
+
+  .lih150per {
+    line-height: 150% !important;
+  }
+
+  .lih135per {
+    line-height: 135% !important;
+  }
+
+  .lih130per {
+    line-height: 130% !important;
+  }
+
+  .lih125per {
+    line-height: 125% !important;
+  }
+
+  .lih120per {
+    line-height: 120% !important;
+  }
+
+  .lih110per {
+    line-height: 110% !important;
+  }
+
+  .lih100per {
+    line-height: 100% !important;
+  }
+
+  .ta_center {
+    text-align: center !important;
+  }
+
+  .ta_left {
+    text-align: left !important;
+  }
+
+  .ta_right {
+    text-align: right !important;
+  }
+
+  .txt_over_dot {
+    overflow: hidden;
+    white-space: normal;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+  }
+
+  .clamp1 {
+    -webkit-line-clamp: 1;
+  }
+
+  .clamp2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .clamp3 {
+    -webkit-line-clamp: 3;
+  }
+
+  .clamp4 {
+    -webkit-line-clamp: 4;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+}
+
+@mixin typography_md() {
+  @each $size in $fontSizes {
+    .md_fs_#{$size} {
+      font-size: rem10($size) !important;
+    }
+  }
+
+  @each $name, $weight in $fontWeight {
+    .md_fw_#{$name} {
+      font-weight: $weight !important;
+    }
+  }
+
+  .md_lih64 {
+    line-height: rem10(64px) !important;
+  }
+
+  .md_lih42 {
+    line-height: rem10(42px) !important;
+  }
+
+  .md_lih36 {
+    line-height: rem10(36px) !important;
+  }
+
+  .md_lih30 {
+    line-height: rem10(30px) !important;
+  }
+
+  .md_lih24 {
+    line-height: rem10(24px) !important;
+  }
+
+  .md_lih20 {
+    line-height: rem10(20px) !important;
+  }
+
+  .md_lih220per {
+    line-height: 220% !important;
+  }
+
+  .md_lih170per {
+    line-height: 170% !important;
+  }
+
+  .md_lih160per {
+    line-height: 160% !important;
+  }
+
+  .md_lih150per {
+    line-height: 150% !important;
+  }
+
+  .md_lih135per {
+    line-height: 135% !important;
+  }
+
+  .md_lih130per {
+    line-height: 130% !important;
+  }
+
+  .md_lih125per {
+    line-height: 125% !important;
+  }
+
+  .md_lih120per {
+    line-height: 120% !important;
+  }
+
+  .md_lih110per {
+    line-height: 110% !important;
+  }
+
+  .md_lih100per {
+    line-height: 100% !important;
+  }
+
+  .md_ta_center {
+    text-align: center !important;
+  }
+
+  .md_ta_left {
+    text-align: left !important;
+  }
+
+  .md_ta_right {
+    text-align: right !important;
+  }
+
+  .md_txt_over_dot {
+    overflow: hidden;
+    white-space: normal;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+  }
+
+  .md_clamp1 {
+    -webkit-line-clamp: 1;
+  }
+
+  .md_clamp2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .md_clamp3 {
+    -webkit-line-clamp: 3;
+  }
+
+  .md_clamp4 {
+    -webkit-line-clamp: 4;
+  }
+
+  .md_underline {
+    text-decoration: underline;
+  }
+}

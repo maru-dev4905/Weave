@@ -1,0 +1,66 @@
+@mixin visibility_base() {
+  .m_show {
+    display: none !important;
+  }
+
+  .res_1600_s {
+    display: none !important;
+  }
+
+  .res_1440_s {
+    display: none !important;
+  }
+
+  .res_1024_s {
+    display: none !important;
+  }
+
+  .res_1280_s {
+    display: none !important;
+  }
+}
+
+@mixin visibility_1600() {
+  .res_1600_s {
+    display: block !important;
+  }
+  .res_1600_h {
+    display: none !important;
+  }
+}
+
+@mixin visibility_1440() {
+  .res_1440_s {
+    display: block !important;
+  }
+  .res_1440_h {
+    display: none !important;
+  }
+}
+
+@mixin visibility_1280() {
+  .res_1280_s {
+    display: block !important;
+  }
+  .res_1280_h {
+    display: none !important;
+  }
+}
+
+@mixin visibility_1024() {
+  .res_1024_s {
+    display: block !important;
+  }
+  .res_1024_h {
+    display: none !important;
+  }
+}
+
+@mixin visibility_768() {
+  .m_show {
+    display: block !important;
+  }
+  .m_hide {
+    display: none !important;
+  }
+}

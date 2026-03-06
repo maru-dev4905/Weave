@@ -1,0 +1,90 @@
+@use '../_settings/scales' as *;
+@use '../_tools/functions' as *;
+@use '../_tools/mixins' as *;
+
+@mixin spacing_base() {
+  @each $size in $intervalSizes {
+    .mt_#{$size} {
+      margin-top: rem10($size) !important;
+    }
+    .mr_#{$size} {
+      margin-right: rem10($size) !important;
+    }
+    .mb_#{$size} {
+      margin-bottom: rem10($size) !important;
+    }
+    .ml_#{$size} {
+      margin-left: rem10($size) !important;
+    }
+    .pt_#{$size} {
+      padding-top: rem10($size) !important;
+    }
+    .pr_#{$size} {
+      padding-right: rem10($size) !important;
+    }
+    .pb_#{$size} {
+      padding-bottom: rem10($size) !important;
+    }
+    .pl_#{$size} {
+      padding-left: rem10($size) !important;
+    }
+  }
+}
+
+@mixin spacing_tb() {
+  @each $size in $intervalSizes {
+    .tb_mt_#{$size} {
+      margin-top: rem10($size) !important;
+    }
+    .tb_mr_#{$size} {
+      margin-right: rem10($size) !important;
+    }
+    .tb_mb_#{$size} {
+      margin-bottom: rem10($size) !important;
+    }
+    .tb_ml_#{$size} {
+      margin-left: rem10($size) !important;
+    }
+    .tb_pt_#{$size} {
+      padding-top: rem10($size) !important;
+    }
+    .tb_pr_#{$size} {
+      padding-right: rem10($size) !important;
+    }
+    .tb_pb_#{$size} {
+      padding-bottom: rem10($size) !important;
+    }
+    .tb_pl_#{$size} {
+      padding-left: rem10($size) !important;
+    }
+  }
+}
+
+@mixin spacing_md() {
+  @each $size in $intervalSizes {
+    .md_mt_#{$size} {
+      margin-top: rem10($size) !important;
+    }
+    .md_mr_#{$size} {
+      margin-right: rem10($size) !important;
+    }
+    .md_mb_#{$size} {
+      margin-bottom: rem10($size) !important;
+    }
+    .md_ml_#{$size} {
+      margin-left: rem10($size) !important;
+    }
+    .md_pt_#{$size} {
+      padding-top: rem10($size) !important;
+    }
+    .md_pr_#{$size} {
+      padding-right: rem10($size) !important;
+    }
+    .md_pb_#{$size} {
+      padding-bottom: rem10($size) !important;
+    }
+    .md_pl_#{$size} {
+      padding-left: rem10($size) !important;
+    }
+  }
+}

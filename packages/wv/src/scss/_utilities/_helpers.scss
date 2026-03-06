@@ -1,0 +1,21 @@
+
+.dot {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.dot::before {
+  content: "·";
+  display: inline-block;
+  font-weight: 400;
+}
+
+.indent {
+  text-indent: -1em;
+  margin-left: 1em;
+}
+
+.dot.indent {
+  margin-left: 1em;
+  text-indent: 0;
+}

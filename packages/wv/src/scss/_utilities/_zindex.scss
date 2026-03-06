@@ -1,0 +1,17 @@
+@use '../_settings/scales' as *;
+
+@mixin zindex_base() {
+  @for $i from 1 through $zIndex {
+    .z_idx#{$i} {
+      z-index: $i !important;
+    }
+  }
+}
+
+@mixin zindex_md() {
+  @for $i from 1 through $zIndex {
+    .md_z_idx#{$i} {
+      z-index: $i !important;
+    }
+  }
+}
