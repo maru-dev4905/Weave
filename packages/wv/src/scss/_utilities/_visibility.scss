@@ -18,6 +18,28 @@
   .res_1280_s {
     display: none !important;
   }
+
+  .ov_h {
+    overflow: hidden !important;
+  }
+  .ov_a {
+    overflow: auto !important;
+  }
+  .ov_v {
+    overflow: visible !important;
+  }
+  .ovx_auto {
+    overflow-x: auto !important;
+  }
+  .ovy_auto {
+    overflow-y: auto !important;
+  }
+  .ovx_scr {
+    overflow-x: scroll !important;
+  }
+  .ovy_scr {
+    overflow-y: scroll !important;
+  }
 }
 
 @mixin visibility_1600() {
@@ -54,6 +76,28 @@
   .res_1024_h {
     display: none !important;
   }
+
+  .tb_ov_h {
+    overflow: hidden !important;
+  }
+  .tb_ov_a {
+    overflow: auto !important;
+  }
+  .tb_ov_v {
+    overflow: visible !important;
+  }
+  .tb_ovx_auto {
+    overflow-x: auto !important;
+  }
+  .tb_ovy_auto {
+    overflow-y: auto !important;
+  }
+  .tb_ovx_scr {
+    overflow-x: scroll !important;
+  }
+  .tb_ovy_scr {
+    overflow-y: scroll !important;
+  }
 }
 
 @mixin visibility_768() {
@@ -62,5 +106,27 @@
   }
   .m_hide {
     display: none !important;
+  }
+
+  .md_ov_h {
+    overflow: hidden !important;
+  }
+  .md_ov_a {
+    overflow: auto !important;
+  }
+  .md_ov_v {
+    overflow: visible !important;
+  }
+  .md_ovx_auto {
+    overflow-x: auto !important;
+  }
+  .md_ovy_auto {
+    overflow-y: auto !important;
+  }
+  .md_ovx_scr {
+    overflow-x: scroll !important;
+  }
+  .md_ovy_scr {
+    overflow-y: scroll !important;
   }
 }

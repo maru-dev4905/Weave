@@ -29,6 +29,13 @@
       padding-left: rem10($size) !important;
     }
   }
+
+  .mx_auto {
+    margin: 0 auto !important;
+  }
+  .my_auto {
+    margin: auto 0 !important;
+  }
 }
 
 @mixin spacing_tb() {

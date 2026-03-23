@@ -11,6 +11,7 @@
 @use './_utilities/zindex' as zindex;
 @use './_utilities/visibility' as visibility;
 @use './_utilities/radius' as radius;
+@use '_utilities/sizing' as size;
 
 @use './_settings/css-vars';
 @use './_tools/functions';
@@ -39,6 +40,7 @@
 @include zindex.zindex_base();
 @include visibility.visibility_base();
 @include radius.radius_base();
+@include size.size_base();
 
 @include mixins.respond(wd) {
   @include visibility.visibility_1600();
@@ -55,6 +57,7 @@
 @include mixins.respond(tb) {
   @include spacing.spacing_tb();
   @include visibility.visibility_1024();
+  @include size.size_tb();
 }
 
 @include mixins.respond(md) {
@@ -70,4 +73,5 @@
   @include zindex.zindex_md();
   @include visibility.visibility_768();
   @include radius.radius_md();
+  @include size.size_md();
 }

@@ -1,0 +1,93 @@
+@use '../_settings/scales' as *;
+@use '../_tools/functions' as *;
+@use '../_tools/mixins' as *;
+
+@mixin size_base() {
+  .w_full {
+    width: 100% !important;
+  }
+  .h_full {
+    height: 100% !important;
+  }
+  @each $size in $intervalSizes {
+    .w_#{$size} {
+      width: rem10($size) !important;
+    }
+    .mw_#{$size} {
+      max-width: rem10($size) !important;
+    }
+    .h_#{$size} {
+      height: rem10($size) !important;
+    }
+    .mh_#{$size} {
+      max-height: rem10($size) !important;
+    }
+  }
+
+  .w_auto {
+    width: auto !important;
+  }
+  .h_auto {
+    height: auto !important;
+  }
+}
+
+@mixin size_tb() {
+  .tb_w_full {
+    width: 100% !important;
+  }
+  .tb_h_full {
+    height: 100% !important;
+  }
+  @each $size in $intervalSizes {
+    .tb_w_#{$size} {
+      width: rem10($size) !important;
+    }
+    .tb_mw_#{$size} {
+      max-width: rem10($size) !important;
+    }
+    .tb_h_#{$size} {
+      height: rem10($size) !important;
+    }
+    .tb_mh_#{$size} {
+      max-height: rem10($size) !important;
+    }
+  }
+
+  .tb_w_auto {
+    width: auto !important;
+  }
+  .tb_h_auto {
+    height: auto !important;
+  }
+}
+
+@mixin size_md() {
+  .md_w_full {
+    width: 100% !important;
+  }
+  .md_h_full {
+    height: 100% !important;
+  }
+  @each $size in $intervalSizes {
+    .md_w_#{$size} {
+      width: rem10($size) !important;
+    }
+    .md_mw_#{$size} {
+      max-width: rem10($size) !important;
+    }
+    .md_h_#{$size} {
+      height: rem10($size) !important;
+    }
+    .md_mh_#{$size} {
+      max-height: rem10($size) !important;
+    }
+  }
+
+  .md_w_auto {
+    width: auto !important;
+  }
+  .md_h_auto {
+    height: auto !important;
+  }
+}
