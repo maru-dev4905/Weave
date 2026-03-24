@@ -589,7 +589,8 @@
   transition: background 180ms ease, color 180ms ease;
 }
 
-.page_sidebar_nav a:hover {
+.page_sidebar_nav a:hover,
+.page_sidebar_nav a.is_active {
   background: rgba(79, 156, 249, 0.1);
   border-left-color: #4f9cf9;
   color: #4f9cf9;
