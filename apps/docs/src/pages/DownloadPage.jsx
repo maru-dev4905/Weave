@@ -1,86 +1,63 @@
 import { Card } from '../components/Card.jsx';
 import { Section } from '../components/Section.jsx';
 
-const starterItems = ['index.html', 'wv.css', 'common.css', 'core.js'];
-const pluginOptions = ['copy', 'tabs', 'accordion', 'modal'];
+const downloadItems = [
+  'index.html',
+  'common.css',
+  'wv.css',
+  'core.js',
+  'README.md',
+];
 
 export function DownloadPage() {
   return (
     <div className="page_shell">
       <Section
         eyebrow="Download"
-        title="WEAVE Starter Kit 다운로드"
-        description="현재는 UI만 구현되어 있으며, 이후 기본 스타터와 커스텀 스타터를 zip으로 생성하는 흐름으로 확장할 수 있습니다."
+        title="스타터 압축 파일 다운로드"
+        description="상단 타이틀 영역, 파일 구성 안내, 다운로드 버튼만 남긴 단순한 구조로 정리했습니다."
         align="wide"
       >
-        <div className="download_grid">
-          <Card className="download_card">
-            <div className="download_card_head">
-              <span className="badge_pill">Basic Starter</span>
-              <h3>빠르게 시작하는 기본 템플릿</h3>
-              <p>가장 기본적인 퍼블리싱 시작 파일을 포함한 스타터 구성을 제공합니다.</p>
-            </div>
-            <ul className="check_list">
-              {starterItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <button type="button" className="primary_button">
-              Download Basic Starter
-            </button>
+        <div className="download_single_stack">
+          <Card className="download_hero_card">
+            <span className="badge_pill">ZIP FILE</span>
+            <h3>퍼블리싱 시작용 기본 압축 파일</h3>
+            <p>
+              자주 쓰는 기본 파일만 담은 단일 압축 파일입니다. 별도 옵션 선택 없이 바로
+              내려받을 수 있도록 구성했습니다.
+            </p>
           </Card>
 
           <Card className="download_card">
             <div className="download_card_head">
-              <span className="badge_pill">Custom Starter</span>
-              <h3>프로젝트 맞춤형 스타터 설정</h3>
-              <p>컬러, 헤더, 푸터, 플러그인을 선택하는 UI만 먼저 제공합니다.</p>
-            </div>
-
-            <div className="config_stack">
-              <div className="config_group">
-                <label>Color Palette</label>
-                <select defaultValue="default">
-                  <option value="default">Default Blue</option>
-                  <option value="violet">Violet Studio</option>
-                  <option value="mint">Mint Accent</option>
-                </select>
-              </div>
-
-              <div className="config_group">
-                <label>Header Type</label>
-                <select defaultValue="corporate">
-                  <option value="corporate">Corporate</option>
-                  <option value="product">Product</option>
-                  <option value="magazine">Magazine</option>
-                </select>
-              </div>
-
-              <div className="config_group">
-                <label>Footer Type</label>
-                <select defaultValue="simple">
-                  <option value="simple">Simple</option>
-                  <option value="columns">Columns</option>
-                  <option value="minimal">Minimal</option>
-                </select>
-              </div>
-
-              <div className="config_group">
-                <label>Plugins</label>
-                <div className="check_grid">
-                  {pluginOptions.map((plugin) => (
-                    <label key={plugin} className="checkbox_card">
-                      <input type="checkbox" defaultChecked={plugin !== 'modal'} />
-                      <span>{plugin}</span>
-                    </label>
-                  ))}
-                </div>
+              <div>
+                <span className="badge_pill">CONTENTS</span>
+                <h3>압축 파일 구성</h3>
+                <p>기본 마크업, 스타일, 스크립트, 안내 문서를 함께 제공합니다.</p>
               </div>
             </div>
+            <ul className="check_list">
+              {downloadItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </Card>
 
-            <button type="button" className="primary_button">
-              Generate Custom Starter
-            </button>
+          <Card className="download_card download_action_card">
+            <div className="download_card_head">
+              <div>
+                <span className="badge_pill">DOWNLOAD</span>
+                <h3>바로 다운로드</h3>
+                <p>단일 압축 파일을 클릭 한 번으로 받을 수 있습니다.</p>
+              </div>
+            </div>
+            <a
+              href="/downloads/publishing-starter.zip"
+              download
+              className="primary_button download_anchor_button"
+            >
+              압축 파일 다운로드
+            </a>
           </Card>
         </div>
       </Section>

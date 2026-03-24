@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom';
 
 const links = [
   { to: '/', label: 'Home', end: true },
-  { to: '/docs', label: 'Docs' },
-  { to: '/palette', label: 'Palette' },
-  { to: '/ui', label: 'UI' },
+  { to: '/docs/css', label: 'Docs(CSS)' },
+  { to: '/docs/js', label: 'Docs(JS)' },
+  { to: '/plate', label: 'Plate' },
   { to: '/download', label: 'Download' },
 ];
 
@@ -15,8 +15,8 @@ export function Navbar() {
         <NavLink to="/" end className="site_brand">
           <span className="site_brand_mark">W</span>
           <span>
-            <strong>WEAVE</strong>
-            <small>Frontend Publishing Framework</small>
+            <strong>Publishing UI Kit</strong>
+            <small>CSS and Script Modules</small>
           </span>
         </NavLink>
 

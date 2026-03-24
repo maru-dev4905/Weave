@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 설명서</title>
+    <style>
+      :root {
+        --bg-body: #0f1117;
+        --bg-sidebar: #161b27;
+        --bg-content: #1a1f2e;
+        --bg-card: #1e2535;
+        --bg-code: #0d1117;
+        --text-main: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border-color: #2d3748;
+        --c-primary: #4f9cf9;
+        --c-green: #4ade80;
+        --c-yellow: #fbbf24;
+        --c-red: #f87171;
+        --c-purple: #a78bfa;
+        --c-code-text: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        line-height: 1.6;
+        display: flex;
+        min-height: 100vh;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-body);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+      }
+
+      .sidebar {
+        width: 280px;
+        background-color: var(--bg-sidebar);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        overflow-y: auto;
+        border-right: 1px solid var(--border-color);
+        padding: 2rem 1rem;
+        z-index: 100;
+      }
+
+      .sidebar-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--c-primary);
+        margin-bottom: 1.5rem;
+        padding-left: 0.75rem;
+      }
+
+      .toc-list {
+        list-style: none;
+      }
+
+      .toc-link {
+        display: block;
+        padding: 0.4rem 0.75rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition: all 0.2s;
+        border-left: 2px solid transparent;
+      }
+
+      .toc-link:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--text-main);
+      }
+
+      .toc-link.active {
+        color: var(--c-primary);
+        background-color: rgba(79, 156, 249, 0.1);
+        border-left-color: var(--c-primary);
+      }
+
+      .main-content {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+        background-color: var(--bg-content);
+        padding: 3rem 4rem 24rem;
+        min-height: 100vh;
+      }
+
+      .doc-header {
+        margin-bottom: 3rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 2rem;
+      }
+
+      .doc-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+      }
+
+      .doc-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+      }
+
+      .badges {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+      }
+
+      section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: 2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        padding-left: 0.75rem;
+        border-left: 4px solid var(--c-primary);
+        color: var(--text-main);
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-main);
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: var(--text-main);
+      }
+
+      .table-container {
+        overflow-x: auto;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--bg-card);
+        text-align: left;
+        min-width: 600px;
+      }
+
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        background-color: rgba(0, 0, 0, 0.2);
+        font-weight: 600;
+        color: var(--text-main);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.02);
+      }
+
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        background-color: var(--bg-code);
+        color: var(--c-code-text);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .status-badge {
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .status-green {
+        background: rgba(74, 222, 128, 0.2);
+        color: var(--c-green);
+      }
+
+      .status-yellow {
+        background: rgba(251, 191, 36, 0.2);
+        color: var(--c-yellow);
+      }
+
+      .status-red {
+        background: rgba(248, 113, 113, 0.2);
+        color: var(--c-red);
+      }
+
+      .info-box {
+        background-color: rgba(79, 156, 249, 0.1);
+        border-left: 4px solid var(--c-primary);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+
+      .warning-box {
+        background-color: rgba(251, 191, 36, 0.1);
+        border-left: 4px solid var(--c-yellow);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+
+      ul,
+      ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      #section-3 h2 {
+        border-color: var(--c-green);
+      }
+
+      #section-4 h2 {
+        border-color: var(--c-yellow);
+      }
+
+      #section-9 h2 {
+        border-color: var(--c-purple);
+      }
+
+      @media (max-width: 1024px) {
+        .main-content {
+          padding: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .main-content {
+          margin-left: 0;
+          width: 100%;
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-title">CSS</div>
+      <ul class="toc-list">
+        <li><a href="#section-1" class="toc-link active">1. 전체 구조</a></li>
+        <li><a href="#section-2" class="toc-link">2. common.css와 wv.css 관계</a></li>
+        <li><a href="#section-3" class="toc-link">3. 빌드 포함 SCSS 모듈</a></li>
+        <li><a href="#section-4" class="toc-link">4. 미포함 항목</a></li>
+        <li><a href="#section-5" class="toc-link">5. 토큰 체계</a></li>
+        <li><a href="#section-6" class="toc-link">6. 반응형 접두사 체계</a></li>
+        <li><a href="#section-7" class="toc-link">7. Layout / Object</a></li>
+        <li><a href="#section-8" class="toc-link">8. Display / Flex / Gap</a></li>
+        <li><a href="#section-9" class="toc-link">9. Grid / Spacing / Typography</a></li>
+        <li><a href="#section-10" class="toc-link">10. Color / Helpers / Motion</a></li>
+        <li><a href="#section-11" class="toc-link">11. 문서 요약</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="doc-header">
+        <h1 class="doc-title">CSS 설명서</h1>
+        <div class="doc-subtitle">wv.css &amp; common.css 클래스 체계 · 토큰 구조 · 실제 사용 방식</div>
+        <div class="badges">
+          <span class="badge">기준 산출물: wv.css, common.css</span>
+          <span class="badge">작성 기준: 현재 실제 포함되는 클래스 우선</span>
+        </div>
+      </header>
+
+      <section id="section-1">
+        <h2>1. 전체 구조</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>파일</th>
+                <th>역할</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>common.css</code></td>
+                <td>토큰 레이어</td>
+                <td>색상, inner/gutter, radius 같은 CSS 변수 정의</td>
+              </tr>
+              <tr>
+                <td><code>wv.css</code></td>
+                <td>유틸리티/기본 스타일 레이어</td>
+                <td>reset, a11y, layout, utility class, helper class, motion class 포함</td>
+              </tr>
+              <tr>
+                <td><code>admin.css</code></td>
+                <td>별도 관리자 스타일</td>
+                <td><code>wv.css</code>와 별개 성격</td>
+              </tr>
+              <tr>
+                <td><code>gov.css</code></td>
+                <td>별도 관공서 스타일</td>
+                <td><code>wv.css</code>와 별개 성격</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-2">
+        <h2>2. common.css와 wv.css 관계</h2>
+        <ol>
+          <li><code>common.css</code>가 <code>:root</code>에 기본 토큰 값을 선언합니다.</li>
+          <li><code>wv.css</code> 유틸리티 클래스는 이 토큰을 <code>var(--token)</code> 형태로 참조합니다.</li>
+          <li>토큰 값을 바꾸면 유틸리티가 참조하는 실제 색상, 간격, 반경도 함께 변경됩니다.</li>
+        </ol>
+
+        <div class="info-box">
+          <p>
+            <strong>핵심 개념:</strong> <code>wv.css</code>는 유틸리티의 형태를 제공하고,
+            <code>common.css</code>는 유틸리티가 참조하는 값을 제공합니다.
+          </p>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>토큰 파일</th>
+                <th>토큰</th>
+                <th>소비 클래스 예시</th>
+                <th>실제 효과</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>common.css</td>
+                <td><code>--g_50</code></td>
+                <td><code>.fc_g_50</code></td>
+                <td>텍스트 색상이 바뀜</td>
+              </tr>
+              <tr>
+                <td>common.css</td>
+                <td><code>--p_40</code></td>
+                <td><code>.bgc_p_40</code></td>
+                <td>배경색이 바뀜</td>
+              </tr>
+              <tr>
+                <td>common.css</td>
+                <td><code>--rd_base</code></td>
+                <td><code>.rd_base</code></td>
+                <td>border-radius가 바뀜</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-3">
+        <h2>3. 빌드에 포함되는 SCSS 모듈</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>분류</th>
+                <th>소스 파일</th>
+                <th>포함 여부</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Layout</td>
+                <td><code>_objects/_layout.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>.inner</code>, <code>.gutter_*</code></td>
+              </tr>
+              <tr>
+                <td>Display</td>
+                <td><code>_utilities/_display.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>dp_*</code></td>
+              </tr>
+              <tr>
+                <td>Flex</td>
+                <td><code>_utilities/_flex.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>fd_*</code>, <code>al_*</code>, <code>jtf_*</code></td>
+              </tr>
+              <tr>
+                <td>Gap</td>
+                <td><code>_utilities/_gap.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>gap*</code></td>
+              </tr>
+              <tr>
+                <td>Grid</td>
+                <td><code>_utilities/_grid.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>grid_lay</code>, <code>colST*</code></td>
+              </tr>
+              <tr>
+                <td>Helpers</td>
+                <td><code>_utilities/_helpers.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>.dot</code>, <code>.indent</code></td>
+              </tr>
+              <tr>
+                <td>Motion</td>
+                <td><code>_motion/*.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td><code>.anim.fade</code>, <code>.hov_op</code></td>
+              </tr>
+              <tr>
+                <td>Reset/A11y</td>
+                <td><code>_generic/*.scss</code></td>
+                <td><span class="status-badge status-green">포함</span></td>
+                <td>reset, <code>#skipNav</code>, <code>.a11y-hidden</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-4">
+        <h2>4. 미포함 항목</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>파일</th>
+                <th>상태</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>_utilities/_form.scss</code></td>
+                <td><span class="status-badge status-yellow">미사용</span></td>
+                <td><code>.wv_ipt</code> 정의만 존재</td>
+              </tr>
+              <tr>
+                <td><code>_settings/_css-vars.scss</code></td>
+                <td><span class="status-badge status-yellow">빈 파일</span></td>
+                <td>실제 선언 없음</td>
+              </tr>
+              <tr>
+                <td><code>_settings/_config.scss</code></td>
+                <td><span class="status-badge status-yellow">미사용</span></td>
+                <td>별도 import 없음</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-5">
+        <h2>5. 토큰 체계</h2>
+        <h3>5.1 Layout 토큰</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>토큰 그룹</th>
+                <th>현재 변수</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inner width</td>
+                <td><code>--inner_sm</code>, <code>--inner_base</code>, <code>--inner_lg</code>, <code>--inner_xl</code></td>
+                <td>컨테이너 최대 너비</td>
+              </tr>
+              <tr>
+                <td>Gutter</td>
+                <td><code>--gutter_sm</code>, <code>--gutter_base</code>, <code>--gutter_lg</code>, <code>--gutter_xl</code></td>
+                <td>좌우 패딩</td>
+              </tr>
+              <tr>
+                <td>Radius</td>
+                <td><code>--rd_xs</code>, <code>--rd_sm</code>, <code>--rd_md</code>, <code>--rd_lg</code>, <code>--rd_xl</code></td>
+                <td>의미 기반 반경 토큰</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>5.2 Color 토큰</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>토큰 그룹</th>
+                <th>접두사</th>
+                <th>의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gray</td>
+                <td><code>g_</code></td>
+                <td>회색 스케일</td>
+              </tr>
+              <tr>
+                <td>Primary</td>
+                <td><code>p_</code></td>
+                <td>메인 컬러</td>
+              </tr>
+              <tr>
+                <td>Danger</td>
+                <td><code>d_</code></td>
+                <td>에러/위험</td>
+              </tr>
+              <tr>
+                <td>Warning</td>
+                <td><code>w_</code></td>
+                <td>경고</td>
+              </tr>
+              <tr>
+                <td>Success</td>
+                <td><code>su_</code></td>
+                <td>성공</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-6">
+        <h2>6. 반응형 접두사 체계</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>키</th>
+                <th>값</th>
+                <th>의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wd</code></td>
+                <td><code>1600px</code></td>
+                <td>wide desktop</td>
+              </tr>
+              <tr>
+                <td><code>ds</code></td>
+                <td><code>1440px</code></td>
+                <td>desktop standard</td>
+              </tr>
+              <tr>
+                <td><code>nb</code></td>
+                <td><code>1280px</code></td>
+                <td>notebook</td>
+              </tr>
+              <tr>
+                <td><code>tb</code></td>
+                <td><code>1024px</code></td>
+                <td>tablet</td>
+              </tr>
+              <tr>
+                <td><code>md</code></td>
+                <td><code>768px</code></td>
+                <td>mobile display</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-7">
+        <h2>7. Layout / Object</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>클래스</th>
+                <th>의미</th>
+                <th>실제 스타일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>.inner</code></td>
+                <td>기본 컨테이너</td>
+                <td><code>max-width: var(--inner_base)</code>와 gutter 적용</td>
+              </tr>
+              <tr>
+                <td><code>.inner_sm</code> ~ <code>.inner_xl</code></td>
+                <td>사이즈별 컨테이너</td>
+                <td><code>max-width: var(--inner_*)</code></td>
+              </tr>
+              <tr>
+                <td><code>.gutter_*</code></td>
+                <td>좌우 padding</td>
+                <td><code>padding-left/right: var(--gutter_*)</code></td>
+              </tr>
+              <tr>
+                <td><code>.w_max_content</code></td>
+                <td>Width Max Content</td>
+                <td><code>width: max-content !important</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-8">
+        <h2>8. Display / Flex / Gap</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>패턴</th>
+                <th>의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>.dp_b</code>, <code>.dp_f</code>, <code>.dp_g</code></td>
+                <td>display block / flex / grid</td>
+              </tr>
+              <tr>
+                <td><code>.fd_col</code>, <code>.fd_row</code></td>
+                <td>flex direction 제어</td>
+              </tr>
+              <tr>
+                <td><code>.al_center</code>, <code>.jtf_bet</code></td>
+                <td>align-items / justify-content</td>
+              </tr>
+              <tr>
+                <td><code>.gap4</code> ~ <code>.gap300</code></td>
+                <td>interval scale 기반 gap</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-9">
+        <h2>9. Grid / Spacing / Typography</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>분류</th>
+                <th>예시</th>
+                <th>의미</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Grid</td>
+                <td><code>.grid_lay</code>, <code>.colST1</code>, <code>.colED12</code></td>
+                <td>12열 기반 배치</td>
+              </tr>
+              <tr>
+                <td>Spacing</td>
+                <td><code>.mt_20</code>, <code>.pb_40</code>, <code>.md_pt_10</code></td>
+                <td>마진, 패딩, 반응형 간격</td>
+              </tr>
+              <tr>
+                <td>Typography</td>
+                <td><code>.fs_16</code>, <code>.fw_bold</code>, <code>.ta_center</code></td>
+                <td>글자 크기, 굵기, 정렬</td>
+              </tr>
+              <tr>
+                <td>Radius</td>
+                <td><code>.rd_base</code>, <code>.rd_full</code></td>
+                <td>반경 토큰과 pill 형태</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning-box">
+          <p>
+            <strong>주의:</strong> show 계열 클래스는 대부분 <code>display: block !important</code>로
+            동작하므로 원래 Flex나 Grid였던 요소를 완전히 복원하지는 않습니다.
+          </p>
+        </div>
+      </section>
+
+      <section id="section-10">
+        <h2>10. Color / Helpers / Motion</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>분류</th>
+                <th>패턴</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Color</td>
+                <td><code>.fc_g_*</code>, <code>.fc_p_*</code>, <code>.bgc_p_*</code></td>
+                <td>텍스트/배경 색상 토큰 클래스</td>
+              </tr>
+              <tr>
+                <td>Helpers</td>
+                <td><code>.dot</code>, <code>.indent</code></td>
+                <td>목록형 텍스트 보조 클래스</td>
+              </tr>
+              <tr>
+                <td>Modal</td>
+                <td><code>.wv_modal</code>, <code>.wv_modal.active</code></td>
+                <td>기본 숨김 / 활성화 시 표시</td>
+              </tr>
+              <tr>
+                <td>Scroll</td>
+                <td><code>.scrollbar_custom</code>, <code>.scrollLock</code></td>
+                <td>스크롤바 커스텀과 스크롤 잠금</td>
+              </tr>
+              <tr>
+                <td>Motion</td>
+                <td><code>.anim.fade</code>, <code>.hov_op</code></td>
+                <td>기본 애니메이션 클래스</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-11">
+        <h2>11. 문서 요약</h2>
+        <ul>
+          <li><code>common.css</code>는 토큰 저장소, <code>wv.css</code>는 유틸리티 레이어입니다.</li>
+          <li>색상, 간격, 사이즈는 모두 토큰 기반으로 연결됩니다.</li>
+          <li>반응형은 <code>tb_</code>, <code>md_</code> 접두사와 <code>res_*</code> 클래스로 제어합니다.</li>
+          <li>실제 수정이 많아질 때는 SCSS 원본과 빌드 결과를 함께 확인하는 편이 안전합니다.</li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (event) {
+          event.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
+          });
+        });
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            document.querySelectorAll('.toc-link').forEach((link) => {
+              link.classList.toggle(
+                'active',
+                link.getAttribute('href').substring(1) === entry.target.id,
+              );
+            });
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '-20% 0px -60% 0px',
+        },
+      );
+
+      document.querySelectorAll('section').forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>

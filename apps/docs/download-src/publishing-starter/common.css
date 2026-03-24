@@ -1,0 +1,9 @@
+:root {
+  --bg-body: #0f1117;
+  --bg-card: #1a1f2e;
+  --border-color: #2d3748;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --primary: #4f9cf9;
+  --radius-base: 18px;
+}

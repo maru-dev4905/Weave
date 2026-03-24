@@ -24,8 +24,8 @@ export function PalettePage() {
   return (
     <div className="page_shell">
       <Section
-        eyebrow="Palette"
-        title="디자인 시스템 색상 토큰"
+        eyebrow="Plate"
+        title="색상 토큰 아카이브"
         description="`common.scss`의 기본 토큰을 그대로 읽어와 그룹별로 보여줍니다. 각 토큰은 바로 복사할 수 있고, 컬러 블록은 더 촘촘하고 밀도 있게 정리했습니다."
         align="wide"
       >

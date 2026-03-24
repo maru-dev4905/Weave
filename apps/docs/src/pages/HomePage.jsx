@@ -5,24 +5,24 @@ import { Section } from '../components/Section.jsx';
 
 const featureCards = [
   {
-    icon: 'UT',
-    title: 'Utility CSS System',
-    text: '재사용 가능한 spacing, color, display, typography 유틸리티로 빠르게 화면을 조립합니다.',
+    icon: 'CSS',
+    title: 'Docs(CSS)',
+    text: '색상, 테이블, TOC 기반으로 정리된 CSS 설명서를 바로 확인할 수 있습니다.',
+  },
+  {
+    icon: 'JS',
+    title: 'Docs(JS)',
+    text: '스크립트 모듈별 사용 방법, 실시간 테스트, 코드 복사 흐름을 한 페이지에 정리했습니다.',
   },
   {
     icon: 'PL',
-    title: 'Plugin Architecture',
-    text: 'setup, scan, mount, unmount, teardown 라이프사이클을 기준으로 UI 동작을 구조화합니다.',
+    title: 'Plate',
+    text: '공통 색상 토큰을 밀도 있게 확인하고 필요한 값을 바로 복사할 수 있습니다.',
   },
   {
-    icon: 'UI',
-    title: 'Component Library',
-    text: '사내 프로젝트에서 반복되는 헤더와 패턴을 라이브러리처럼 공유하고 문서화합니다.',
-  },
-  {
-    icon: 'ST',
-    title: 'Starter Kit Generator',
-    text: '기본 템플릿과 커스텀 옵션을 조합해 시작 프로젝트를 빠르게 구성할 수 있게 만듭니다.',
+    icon: 'DL',
+    title: 'Download',
+    text: '배포용 압축 파일 구성과 다운로드 버튼만 남긴 단순한 다운로드 페이지입니다.',
   },
 ];
 
@@ -31,18 +31,18 @@ export function HomePage() {
     <div className="page_shell">
       <section className="hero_panel">
         <div className="hero_copy">
-          <span className="section_eyebrow">WEAVE</span>
-          <h1>Frontend Publishing Framework</h1>
+          <span className="section_eyebrow">Publishing Docs</span>
+          <h1>문서와 테스트를 한 화면에 모은 퍼블리싱 허브</h1>
           <p>
-            Utility CSS + Plugin Runtime + UI Library for fast and scalable frontend
-            development.
+            다크 톤의 문서형 레이아웃 안에서 CSS 가이드, 스크립트 모듈 데모, 색상 토큰,
+            다운로드 자산까지 한 번에 탐색할 수 있도록 정리했습니다.
           </p>
           <div className="hero_actions">
-            <Link to="/docs" className="primary_link_button">
-              Explore Docs
+            <Link to="/docs/css" className="primary_link_button">
+              CSS 문서 보기
             </Link>
-            <Link to="/download" className="secondary_link_button">
-              Starter Kit
+            <Link to="/docs/js" className="secondary_link_button">
+              JS 모듈 보기
             </Link>
           </div>
         </div>
@@ -50,31 +50,31 @@ export function HomePage() {
         <Card className="hero_preview_card">
           <div className="hero_preview_grid">
             <div>
+              <strong>Landing</strong>
+              <span>문서형 다크 UI</span>
+            </div>
+            <div>
               <strong>CSS</strong>
-              <span>Utility system</span>
+              <span>TOC + 표 중심 구조</span>
             </div>
             <div>
               <strong>JS</strong>
-              <span>Runtime plugins</span>
-            </div>
-            <div>
-              <strong>UI</strong>
-              <span>Reusable patterns</span>
+              <span>기능 테스트 + 코드 복사</span>
             </div>
           </div>
           <div className="hero_preview_code">
-            <span>createWeave()</span>
-            <span>copyPlugin()</span>
-            <span>tabsPlugin()</span>
-            <span>accordionPlugin()</span>
+            <span>Docs(CSS)</span>
+            <span>Docs(JS)</span>
+            <span>Plate</span>
+            <span>Download</span>
           </div>
         </Card>
       </section>
 
       <Section
-        eyebrow="Features"
-        title="빠르게 만들고, 반복하고, 문서화하기 위한 사내 프레임워크"
-        description="퍼블리셔와 프론트엔드 개발자가 같은 설계 언어로 작업할 수 있도록 CSS, JS, UI 자산을 한곳에 정리합니다."
+        eyebrow="Sections"
+        title="필요한 자료를 바로 찾을 수 있게 구조를 단순하게 다시 정리했습니다"
+        description="상단 GNB를 기준으로 역할이 분명하게 나뉘도록 재구성했고, 각 페이지는 하나의 목적에만 집중하도록 정리했습니다."
       >
         <div className="feature_grid">
           {featureCards.map((feature) => (
@@ -84,6 +84,31 @@ export function HomePage() {
               <p>{feature.text}</p>
             </Card>
           ))}
+        </div>
+      </Section>
+
+      <Section
+        eyebrow="Quick Access"
+        title="바로 이동"
+        description="실제 작업 흐름에 맞춰 자주 보는 페이지를 빠르게 열 수 있도록 링크를 분리했습니다."
+      >
+        <div className="quick_link_grid">
+          <Link to="/docs/css" className="quick_link_card surface_card">
+            <strong>색상, 테이블, TOC 기반 CSS 설명서</strong>
+            <span>문서 원본 느낌을 유지한 상세 가이드</span>
+          </Link>
+          <Link to="/docs/js" className="quick_link_card surface_card">
+            <strong>모듈별 기능 테스트와 코드 복사</strong>
+            <span>Copy, Tabs, Accordion, Modal, Scroll, Hide Today</span>
+          </Link>
+          <Link to="/plate" className="quick_link_card surface_card">
+            <strong>색상 토큰 탐색</strong>
+            <span>토큰 값 확인과 복사</span>
+          </Link>
+          <Link to="/download" className="quick_link_card surface_card">
+            <strong>압축 파일 다운로드</strong>
+            <span>구성 안내와 단일 다운로드 버튼</span>
+          </Link>
         </div>
       </Section>
     </div>

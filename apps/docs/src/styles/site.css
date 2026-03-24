@@ -363,24 +363,39 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.quick_link_grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .docs_grid_2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.download_single_stack {
+  display: grid;
+  gap: 24px;
 }
 
 .feature_card,
 .intro_banner,
 .lifecycle_card,
 .download_card,
+.download_hero_card,
 .ui_showcase_card,
 .color_block,
 .page_sidebar_card,
 .demo_tabs,
-.demo_accordion {
+.demo_accordion,
+.docs_note_card,
+.docs_module_card {
   padding: 32px;
 }
 
 .feature_card h3,
 .download_card h3,
+.download_hero_card h3,
 .ui_showcase_card h3 {
   margin: 20px 0 12px;
   font-size: 24px;
@@ -388,6 +403,7 @@
 
 .feature_card p,
 .download_card p,
+.download_hero_card p,
 .ui_showcase_card p,
 .intro_banner span,
 .page_sidebar_title,
@@ -410,6 +426,22 @@
   color: #dce6ff;
   font-size: 14px;
   font-weight: 800;
+}
+
+.quick_link_card {
+  display: grid;
+  gap: 10px;
+  padding: 24px 26px;
+  border-radius: 22px;
+}
+
+.quick_link_card strong {
+  font-size: 18px;
+}
+
+.quick_link_card span {
+  color: #a9b1be;
+  font-size: 14px;
 }
 
 .page_sidebar {
@@ -535,6 +567,10 @@
   overflow: hidden;
 }
 
+.demo_tabs_panels_wrap {
+  padding: 0;
+}
+
 .demo_tabs_buttons {
   display: flex;
   gap: 10px;
@@ -563,6 +599,26 @@
 .demo_tabs_panels {
   padding: 24px;
   color: #b8c0cc;
+}
+
+.docs_module_card {
+  display: grid;
+  gap: 12px;
+}
+
+.docs_module_card h3,
+.docs_note_card h3 {
+  margin: 0;
+}
+
+.docs_module_card p,
+.docs_note_card p {
+  margin: 0;
+}
+
+.docs_module_card code {
+  width: max-content;
+  max-width: 100%;
 }
 
 .demo_accordion {
@@ -713,6 +769,20 @@
   margin: 12px 0 0;
 }
 
+.download_hero_card {
+  background:
+    linear-gradient(180deg, rgba(79, 156, 249, 0.12), rgba(255, 255, 255, 0.02)),
+    #161618;
+}
+
+.download_action_card {
+  align-items: start;
+}
+
+.download_anchor_button {
+  width: 100%;
+}
+
 .check_list {
   margin: 24px 0 28px;
   padding-left: 20px;
@@ -775,6 +845,102 @@
   margin: 0;
 }
 
+.demo_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 10, 14, 0.68);
+}
+
+.demo_modal_panel {
+  width: min(100%, 560px);
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: #17191f;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.demo_modal_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.demo_modal_head h3 {
+  margin: 0;
+}
+
+.demo_scroll_panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.demo_scroll_spacer,
+.demo_scroll_target,
+.today_notice {
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.demo_scroll_spacer {
+  min-height: 320px;
+  align-content: start;
+  color: #9aa3b2;
+}
+
+.demo_scroll_target {
+  border-color: rgba(79, 124, 255, 0.34);
+  background: rgba(79, 124, 255, 0.1);
+  color: #dce6ff;
+  font-weight: 700;
+}
+
+.today_notice {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.today_notice span {
+  color: #a9b1be;
+}
+
+.hide_today_demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page_shell_document {
+  max-width: 1440px;
+  padding-top: 28px;
+}
+
+.doc_embed_frame {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  background: #101216;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+.doc_embed_iframe {
+  display: block;
+  width: 100%;
+  min-height: calc(100vh - 180px);
+  border: 0;
+  background: #101216;
+}
+
 .copy_toast {
   position: fixed;
   right: 24px;
@@ -804,6 +970,7 @@
   .page_shell_with_sidebar,
   .hero_panel,
   .feature_grid,
+  .quick_link_grid,
   .download_grid,
   .docs_grid_2,
   .palette_grid {
@@ -860,7 +1027,12 @@
 
   .demo_card_head,
   .color_block_meta,
-  .download_card_head {
+  .download_card_head,
+  .demo_modal_head {
+    flex-direction: column;
+  }
+
+  .hide_today_demo {
     flex-direction: column;
   }
 

@@ -1,11 +1,11 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { DocsLayout } from '../layout/DocsLayout.jsx';
-import { DocsPage } from '../pages/DocsPage.jsx';
+import { CssDocsPage } from '../pages/CssDocsPage.jsx';
 import { DownloadPage } from '../pages/DownloadPage.jsx';
 import { HomePage } from '../pages/HomePage.jsx';
 import { PalettePage } from '../pages/PalettePage.jsx';
-import { UILibraryPage } from '../pages/UILibraryPage.jsx';
+import { JsDocsPage } from '../pages/JsDocsPage.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -18,15 +18,19 @@ export const router = createBrowserRouter([
       },
       {
         path: 'docs',
-        element: <DocsPage />,
+        element: <Navigate to="/docs/css" replace />,
       },
       {
-        path: 'palette',
+        path: 'docs/css',
+        element: <CssDocsPage />,
+      },
+      {
+        path: 'docs/js',
+        element: <JsDocsPage />,
+      },
+      {
+        path: 'plate',
         element: <PalettePage />,
-      },
-      {
-        path: 'ui',
-        element: <UILibraryPage />,
       },
       {
         path: 'download',
