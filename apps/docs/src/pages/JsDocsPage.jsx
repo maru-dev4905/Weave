@@ -46,6 +46,54 @@ const moduleCards = [
   },
 ];
 
+const copyGuideRows = [
+  ['selector', '[data-weave-copy], .weave_copy', '복사 동작을 바인딩하는 기본 셀렉터'],
+  ['data-text', '문자열', '직접 복사할 텍스트를 지정합니다.'],
+  ['data-target', '#id 또는 selector', '대상 요소의 textContent를 복사합니다.'],
+  ['data-copy-message', '문자열', '복사 완료 메시지를 지정합니다.'],
+  ['data-copy-alert', 'true | false', 'alert 창 사용 여부를 제어합니다.'],
+];
+
+const tabsGuideRows = [
+  ['root', '[data-weave-tabs], .weave_tabs, .wv_tab', '탭 전체를 감싸는 루트 셀렉터'],
+  ['button', '[data-weave-tabs-button]', '탭 버튼 요소입니다.'],
+  ['panel', '[data-weave-tabs-panel]', '탭 콘텐츠 패널 요소입니다.'],
+  ['active class', 'active', '초기 활성 상태와 선택 상태를 제어합니다.'],
+  ['접근성', 'aria-selected, role=tab', 'mount 시 aria 속성을 함께 동기화합니다.'],
+];
+
+const accordionGuideRows = [
+  ['root', '[data-weave-accordion], .weave_accordion, .wv_accordion', '아코디언 루트 셀렉터'],
+  ['item', '[data-weave-accordion-item]', '개별 아코디언 항목입니다.'],
+  ['button', '[data-weave-accordion-button]', '열기/닫기 제어 버튼입니다.'],
+  ['panel', '[data-weave-accordion-panel]', '콘텐츠 패널입니다.'],
+  ['mode', 'data-weave-accordion-mode', 'single 또는 multi 모드를 지정합니다.'],
+];
+
+const modalGuideRows = [
+  ['modal root', '[data-weave-modal], .weave_modal, .wv_modal', '모달 루트 셀렉터입니다.'],
+  ['open trigger', 'data-weave-modal-open', '열기 버튼과 모달 id를 연결합니다.'],
+  ['close trigger', 'data-weave-modal-close', '모달을 닫는 버튼 셀렉터입니다.'],
+  ['overlay', 'data-weave-modal-overlay', '오버레이 클릭 닫기 대상입니다.'],
+  ['body lock class', 'scrollLock', '활성 모달이 있을 때 body에 적용됩니다.'],
+];
+
+const scrollGuideRows = [
+  ['selector', '[data-weave-scroll-target]', '스크롤 이동 트리거 셀렉터입니다.'],
+  ['data-weave-scroll-target', '#id 또는 selector', '도착할 대상 요소를 지정합니다.'],
+  ['data-weave-scroll-container', 'selector | window', '스크롤 컨테이너를 지정합니다.'],
+  ['data-weave-scroll-duration', 'number', '애니메이션 시간을 제어합니다.'],
+  ['data-weave-scroll-offset', 'true | false', '헤더 높이를 offset으로 반영합니다.'],
+];
+
+const hideTodayGuideRows = [
+  ['root', '[data-weave-hide-today], .weave_hide_today, .hide_today_compo', '하루 숨김 제어 루트입니다.'],
+  ['button', 'data-weave-hide-today-button', '적용 버튼 셀렉터입니다.'],
+  ['checkbox', 'data-weave-hide-today-checkbox', '저장 여부와 expire 옵션을 읽습니다.'],
+  ['target', 'data-weave-hide-target', '숨길 대상 id를 지정합니다.'],
+  ['storage', 'weave-hide-today-*', 'localStorage에 만료 시간을 저장합니다.'],
+];
+
 export function JsDocsPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
@@ -147,6 +195,10 @@ const app = createWeave({
 app.mount();`}
               />
             </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={copyGuideRows} />
+            </div>
           </Card>
         </Section>
 
@@ -199,6 +251,10 @@ app.mount();`}
               </ul>
             </Card>
           </div>
+
+          <div className="mt_20">
+            <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={tabsGuideRows} />
+          </div>
         </Section>
 
         <Section
@@ -247,6 +303,10 @@ app.mount();`}
                   <li>버튼 다음 형제 요소도 패널로 인식할 수 있도록 보조 처리되어 있습니다.</li>
                 </ul>
               </Card>
+            </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={accordionGuideRows} />
             </div>
           </Card>
         </Section>
@@ -299,6 +359,10 @@ app.mount();`}
                 </ul>
               </Card>
             </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={modalGuideRows} />
+            </div>
           </Card>
         </Section>
 
@@ -346,6 +410,10 @@ app.mount();`}
                 </ul>
               </Card>
             </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={scrollGuideRows} />
+            </div>
           </Card>
         </Section>
 
@@ -355,15 +423,19 @@ app.mount();`}
           title="Hide Today"
           description="하루 동안 다시 보지 않기 체크와 함께 대상 요소 숨김 상태를 저장합니다."
         >
-          <Card>
-            <div id="today-banner" className="today_notice">
-              <strong>오늘 하루 보지 않기 예시 배너</strong>
-              <span>체크 후 버튼을 누르면 localStorage에 만료 시간이 저장됩니다.</span>
+          <Card id="hide-today-panel" data-weave-hide-today data-weave-hide-target="hide-today-panel">
+            <div className="today_notice">
+              <strong>오늘 하루 보지 않기 예시 패널</strong>
+              <span>체크 후 적용을 누르면 현재 패널이 숨겨지고 localStorage에 만료 시간이 저장됩니다.</span>
             </div>
 
-            <div data-weave-hide-today data-weave-hide-target="today-banner" className="hide_today_demo">
+            <div className="hide_today_demo">
               <label className="checkbox_card">
-                <input type="checkbox" data-weave-hide-today-checkbox data-weave-hide-target="today-banner" />
+                <input
+                  type="checkbox"
+                  data-weave-hide-today-checkbox
+                  data-weave-hide-target="hide-today-panel"
+                />
                 <span>오늘 하루 보지 않기</span>
               </label>
               <button type="button" data-weave-hide-today-button>
@@ -374,11 +446,15 @@ app.mount();`}
             <div className="docs_grid_2 mt_20">
               <CodeBlock
                 language="html"
-                code={`<div data-weave-hide-today data-weave-hide-target="today-banner">
+                code={`<div
+  id="hide-today-panel"
+  data-weave-hide-today
+  data-weave-hide-target="hide-today-panel"
+>
   <input
     type="checkbox"
     data-weave-hide-today-checkbox
-    data-weave-hide-target="today-banner"
+    data-weave-hide-target="hide-today-panel"
   />
   <button type="button" data-weave-hide-today-button>적용</button>
 </div>`}
@@ -392,9 +468,44 @@ app.mount();`}
                 </ul>
               </Card>
             </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={hideTodayGuideRows} />
+            </div>
           </Card>
         </Section>
       </div>
     </div>
+  );
+}
+
+function GuideTable({ headers, rows }) {
+  return (
+    <Card className="guide_table_card">
+      <div className="guide_table_wrap">
+        <table className="guide_table">
+          <thead>
+            <tr>
+              {headers.map((header) => (
+                <th key={header}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={`${headers[0]}-${rowIndex}`}>
+                {row.map((cell, cellIndex) => (
+                  <td key={`${rowIndex}-${cellIndex}`}>
+                    {typeof cell === 'string' && (cell.startsWith('.') || cell.startsWith('[') || cell.startsWith('data-'))
+                      ? <code>{cell}</code>
+                      : cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
   );
 }

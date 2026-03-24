@@ -29,6 +29,10 @@
   min-height: 100vh;
 }
 
+:root {
+  --site-topbar-height: 160px;
+}
+
 .weave_site_bg {
   position: fixed;
   inset: 0;
@@ -148,15 +152,9 @@
 .site_footer_inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 18px;
   padding: 24px 40px 40px;
-}
-
-.site_footer_inner p {
-  margin: 0;
-  color: #94a3b8;
-  font-size: 14px;
 }
 
 .site_sidebar_note {
@@ -253,7 +251,10 @@
 }
 
 .page_shell_with_sidebar {
-  display: block;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
 }
 
 .page_content {
@@ -269,6 +270,10 @@
   border-radius: 20px;
   background: #1e2535;
   box-shadow: none;
+}
+
+.hero_panel + .content_section {
+  margin-top: 120px;
 }
 
 .hero_copy h1 {
@@ -388,7 +393,11 @@
 }
 
 .content_section + .content_section {
-  margin-top: 96px;
+  margin-top: 120px;
+}
+
+.content_section {
+  scroll-margin-top: calc(var(--site-topbar-height) + 24px);
 }
 
 .section_align_wide .section_header {
@@ -421,6 +430,11 @@
   letter-spacing: -0.03em;
 }
 
+.section_eyebrow + h2,
+.badge_pill + h3 {
+  margin-top: 22px;
+}
+
 .section_header p {
   margin: 0;
   color: #94a3b8;
@@ -429,6 +443,7 @@
 }
 
 .surface_card {
+  padding: 32px;
   border: 1px solid #2d3748;
   border-radius: 18px;
   background: #1e2535;
@@ -540,13 +555,14 @@
 }
 
 .page_sidebar {
-  margin-bottom: 32px;
+  position: relative;
 }
 
 .page_sidebar_card {
-  position: static;
-  max-height: none;
-  overflow: visible;
+  position: sticky;
+  top: calc(var(--site-topbar-height) + 24px);
+  max-height: calc(100vh - var(--site-topbar-height) - 48px);
+  overflow: auto;
 }
 
 .page_sidebar_title {
@@ -557,22 +573,23 @@
 }
 
 .page_sidebar_nav {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 10px;
 }
 
 .page_sidebar_nav a {
   padding: 10px 12px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid transparent;
   transition: background 180ms ease, color 180ms ease;
 }
 
 .page_sidebar_nav a:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  background: rgba(79, 156, 249, 0.1);
+  border-left-color: #4f9cf9;
+  color: #4f9cf9;
 }
 
 .intro_banner {
@@ -729,6 +746,10 @@
 }
 
 .demo_accordion button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   width: 100%;
   min-height: 60px;
   padding: 20px 22px;
@@ -739,6 +760,20 @@
   text-align: left;
 }
 
+.demo_accordion button::after {
+  content: '▾';
+  flex: 0 0 auto;
+  color: #94a3b8;
+  font-size: 16px;
+  transition: transform 180ms ease, color 180ms ease;
+}
+
+.demo_accordion > li.active > button::after,
+.demo_accordion button.active::after {
+  transform: rotate(180deg);
+  color: #4f9cf9;
+}
+
 .demo_accordion [data-weave-accordion-panel] {
   padding: 0 22px 22px;
   color: #b0b8c5;
@@ -747,6 +782,47 @@
 .code_block {
   padding: 0;
   overflow: hidden;
+}
+
+.guide_table_card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.guide_table_wrap {
+  overflow-x: auto;
+}
+
+.guide_table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  background: #1e2535;
+  text-align: left;
+}
+
+.guide_table th,
+.guide_table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #2d3748;
+  vertical-align: top;
+}
+
+.guide_table th {
+  background: rgba(0, 0, 0, 0.18);
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.guide_table td {
+  color: #c8d0dc;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.guide_table tr:last-child td {
+  border-bottom: 0;
 }
 
 .code_block_head {
@@ -1085,13 +1161,16 @@
     border-bottom: 1px solid #2d3748;
   }
 
-  .page_shell_with_sidebar,
   .hero_panel,
   .feature_grid,
   .quick_link_grid,
   .download_grid,
   .docs_grid_2,
   .palette_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page_shell_with_sidebar {
     grid-template-columns: 1fr;
   }
 
@@ -1120,6 +1199,11 @@
     padding: 28px 18px 72px;
   }
 
+  .page_sidebar_card {
+    position: static;
+    max-height: none;
+  }
+
   .hero_panel {
     padding: 30px;
   }
@@ -1145,6 +1229,10 @@
   .download_card_head,
   .demo_modal_head {
     flex-direction: column;
+  }
+
+  .page_sidebar_nav {
+    grid-template-columns: 1fr 1fr;
   }
 
   .hide_today_demo {

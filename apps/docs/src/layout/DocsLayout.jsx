@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import {
@@ -16,6 +16,7 @@ import { Navbar } from '../components/Navbar.jsx';
 export function DocsLayout() {
   const location = useLocation();
   const [copyStatus, setCopyStatus] = useState('');
+  const topbarRef = useRef(null);
   const pageMeta = getPageMeta(location.pathname);
 
   useEffect(() => {
@@ -42,6 +43,32 @@ export function DocsLayout() {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [location.pathname]);
+
+  useEffect(() => {
+    const syncTopbarHeight = () => {
+      const nextHeight = topbarRef.current?.offsetHeight ?? 0;
+      document.documentElement.style.setProperty('--site-topbar-height', `${nextHeight}px`);
+    };
+
+    syncTopbarHeight();
+
+    if (typeof ResizeObserver === 'undefined' || !topbarRef.current) {
+      window.addEventListener('resize', syncTopbarHeight);
+
+      return () => {
+        window.removeEventListener('resize', syncTopbarHeight);
+      };
+    }
+
+    const observer = new ResizeObserver(syncTopbarHeight);
+    observer.observe(topbarRef.current);
+    window.addEventListener('resize', syncTopbarHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', syncTopbarHeight);
+    };
+  }, []);
 
   useEffect(() => {
     let timeoutId = null;
@@ -75,7 +102,7 @@ export function DocsLayout() {
       <div className="weave_site_bg" aria-hidden="true" />
       <Navbar />
       <div className="weave_site_stage">
-        <header className="site_topbar">
+        <header ref={topbarRef} className="site_topbar">
           <div className="site_topbar_inner">
             <div className="site_topbar_copy">
               <span className="site_topbar_eyebrow">{pageMeta.eyebrow}</span>
@@ -91,13 +118,12 @@ export function DocsLayout() {
 
         <footer className="site_footer">
           <div className="site_footer_inner">
-            <p>문서, 테스트, 토큰, 다운로드 흐름을 한곳에서 확인할 수 있도록 정리했습니다.</p>
             <button
               type="button"
               className="copy_ghost_button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              위로 올라가기
+              TOP
             </button>
           </div>
         </footer>
