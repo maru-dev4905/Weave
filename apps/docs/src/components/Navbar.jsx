@@ -10,8 +10,8 @@ const links = [
 
 export function Navbar() {
   return (
-    <header className="site_navbar_wrap">
-      <div className="site_navbar">
+    <aside className="site_sidebar">
+      <div className="site_sidebar_inner">
         <NavLink to="/" end className="site_brand">
           <span className="site_brand_mark">W</span>
           <span>
@@ -34,7 +34,12 @@ export function Navbar() {
             </NavLink>
           ))}
         </nav>
+
+        <div className="site_sidebar_note">
+          <strong>Document Layout</strong>
+          <p>왼쪽 탐색, 상단 헤더, 오른쪽 콘텐츠 흐름으로 다시 정리한 퍼블리싱 문서 허브입니다.</p>
+        </div>
       </div>
-    </header>
+    </aside>
   );
 }

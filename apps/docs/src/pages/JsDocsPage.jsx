@@ -56,7 +56,7 @@ export function JsDocsPage() {
           id="overview"
           eyebrow="Docs(JS)"
           title="스크립트 모듈 사용 방법과 기능 테스트"
-          description="모듈별 역할, 셀렉터, 예제 코드, 동작 테스트를 한 페이지에 모았습니다."
+          description="모듈별 역할, PF 호환 셀렉터, 예제 코드, 동작 테스트를 한 페이지에 모았습니다."
           align="wide"
         >
           <Card className="intro_banner">
@@ -66,7 +66,7 @@ export function JsDocsPage() {
             </div>
             <div>
               <strong>Selector Rule</strong>
-              <span>data-weave-* + .weave_* + legacy selector</span>
+              <span>data-weave-* + .weave_* + PF legacy selector</span>
             </div>
             <div>
               <strong>Flow</strong>
@@ -262,8 +262,9 @@ app.mount();`}
               <button data-weave-modal-open="sample-modal">기본 모달 열기</button>
             </div>
 
-            <div data-weave-modal id="sample-modal" className="demo_modal">
-              <div className="demo_modal_panel">
+            <div data-weave-modal id="sample-modal" className="demo_modal" hidden>
+              <div className="demo_modal_overlay" data-weave-modal-overlay />
+              <div className="demo_modal_panel" role="document">
                 <div className="demo_modal_head">
                   <h3>샘플 모달</h3>
                   <button type="button" data-weave-modal-close className="copy_ghost_button">
@@ -284,7 +285,8 @@ app.mount();`}
   모달 열기
 </button>
 
-<div data-weave-modal id="sample-modal">
+<div data-weave-modal id="sample-modal" hidden>
+  <div data-weave-modal-overlay></div>
   <button data-weave-modal-close>닫기</button>
 </div>`}
               />

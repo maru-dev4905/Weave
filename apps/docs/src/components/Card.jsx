@@ -1,7 +1,9 @@
-export function Card({ children, className = '', as: Tag = 'article', ...props }) {
+export function Card({ children, className = '', as = 'article', ...props }) {
+  const Component = as;
+
   return (
-    <Tag className={`surface_card ${className}`.trim()} {...props}>
+    <Component className={`surface_card ${className}`.trim()} {...props}>
       {children}
-    </Tag>
+    </Component>
   );
 }

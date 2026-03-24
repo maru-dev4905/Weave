@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { ColorBlock } from '../components/ColorBlock.jsx';
 import { Section } from '../components/Section.jsx';
 import { palette_tokens } from '../data/palette_tokens.js';
 
 export function PalettePage() {
-  const [palettes, setPalettes] = useState([]);
+  const palettes = useMemo(() => {
+    if (typeof window === 'undefined') {
+      return [];
+    }
 
-  useEffect(() => {
-    const root_styles = window.getComputedStyle(document.documentElement);
+    const rootStyles = window.getComputedStyle(document.documentElement);
 
-    setPalettes(
-      palette_tokens.map((group) => ({
-        ...group,
-        items: group.tokens.map((token) => [
-          token,
-          root_styles.getPropertyValue(token).trim(),
-        ]),
-      })),
-    );
+    return palette_tokens.map((group) => ({
+      ...group,
+      items: group.tokens.map((token) => [
+        token,
+        rootStyles.getPropertyValue(token).trim(),
+      ]),
+    }));
   }, []);
 
   return (
