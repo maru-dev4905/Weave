@@ -317,7 +317,7 @@ app.mount();`}
           title="Modal"
           description="열기 버튼, 닫기 버튼, 오버레이 클릭, ESC 닫기, body scroll lock을 함께 처리합니다."
         >
-          <Card>
+          <Card className="modal_demo_card">
             <div className="demo_button_row">
               <button data-weave-modal-open="sample-modal">기본 모달 열기</button>
             </div>
@@ -423,10 +423,10 @@ app.mount();`}
           title="Hide Today"
           description="하루 동안 다시 보지 않기 체크와 함께 대상 요소 숨김 상태를 저장합니다."
         >
-          <Card id="hide-today-panel" data-weave-hide-today data-weave-hide-target="hide-today-panel">
-            <div className="today_notice">
+          <Card data-weave-hide-today data-weave-hide-target="today-banner">
+            <div id="today-banner" className="today_notice">
               <strong>오늘 하루 보지 않기 예시 패널</strong>
-              <span>체크 후 적용을 누르면 현재 패널이 숨겨지고 localStorage에 만료 시간이 저장됩니다.</span>
+              <span>체크 후 닫기를 누르면 상단 공지 영역이 숨겨지고 localStorage에 만료 시간이 저장됩니다.</span>
             </div>
 
             <div className="hide_today_demo">
@@ -434,12 +434,12 @@ app.mount();`}
                 <input
                   type="checkbox"
                   data-weave-hide-today-checkbox
-                  data-weave-hide-target="hide-today-panel"
+                  data-weave-hide-target="today-banner"
                 />
                 <span>오늘 하루 보지 않기</span>
               </label>
               <button type="button" data-weave-hide-today-button>
-                적용
+                닫기
               </button>
             </div>
 
@@ -447,16 +447,16 @@ app.mount();`}
               <CodeBlock
                 language="html"
                 code={`<div
-  id="hide-today-panel"
   data-weave-hide-today
-  data-weave-hide-target="hide-today-panel"
+  data-weave-hide-target="today-banner"
 >
+  <div id="today-banner">공지 영역</div>
   <input
     type="checkbox"
     data-weave-hide-today-checkbox
-    data-weave-hide-target="hide-today-panel"
+    data-weave-hide-target="today-banner"
   />
-  <button type="button" data-weave-hide-today-button>적용</button>
+  <button type="button" data-weave-hide-today-button>닫기</button>
 </div>`}
               />
               <Card className="docs_note_card">
