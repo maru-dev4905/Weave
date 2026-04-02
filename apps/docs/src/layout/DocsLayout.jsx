@@ -5,10 +5,11 @@ import {
   accordionPlugin,
   copyPlugin,
   createWeave,
+  fileDropPlugin,
   hideTodayPlugin,
+  linkButtonPlugin,
   modalPlugin,
   scrollToPlugin,
-  targetButtonPlugin,
   tabsPlugin,
 } from '@weave/wv/dist/js/core.js';
 
@@ -26,7 +27,10 @@ export function DocsLayout() {
       autoObserve: true,
       plugins: [
         copyPlugin(),
-        targetButtonPlugin(),
+        fileDropPlugin({
+          zones: createDocsFileDropZones(),
+        }),
+        linkButtonPlugin(),
         tabsPlugin(),
         accordionPlugin(),
         modalPlugin(),
@@ -133,6 +137,106 @@ export function DocsLayout() {
       <div className={copyStatus ? 'copy_toast is_visible' : 'copy_toast'}>{copyStatus}</div>
     </div>
   );
+}
+
+function createDocsFileDropZones() {
+  const MB = 1024 * 1024;
+
+  return {
+    docsFileDropSingle: {
+      input: '#docs-file-drop-single-input',
+      accept: ['jpg', 'png', 'pdf'],
+      maxSize: 5 * MB,
+      renderList: true,
+      listTarget: '#docs-file-drop-single-list',
+      onChange(files) {
+        renderFileDropStatus(
+          '#docs-file-drop-single-status',
+          files,
+          'JPG, PNG, PDF / 최대 5 MB / 단일 파일',
+        );
+        renderFileDropMessage('#docs-file-drop-single-feedback', '');
+      },
+      onError(errors, context) {
+        renderFileDropStatus(
+          '#docs-file-drop-single-status',
+          context.validFiles,
+          'JPG, PNG, PDF / 최대 5 MB / 단일 파일',
+        );
+        renderFileDropMessage('#docs-file-drop-single-feedback', formatFileDropErrors(errors));
+      },
+    },
+    docsFileDropMulti: {
+      input: '#docs-file-drop-multi-input',
+      accept: ['jpg', 'png', 'webp'],
+      multiple: true,
+      maxSize: 10 * MB,
+      renderList: true,
+      listTarget: '#docs-file-drop-multi-list',
+      onChange(files) {
+        renderFileDropStatus(
+          '#docs-file-drop-multi-status',
+          files,
+          'JPG, PNG, WEBP / 파일당 최대 10 MB / 다중 파일',
+        );
+        renderFileDropMessage('#docs-file-drop-multi-feedback', '');
+      },
+      onError(errors, context) {
+        renderFileDropStatus(
+          '#docs-file-drop-multi-status',
+          context.validFiles,
+          'JPG, PNG, WEBP / 파일당 최대 10 MB / 다중 파일',
+        );
+        renderFileDropMessage('#docs-file-drop-multi-feedback', formatFileDropErrors(errors));
+      },
+    },
+  };
+}
+
+function renderFileDropStatus(selector, files, fallbackMessage) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+
+  if (!files.length) {
+    target.textContent = fallbackMessage;
+    return;
+  }
+
+  if (files.length === 1) {
+    target.textContent = `${files[0].name} · ${files[0].sizeLabel} · ${files[0].extension || 'file'}`;
+    return;
+  }
+
+  const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+  target.textContent = `${files.length}개 파일 선택 · 총 ${formatBytes(totalSize)}`;
+}
+
+function renderFileDropMessage(selector, message) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+  target.textContent = message;
+}
+
+function formatFileDropErrors(errors) {
+  return errors
+    .map((error) => (error.fileName ? `${error.fileName}: ${error.message}` : error.message))
+    .join(' / ');
+}
+
+function formatBytes(size) {
+  if (!Number.isFinite(size)) return '0 B';
+
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let nextSize = size;
+  let unitIndex = 0;
+
+  while (nextSize >= 1024 && unitIndex < units.length - 1) {
+    nextSize /= 1024;
+    unitIndex += 1;
+  }
+
+  const fixed = nextSize >= 10 || unitIndex === 0 ? 0 : 1;
+  return `${nextSize.toFixed(fixed)} ${units[unitIndex]}`;
 }
 
 function getPageMeta(pathname) {

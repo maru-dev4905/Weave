@@ -6,7 +6,8 @@ import { Sidebar } from '../components/Sidebar.jsx';
 const sidebarItems = [
   { href: '#overview', label: '개요' },
   { href: '#copy', label: 'Copy' },
-  { href: '#target-button', label: 'Target Button' },
+  { href: '#link-button', label: 'Link Button' },
+  { href: '#file-drop', label: 'File Drop' },
   { href: '#tabs', label: 'Tabs' },
   { href: '#accordion', label: 'Accordion' },
   { href: '#modal', label: 'Modal' },
@@ -21,9 +22,14 @@ const moduleCards = [
     summary: '버튼 클릭으로 텍스트나 특정 요소의 내용을 복사합니다.',
   },
   {
-    title: 'Target Button',
-    selector: '[data-weave-target-button], .weave_target_button, .wv_target_btn',
-    summary: '클릭한 버튼이 대상 요소와 자기 자신에 클래스를 add, remove, toggle 합니다.',
+    title: 'Link Button',
+    selector: '[data-weave-link-button], .weave_link_button',
+    summary: '지정한 href로 현재 창 또는 새 창 이동을 지연 시간과 함께 제어합니다.',
+  },
+  {
+    title: 'File Drop',
+    selector: '[data-weave-file-drop]',
+    summary: '드래그 앤 드랍 영역과 file input을 연결하고, 파일 유효성 검사와 리스트 렌더링을 처리합니다.',
   },
   {
     title: 'Tabs',
@@ -60,14 +66,26 @@ const copyGuideRows = [
   ['data-copy-alert', 'true | false', 'alert 창 사용 여부를 제어합니다.'],
 ];
 
-const targetButtonGuideRows = [
-  ['selector', '[data-weave-target-button], .weave_target_button, .wv_target_btn', '타깃 클래스 제어 버튼 셀렉터입니다.'],
-  ['data-weave-target', '#id 또는 selector', '클래스를 적용할 대상 요소를 지정합니다.'],
-  ['data-weave-target-class', '문자열', '대상에 적용할 클래스명입니다. 기본값은 `on`입니다.'],
-  ['data-weave-target-action', 'toggle | add | remove', '실행할 클래스트 동작을 지정합니다.'],
-  ['data-weave-target-self', 'true | false', '버튼 자신도 같은 상태 클래스를 동기화할지 지정합니다.'],
-  ['data-weave-target-self-class', '문자열', '버튼 자신에 적용할 별도 클래스명을 지정합니다.'],
-  ['data-target', "['targetId','class','toggle']", 'PF 레거시 형식 fallback입니다.'],
+const linkButtonGuideRows = [
+  ['selector', '[data-weave-link-button], .weave_link_button', '링크 이동 버튼 셀렉터입니다.'],
+  ['data-weave-link-href', '/path 또는 https://...', '이동할 주소를 지정합니다.'],
+  ['data-weave-link-delay', 'number', '이동 전 지연 시간을 밀리초 단위로 지정합니다.'],
+  ['data-weave-link-blank', 'true | false', '새 창으로 열지 여부를 지정합니다.'],
+];
+
+const fileDropGuideRows = [
+  ['selector', '[data-weave-file-drop]', '드래그 앤 드랍 영역 루트 셀렉터입니다.'],
+  ['zone key', 'data-weave-file-drop="docsFileDropSingle"', 'JS `zones` 객체와 연결하는 식별자입니다.'],
+  ['input', 'input[type="file"] 또는 config.input', '업로드에 사용할 파일 입력 요소입니다.'],
+  ['multiple', 'boolean', '다중 파일 선택 허용 여부를 제어합니다.'],
+  ['maxSize', 'number(bytes)', '파일당 허용할 최대 용량입니다.'],
+  ['accept', "['jpg', 'png'] | 'image/*'", '허용 확장자 또는 MIME 목록입니다.'],
+  ['overClass', '문자열', '드래그 중 루트 요소에 붙일 클래스명입니다.'],
+  ['renderList', 'true | false', '선택된 파일 목록 자동 렌더링 여부입니다.'],
+  ['listTarget', '#id | Element', '파일 리스트를 출력할 대상입니다.'],
+  ['onChange', '(files, context) => {}', '유효한 파일 메타데이터 배열을 콜백으로 반환합니다.'],
+  ['onError', '(errors, context) => {}', '용량, 확장자, 다중 선택 오류 정보를 콜백으로 반환합니다.'],
+  ['return item', '{ name, size, sizeLabel, type, extension, lastModified, file }', '콜백 배열의 각 파일 항목 구조입니다.'],
 ];
 
 const tabsGuideRows = [
@@ -219,60 +237,48 @@ app.mount();`}
         </Section>
 
         <Section
-          id="target-button"
+          id="link-button"
           eyebrow="Module"
-          title="Target Button"
-          description="PF의 `TargetBtn` 패턴을 새 WEAVE API 우선 구조로 옮긴 클래스 제어 모듈입니다."
+          title="Link Button"
+          description="새 WEAVE API 기준으로 현재 창 이동, 지연 이동, 새 창 이동을 제어하는 이동 모듈입니다."
         >
           <Card>
             <div className="demo_card_head">
               <div>
                 <h3>Live Demo</h3>
-                <p>대상 요소와 버튼 자신에 같은 상태 클래스를 붙이거나 제거할 수 있습니다.</p>
+                <p>현재 창 이동, 지연 이동, 새 창 이동을 버튼 속성만으로 제어할 수 있습니다.</p>
               </div>
             </div>
 
-            <div className="target_button_demo">
+            <div className="link_button_demo">
               <div className="demo_button_row">
                 <button
-                  data-weave-target-button
-                  data-weave-target="target-button-panel"
-                  data-weave-target-class="on"
-                  data-weave-target-action="toggle"
+                  data-weave-link-button
+                  data-weave-link-href="#overview"
                 >
-                  Toggle
+                  현재 창 이동
                 </button>
                 <button
-                  data-weave-target-button
-                  data-weave-target="target-button-panel"
-                  data-weave-target-class="on"
-                  data-weave-target-action="add"
-                  data-weave-target-self="false"
+                  data-weave-link-button
+                  data-weave-link-href="#hide-today"
+                  data-weave-link-delay="600"
                 >
-                  Add
+                  0.6초 후 이동
                 </button>
                 <button
-                  data-weave-target-button
-                  data-weave-target="target-button-panel"
-                  data-weave-target-class="on"
-                  data-weave-target-action="remove"
-                  data-weave-target-self="false"
+                  data-weave-link-button
+                  data-weave-link-href="/docs/css"
+                  data-weave-link-blank="true"
                 >
-                  Remove
-                </button>
-                <button
-                  className="wv_target_btn"
-                  data-target="['target-button-panel','on','toggle']"
-                >
-                  PF Legacy Toggle
+                  새 창 열기
                 </button>
               </div>
 
-              <div id="target-button-panel" className="target_button_panel">
-                <strong>대상 패널</strong>
+              <div className="link_button_panel">
+                <strong>테스트 안내</strong>
                 <p>
-                  `data-weave-target` 또는 PF의 `data-target`으로 연결된 요소입니다.
-                  상태 클래스가 붙으면 시각적으로 열림 상태를 확인할 수 있습니다.
+                  현재 창 이동은 문서 내 앵커 또는 동일 사이트 경로를 기준으로 확인할 수 있고,
+                  새 창 이동은 `/docs/css`를 별도 탭으로 엽니다.
                 </p>
               </div>
             </div>
@@ -281,29 +287,143 @@ app.mount();`}
               <CodeBlock
                 language="html"
                 code={`<button
-  data-weave-target-button
-  data-weave-target="target-button-panel"
-  data-weave-target-class="on"
-  data-weave-target-action="toggle"
+  data-weave-link-button
+  data-weave-link-href="/docs/css"
+  data-weave-link-delay="300"
+  data-weave-link-blank="true"
 >
-  Toggle
-</button>
-
-<div id="target-button-panel">...</div>`}
-              />
-              <CodeBlock
-                language="html"
-                code={`<button
-  class="wv_target_btn"
-  data-target="['target-button-panel','on','toggle']"
->
-  PF Legacy Toggle
+  이동
 </button>`}
               />
             </div>
 
             <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={targetButtonGuideRows} />
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={linkButtonGuideRows} />
+            </div>
+          </Card>
+        </Section>
+
+        <Section
+          id="file-drop"
+          eyebrow="Module"
+          title="File Drop"
+          description="드롭 존 상태 클래스, 파일 검증, 선택 결과 콜백, 파일 목록 렌더링을 한 번에 처리하는 file input 전용 모듈입니다."
+        >
+          <Card>
+            <div className="demo_card_head">
+              <div>
+                <h3>Live Demo</h3>
+                <p>영역 위로 파일을 끌어오면 `over` 클래스가 적용되고, 드롭 또는 클릭 선택 모두 같은 검증 흐름으로 처리됩니다.</p>
+              </div>
+            </div>
+
+            <div className="file_drop_demo_grid mt_20">
+              <div className="file_drop_demo_col">
+                <div
+                  data-weave-file-drop="docsFileDropSingle"
+                  className="file_drop_zone"
+                  role="button"
+                  tabIndex={0}
+                  aria-controls="docs-file-drop-single-input"
+                >
+                  <input
+                    id="docs-file-drop-single-input"
+                    className="file_drop_input"
+                    type="file"
+                  />
+                  <span className="badge_pill">Single</span>
+                  <strong>단일 파일 업로드 영역</strong>
+                  <p id="docs-file-drop-single-status">
+                    JPG, PNG, PDF / 최대 5 MB / 단일 파일
+                  </p>
+                  <small>파일을 드롭하거나 영역을 클릭해 선택하세요.</small>
+                </div>
+                <p id="docs-file-drop-single-feedback" className="file_drop_feedback" />
+                <div id="docs-file-drop-single-list" className="file_drop_list_wrap" />
+              </div>
+
+              <div className="file_drop_demo_col">
+                <div
+                  data-weave-file-drop="docsFileDropMulti"
+                  className="file_drop_zone"
+                  role="button"
+                  tabIndex={0}
+                  aria-controls="docs-file-drop-multi-input"
+                >
+                  <input
+                    id="docs-file-drop-multi-input"
+                    className="file_drop_input"
+                    type="file"
+                    multiple
+                  />
+                  <span className="badge_pill">Multi</span>
+                  <strong>다중 파일 업로드 영역</strong>
+                  <p id="docs-file-drop-multi-status">
+                    JPG, PNG, WEBP / 파일당 최대 10 MB / 다중 파일
+                  </p>
+                  <small>여러 파일을 한 번에 올리면 리스트가 자동으로 갱신됩니다.</small>
+                </div>
+                <p id="docs-file-drop-multi-feedback" className="file_drop_feedback" />
+                <div id="docs-file-drop-multi-list" className="file_drop_list_wrap" />
+              </div>
+            </div>
+
+            <div className="docs_grid_2 mt_20">
+              <CodeBlock
+                language="html"
+                code={`<div
+  data-weave-file-drop="uploadA"
+  class="file_drop_zone"
+  role="button"
+  tabindex="0"
+>
+  <input id="upload-input" type="file" />
+  <div id="upload-file-list"></div>
+</div>`}
+              />
+              <CodeBlock
+                language="js"
+                code={`import { createWeave, fileDropPlugin } from '@weave/wv/dist/js/core.js';
+
+const app = createWeave({
+  plugins: [
+    fileDropPlugin({
+      zones: {
+        uploadA: {
+          input: '#upload-input',
+          accept: ['jpg', 'png', 'pdf'],
+          maxSize: 5 * 1024 * 1024,
+          renderList: true,
+          listTarget: '#upload-file-list',
+          onChange(files) {
+            console.log(files);
+          },
+          onError(errors) {
+            console.warn(errors);
+          },
+        },
+      },
+    }),
+  ],
+});
+
+app.mount();`}
+              />
+            </div>
+
+            <div className="docs_grid_2 mt_20">
+              <Card className="docs_note_card">
+                <h3>체크 포인트</h3>
+                <ul className="check_list">
+                  <li>실제 업로드는 하지 않고, 브라우저의 `File` 객체 메타데이터만 정리해 반환합니다.</li>
+                  <li>모바일 환경에서는 드래그보다 클릭 선택이 주 경로이므로 클릭 동선도 함께 유지하는 편이 안전합니다.</li>
+                  <li>유효한 파일만 input에 다시 반영하려 시도하므로 검증 실패 파일은 목록에서 제외됩니다.</li>
+                </ul>
+              </Card>
+            </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={fileDropGuideRows} />
             </div>
           </Card>
         </Section>
