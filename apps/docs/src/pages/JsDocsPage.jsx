@@ -6,6 +6,7 @@ import { Sidebar } from '../components/Sidebar.jsx';
 const sidebarItems = [
   { href: '#overview', label: '개요' },
   { href: '#copy', label: 'Copy' },
+  { href: '#target-button', label: 'Target Button' },
   { href: '#tabs', label: 'Tabs' },
   { href: '#accordion', label: 'Accordion' },
   { href: '#modal', label: 'Modal' },
@@ -18,6 +19,11 @@ const moduleCards = [
     title: 'Copy',
     selector: '[data-weave-copy], .weave_copy',
     summary: '버튼 클릭으로 텍스트나 특정 요소의 내용을 복사합니다.',
+  },
+  {
+    title: 'Target Button',
+    selector: '[data-weave-target-button], .weave_target_button, .wv_target_btn',
+    summary: '클릭한 버튼이 대상 요소와 자기 자신에 클래스를 add, remove, toggle 합니다.',
   },
   {
     title: 'Tabs',
@@ -52,6 +58,16 @@ const copyGuideRows = [
   ['data-target', '#id 또는 selector', '대상 요소의 textContent를 복사합니다.'],
   ['data-copy-message', '문자열', '복사 완료 메시지를 지정합니다.'],
   ['data-copy-alert', 'true | false', 'alert 창 사용 여부를 제어합니다.'],
+];
+
+const targetButtonGuideRows = [
+  ['selector', '[data-weave-target-button], .weave_target_button, .wv_target_btn', '타깃 클래스 제어 버튼 셀렉터입니다.'],
+  ['data-weave-target', '#id 또는 selector', '클래스를 적용할 대상 요소를 지정합니다.'],
+  ['data-weave-target-class', '문자열', '대상에 적용할 클래스명입니다. 기본값은 `on`입니다.'],
+  ['data-weave-target-action', 'toggle | add | remove', '실행할 클래스트 동작을 지정합니다.'],
+  ['data-weave-target-self', 'true | false', '버튼 자신도 같은 상태 클래스를 동기화할지 지정합니다.'],
+  ['data-weave-target-self-class', '문자열', '버튼 자신에 적용할 별도 클래스명을 지정합니다.'],
+  ['data-target', "['targetId','class','toggle']", 'PF 레거시 형식 fallback입니다.'],
 ];
 
 const tabsGuideRows = [
@@ -198,6 +214,96 @@ app.mount();`}
 
             <div className="mt_20">
               <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={copyGuideRows} />
+            </div>
+          </Card>
+        </Section>
+
+        <Section
+          id="target-button"
+          eyebrow="Module"
+          title="Target Button"
+          description="PF의 `TargetBtn` 패턴을 새 WEAVE API 우선 구조로 옮긴 클래스 제어 모듈입니다."
+        >
+          <Card>
+            <div className="demo_card_head">
+              <div>
+                <h3>Live Demo</h3>
+                <p>대상 요소와 버튼 자신에 같은 상태 클래스를 붙이거나 제거할 수 있습니다.</p>
+              </div>
+            </div>
+
+            <div className="target_button_demo">
+              <div className="demo_button_row">
+                <button
+                  data-weave-target-button
+                  data-weave-target="target-button-panel"
+                  data-weave-target-class="on"
+                  data-weave-target-action="toggle"
+                >
+                  Toggle
+                </button>
+                <button
+                  data-weave-target-button
+                  data-weave-target="target-button-panel"
+                  data-weave-target-class="on"
+                  data-weave-target-action="add"
+                  data-weave-target-self="false"
+                >
+                  Add
+                </button>
+                <button
+                  data-weave-target-button
+                  data-weave-target="target-button-panel"
+                  data-weave-target-class="on"
+                  data-weave-target-action="remove"
+                  data-weave-target-self="false"
+                >
+                  Remove
+                </button>
+                <button
+                  className="wv_target_btn"
+                  data-target="['target-button-panel','on','toggle']"
+                >
+                  PF Legacy Toggle
+                </button>
+              </div>
+
+              <div id="target-button-panel" className="target_button_panel">
+                <strong>대상 패널</strong>
+                <p>
+                  `data-weave-target` 또는 PF의 `data-target`으로 연결된 요소입니다.
+                  상태 클래스가 붙으면 시각적으로 열림 상태를 확인할 수 있습니다.
+                </p>
+              </div>
+            </div>
+
+            <div className="docs_grid_2 mt_20">
+              <CodeBlock
+                language="html"
+                code={`<button
+  data-weave-target-button
+  data-weave-target="target-button-panel"
+  data-weave-target-class="on"
+  data-weave-target-action="toggle"
+>
+  Toggle
+</button>
+
+<div id="target-button-panel">...</div>`}
+              />
+              <CodeBlock
+                language="html"
+                code={`<button
+  class="wv_target_btn"
+  data-target="['target-button-panel','on','toggle']"
+>
+  PF Legacy Toggle
+</button>`}
+              />
+            </div>
+
+            <div className="mt_20">
+              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={targetButtonGuideRows} />
             </div>
           </Card>
         </Section>

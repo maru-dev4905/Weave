@@ -8,6 +8,7 @@ import {
   hideTodayPlugin,
   modalPlugin,
   scrollToPlugin,
+  targetButtonPlugin,
   tabsPlugin,
 } from '@weave/wv/dist/js/core.js';
 
@@ -25,6 +26,7 @@ export function DocsLayout() {
       autoObserve: true,
       plugins: [
         copyPlugin(),
+        targetButtonPlugin(),
         tabsPlugin(),
         accordionPlugin(),
         modalPlugin(),

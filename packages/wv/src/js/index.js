@@ -1,6 +1,7 @@
 export { createWeave } from './core/createWeave.js';
 
 export { copyPlugin } from './plugins/copy/index.js';
+export { targetButtonPlugin } from './plugins/targetButton/index.js';
 export { tabsPlugin } from './plugins/tabs/index.js';
 export { accordionPlugin } from './plugins/accordion/index.js';
 export { modalPlugin } from './plugins/modal/index.js';
