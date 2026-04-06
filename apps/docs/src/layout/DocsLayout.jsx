@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 import {
   accordionPlugin,
+  animPlugin,
   copyPlugin,
   createWeave,
   fileDropPlugin,
@@ -36,6 +37,8 @@ export function DocsLayout() {
         modalPlugin(),
         hideTodayPlugin(),
         scrollToPlugin(),
+        animPlugin.fadeAnim(),
+        animPlugin.marqueeAnim(),
       ],
     });
 
@@ -255,6 +258,11 @@ function getPageMeta(pathname) {
       eyebrow: 'Docs(JS)',
       title: '스크립트 모듈 설명서',
       description: '기능 설명, 테스트, 코드 복사를 모듈별로 바로 확인할 수 있도록 다시 정리했습니다.',
+    },
+    '/anim': {
+      eyebrow: 'Anim',
+      title: '애니메이션 모듈 설명서',
+      description: 'fade와 marquee를 GSAP 기반으로 테스트하고 속성 규칙을 바로 확인할 수 있도록 정리했습니다.',
     },
     '/plate': {
       eyebrow: 'Plate',

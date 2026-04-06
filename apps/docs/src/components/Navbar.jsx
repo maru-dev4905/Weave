@@ -4,6 +4,7 @@ const links = [
   { to: '/', label: 'Home', end: true },
   { to: '/docs/css', label: 'Docs(CSS)' },
   { to: '/docs/js', label: 'Docs(JS)' },
+  { to: '/anim', label: 'Anim' },
   { to: '/plate', label: 'Plate' },
   { to: '/download', label: 'Download' },
 ];

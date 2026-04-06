@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { DocsLayout } from '../layout/DocsLayout.jsx';
+import { AnimPage } from '../pages/AnimPage.jsx';
 import { CssDocsPage } from '../pages/CssDocsPage.jsx';
 import { DownloadPage } from '../pages/DownloadPage.jsx';
 import { HomePage } from '../pages/HomePage.jsx';
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: 'docs/js',
         element: <JsDocsPage />,
+      },
+      {
+        path: 'anim',
+        element: <AnimPage />,
       },
       {
         path: 'plate',

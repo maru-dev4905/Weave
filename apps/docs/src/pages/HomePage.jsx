@@ -15,6 +15,11 @@ const featureCards = [
     text: '스크립트 모듈별 사용 방법, 실시간 테스트, 코드 복사 흐름을 한 페이지에 정리했습니다.',
   },
   {
+    icon: 'AN',
+    title: 'Anim',
+    text: 'fade와 marquee 애니메이션을 GSAP 기반으로 테스트하고 속성 규칙을 함께 확인할 수 있습니다.',
+  },
+  {
     icon: 'PL',
     title: 'Plate',
     text: '공통 색상 토큰을 밀도 있게 확인하고 필요한 값을 바로 복사할 수 있습니다.',
@@ -61,10 +66,15 @@ export function HomePage() {
               <strong>JS</strong>
               <span>기능 테스트 + 코드 복사</span>
             </div>
+            <div>
+              <strong>ANIM</strong>
+              <span>Fade + Marquee</span>
+            </div>
           </div>
           <div className="hero_preview_code">
             <span>Docs(CSS)</span>
             <span>Docs(JS)</span>
+            <span>Anim</span>
             <span>Plate</span>
             <span>Download</span>
           </div>
@@ -100,6 +110,10 @@ export function HomePage() {
           <Link to="/docs/js" className="quick_link_card surface_card">
             <strong>모듈별 기능 테스트와 코드 복사</strong>
             <span>Copy, Tabs, Accordion, Modal, Scroll, Hide Today</span>
+          </Link>
+          <Link to="/anim" className="quick_link_card surface_card">
+            <strong>애니메이션 모듈 테스트</strong>
+            <span>Fade, Marquee, GSAP, ScrollTrigger</span>
           </Link>
           <Link to="/plate" className="quick_link_card surface_card">
             <strong>색상 토큰 탐색</strong>
