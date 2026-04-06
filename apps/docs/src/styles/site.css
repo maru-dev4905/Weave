@@ -668,6 +668,11 @@
   line-height: 1.3;
 }
 
+.download_card_head .badge_pill + h3,
+.download_tree_head .badge_pill + h3 {
+  margin-top: 22px;
+}
+
 .demo_inline_source {
   max-width: 280px;
   padding: 12px 14px;
@@ -960,6 +965,42 @@
     #1e2535;
 }
 
+.download_intro_grid {
+  align-items: stretch;
+}
+
+.download_check_list {
+  margin-bottom: 0;
+}
+
+.download_tree_card {
+  padding: 0;
+}
+
+.download_tree_head {
+  align-items: flex-start;
+}
+
+.download_tree_head p {
+  margin: 12px 0 0;
+}
+
+.download_tree_pre {
+  padding: 22px 24px 24px;
+  background:
+    linear-gradient(180deg, rgba(79, 156, 249, 0.06), rgba(255, 255, 255, 0)),
+    #121722;
+}
+
+.download_tree_pre code {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #d7e2f3;
+  white-space: pre;
+}
+
 .download_action_card {
   align-items: start;
 }
@@ -1247,8 +1288,19 @@
   margin-bottom: 20px;
 }
 
+.today_notice[hidden] {
+  display: none !important;
+}
+
 .today_notice span {
   color: #a9b1be;
+}
+
+.hide_today_demo_card {
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .hide_today_demo {

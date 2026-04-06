@@ -128,6 +128,54 @@ const hideTodayGuideRows = [
   ['storage', 'weave-hide-today-*', 'localStorage에 만료 시간을 저장합니다.'],
 ];
 
+const copyCheckpoints = [
+  '직접 문자열 복사와 대상 요소 복사를 같은 셀렉터 규칙 안에서 함께 쓸 수 있습니다.',
+  '`data-target`을 쓰는 경우 복사 대상 요소가 먼저 렌더링되어 있어야 안전합니다.',
+  '알림창 사용이 필요 없으면 기본 토스트 피드백만 유지하는 편이 작업 흐름상 자연스럽습니다.',
+];
+
+const linkButtonCheckpoints = [
+  '앵커 이동과 내부 경로 이동 모두 `data-weave-link-href` 하나로 맞출 수 있습니다.',
+  '지연 이동이 필요한 경우 `data-weave-link-delay`만 추가하면 됩니다.',
+  '새 창 열기는 `data-weave-link-blank="true"`로 분기되므로 마크업에서 의도가 바로 보입니다.',
+];
+
+const fileDropCheckpoints = [
+  '실제 업로드는 하지 않고, 브라우저의 `File` 객체 메타데이터만 정리해 반환합니다.',
+  '모바일 환경에서는 드래그보다 클릭 선택이 주 경로이므로 클릭 동선도 함께 유지하는 편이 안전합니다.',
+  '유효한 파일만 input에 다시 반영하려 시도하므로 검증 실패 파일은 목록에서 제외됩니다.',
+];
+
+const tabsCheckpoints = [
+  '버튼과 패널 개수는 동일하게 맞추는 편이 안전합니다.',
+  '초기 활성화는 `active` 클래스 또는 `initialIndex`로 정할 수 있습니다.',
+  '링크 태그를 버튼처럼 써도 클릭 시 기본 이동을 막고 탭만 전환합니다.',
+];
+
+const accordionCheckpoints = [
+  '`data-weave-accordion-mode="multi"`를 쓰면 여러 항목을 동시에 열 수 있습니다.',
+  '초기 활성 항목은 `active` 클래스로 지정할 수 있습니다.',
+  '버튼 다음 형제 요소도 패널로 인식할 수 있도록 보조 처리되어 있습니다.',
+];
+
+const modalCheckpoints = [
+  '활성 상태에서는 `active` 클래스와 `hidden=false`가 함께 적용됩니다.',
+  'Escape 키와 오버레이 클릭으로 닫을 수 있습니다.',
+  '열기 버튼 포커스를 기억했다가 닫힐 때 다시 돌려줍니다.',
+];
+
+const scrollCheckpoints = [
+  'target은 id 또는 selector로 지정할 수 있습니다.',
+  'container를 지정하지 않으면 기본값은 `window`입니다.',
+  'duration이 0이면 즉시 이동합니다.',
+];
+
+const hideTodayCheckpoints = [
+  '저장 키는 `weave-hide-today-*` prefix를 사용합니다.',
+  '체크하지 않으면 숨김만 적용되고 저장은 남지 않습니다.',
+  '데모와 동일하게 체크박스와 버튼을 같은 루트 안에 두면 검증 흐름을 맞추기 쉽습니다.',
+];
+
 export function JsDocsPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
@@ -231,6 +279,17 @@ app.mount();`}
             </div>
 
             <div className="mt_20">
+              <Card className="docs_note_card">
+                <h3>체크 포인트</h3>
+                <ul className="check_list">
+                  {copyCheckpoints.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </Card>
+            </div>
+
+            <div className="mt_20">
               <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={copyGuideRows} />
             </div>
           </Card>
@@ -283,10 +342,8 @@ app.mount();`}
               </div>
             </div>
 
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<button
+            <ModuleReference
+              htmlCode={`<button
   data-weave-link-button
   data-weave-link-href="/docs/css"
   data-weave-link-delay="300"
@@ -294,12 +351,10 @@ app.mount();`}
 >
   이동
 </button>`}
-              />
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={linkButtonGuideRows} />
-            </div>
+              jsCode={buildPluginSnippet('linkButtonPlugin')}
+              checkpoints={linkButtonCheckpoints}
+              rows={linkButtonGuideRows}
+            />
           </Card>
         </Section>
 
@@ -368,10 +423,8 @@ app.mount();`}
               </div>
             </div>
 
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<div
+            <ModuleReference
+              htmlCode={`<div
   data-weave-file-drop="uploadA"
   class="file_drop_zone"
   role="button"
@@ -380,10 +433,7 @@ app.mount();`}
   <input id="upload-input" type="file" />
   <div id="upload-file-list"></div>
 </div>`}
-              />
-              <CodeBlock
-                language="js"
-                code={`import { createWeave, fileDropPlugin } from '@weave/wv/dist/js/core.js';
+              jsCode={`import { createWeave, fileDropPlugin } from '@weave/wv/dist/js/core.js';
 
 const app = createWeave({
   plugins: [
@@ -408,23 +458,9 @@ const app = createWeave({
 });
 
 app.mount();`}
-              />
-            </div>
-
-            <div className="docs_grid_2 mt_20">
-              <Card className="docs_note_card">
-                <h3>체크 포인트</h3>
-                <ul className="check_list">
-                  <li>실제 업로드는 하지 않고, 브라우저의 `File` 객체 메타데이터만 정리해 반환합니다.</li>
-                  <li>모바일 환경에서는 드래그보다 클릭 선택이 주 경로이므로 클릭 동선도 함께 유지하는 편이 안전합니다.</li>
-                  <li>유효한 파일만 input에 다시 반영하려 시도하므로 검증 실패 파일은 목록에서 제외됩니다.</li>
-                </ul>
-              </Card>
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={fileDropGuideRows} />
-            </div>
+              checkpoints={fileDropCheckpoints}
+              rows={fileDropGuideRows}
+            />
           </Card>
         </Section>
 
@@ -457,30 +493,18 @@ app.mount();`}
             </div>
           </Card>
 
-          <div className="docs_grid_2 mt_20">
-            <CodeBlock
-              language="html"
-              code={`<div data-weave-tabs>
+          <ModuleReference
+            htmlCode={`<div data-weave-tabs>
   <button data-weave-tabs-button>Overview</button>
   <button data-weave-tabs-button>Usage</button>
 
   <div data-weave-tabs-panel>...</div>
   <div data-weave-tabs-panel>...</div>
 </div>`}
-            />
-            <Card className="docs_note_card">
-              <h3>체크 포인트</h3>
-              <ul className="check_list">
-                <li>버튼과 패널 개수는 동일하게 맞추는 편이 안전합니다.</li>
-                <li>초기 활성화는 `active` 클래스 또는 `initialIndex`로 정할 수 있습니다.</li>
-                <li>링크 태그를 버튼처럼 써도 클릭 시 기본 이동을 막고 탭만 전환합니다.</li>
-              </ul>
-            </Card>
-          </div>
-
-          <div className="mt_20">
-            <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={tabsGuideRows} />
-          </div>
+            jsCode={buildPluginSnippet('tabsPlugin')}
+            checkpoints={tabsCheckpoints}
+            rows={tabsGuideRows}
+          />
         </Section>
 
         <Section
@@ -511,29 +535,17 @@ app.mount();`}
               </li>
             </ul>
 
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<ul data-weave-accordion data-weave-accordion-mode="single">
+            <ModuleReference
+              htmlCode={`<ul data-weave-accordion data-weave-accordion-mode="single">
   <li data-weave-accordion-item>
     <button data-weave-accordion-button>Question</button>
     <div data-weave-accordion-panel>Answer</div>
   </li>
 </ul>`}
-              />
-              <Card className="docs_note_card">
-                <h3>체크 포인트</h3>
-                <ul className="check_list">
-                  <li>`data-weave-accordion-mode="multi"`를 쓰면 여러 항목을 동시에 열 수 있습니다.</li>
-                  <li>초기 활성 항목은 `active` 클래스로 지정할 수 있습니다.</li>
-                  <li>버튼 다음 형제 요소도 패널로 인식할 수 있도록 보조 처리되어 있습니다.</li>
-                </ul>
-              </Card>
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={accordionGuideRows} />
-            </div>
+              jsCode={buildPluginSnippet('accordionPlugin')}
+              checkpoints={accordionCheckpoints}
+              rows={accordionGuideRows}
+            />
           </Card>
         </Section>
 
@@ -564,10 +576,8 @@ app.mount();`}
               </div>
             </div>
 
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<button data-weave-modal-open="sample-modal">
+            <ModuleReference
+              htmlCode={`<button data-weave-modal-open="sample-modal">
   모달 열기
 </button>
 
@@ -575,20 +585,10 @@ app.mount();`}
   <div data-weave-modal-overlay></div>
   <button data-weave-modal-close>닫기</button>
 </div>`}
-              />
-              <Card className="docs_note_card">
-                <h3>체크 포인트</h3>
-                <ul className="check_list">
-                  <li>활성 상태에서는 `active` 클래스와 `hidden=false`가 함께 적용됩니다.</li>
-                  <li>Escape 키와 오버레이 클릭으로 닫을 수 있습니다.</li>
-                  <li>열기 버튼 포커스를 기억했다가 닫힐 때 다시 돌려줍니다.</li>
-                </ul>
-              </Card>
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={modalGuideRows} />
-            </div>
+              jsCode={buildPluginSnippet('modalPlugin')}
+              checkpoints={modalCheckpoints}
+              rows={modalGuideRows}
+            />
           </Card>
         </Section>
 
@@ -616,30 +616,18 @@ app.mount();`}
               </div>
             </div>
 
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<button
+            <ModuleReference
+              htmlCode={`<button
   data-weave-scroll-target="#target"
   data-weave-scroll-duration="700"
   data-weave-scroll-offset="true"
 >
   이동
 </button>`}
-              />
-              <Card className="docs_note_card">
-                <h3>체크 포인트</h3>
-                <ul className="check_list">
-                  <li>target은 id 또는 selector로 지정할 수 있습니다.</li>
-                  <li>container를 지정하지 않으면 기본값은 `window`입니다.</li>
-                  <li>duration이 0이면 즉시 이동합니다.</li>
-                </ul>
-              </Card>
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={scrollGuideRows} />
-            </div>
+              jsCode={buildPluginSnippet('scrollToPlugin')}
+              checkpoints={scrollCheckpoints}
+              rows={scrollGuideRows}
+            />
           </Card>
         </Section>
 
@@ -649,55 +637,51 @@ app.mount();`}
           title="Hide Today"
           description="하루 동안 다시 보지 않기 체크와 함께 대상 요소 숨김 상태를 저장합니다."
         >
-          <Card data-weave-hide-today data-weave-hide-target="today-banner">
-            <div id="today-banner" className="today_notice">
-              <strong>오늘 하루 보지 않기 예시 패널</strong>
-              <span>체크 후 닫기를 누르면 상단 공지 영역이 숨겨지고 localStorage에 만료 시간이 저장됩니다.</span>
+          <Card>
+            <div className="hide_today_demo_card" data-weave-hide-today data-weave-hide-target="today-banner">
+              <div id="today-banner" className="today_notice">
+                <strong>오늘 하루 보지 않기 예시 패널</strong>
+                <span>체크 후 닫기를 누르면 상단 공지 영역이 숨겨지고 localStorage에 만료 시간이 저장됩니다.</span>
+              </div>
+
+              <div className="hide_today_demo">
+                <label className="checkbox_card">
+                  <input
+                    type="checkbox"
+                    data-weave-hide-today-checkbox
+                    data-weave-hide-target="today-banner"
+                  />
+                  <span>오늘 하루 보지 않기</span>
+                </label>
+                <button type="button" data-weave-hide-today-button>
+                  닫기
+                </button>
+              </div>
             </div>
 
-            <div className="hide_today_demo">
-              <label className="checkbox_card">
-                <input
-                  type="checkbox"
-                  data-weave-hide-today-checkbox
-                  data-weave-hide-target="today-banner"
-                />
-                <span>오늘 하루 보지 않기</span>
-              </label>
-              <button type="button" data-weave-hide-today-button>
-                닫기
-              </button>
-            </div>
-
-            <div className="docs_grid_2 mt_20">
-              <CodeBlock
-                language="html"
-                code={`<div
+            <ModuleReference
+              htmlCode={`<div
+  class="hide_today_demo_card"
   data-weave-hide-today
   data-weave-hide-target="today-banner"
 >
   <div id="today-banner">공지 영역</div>
-  <input
-    type="checkbox"
-    data-weave-hide-today-checkbox
-    data-weave-hide-target="today-banner"
-  />
+
+  <label class="checkbox_card">
+    <input
+      type="checkbox"
+      data-weave-hide-today-checkbox
+      data-weave-hide-target="today-banner"
+    />
+    <span>오늘 하루 보지 않기</span>
+  </label>
+
   <button type="button" data-weave-hide-today-button>닫기</button>
 </div>`}
-              />
-              <Card className="docs_note_card">
-                <h3>체크 포인트</h3>
-                <ul className="check_list">
-                  <li>저장 키는 `weave-hide-today-*` prefix를 사용합니다.</li>
-                  <li>체크하지 않으면 숨김만 적용되고 저장은 남지 않습니다.</li>
-                  <li>기본 만료 시간은 24시간입니다.</li>
-                </ul>
-              </Card>
-            </div>
-
-            <div className="mt_20">
-              <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={hideTodayGuideRows} />
-            </div>
+              jsCode={buildPluginSnippet('hideTodayPlugin')}
+              checkpoints={hideTodayCheckpoints}
+              rows={hideTodayGuideRows}
+            />
           </Card>
         </Section>
       </div>
@@ -734,4 +718,40 @@ function GuideTable({ headers, rows }) {
       </div>
     </Card>
   );
+}
+
+function ModuleReference({ htmlCode, jsCode, checkpoints, rows }) {
+  return (
+    <>
+      <div className="docs_grid_2 mt_20">
+        <CodeBlock language="html" code={htmlCode} />
+        <CodeBlock language="js" code={jsCode} />
+      </div>
+
+      <div className="mt_20">
+        <Card className="docs_note_card">
+          <h3>체크 포인트</h3>
+          <ul className="check_list">
+            {checkpoints.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+
+      <div className="mt_20">
+        <GuideTable headers={['항목', '값 또는 셀렉터', '설명']} rows={rows} />
+      </div>
+    </>
+  );
+}
+
+function buildPluginSnippet(pluginName) {
+  return `import { createWeave, ${pluginName} } from '@weave/wv/dist/js/core.js';
+
+const app = createWeave({
+  plugins: [${pluginName}()],
+});
+
+app.mount();`;
 }
