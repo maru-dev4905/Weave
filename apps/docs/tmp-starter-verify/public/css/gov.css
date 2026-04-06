@@ -1,0 +1,381 @@
+@charset "UTF-8";
+:root {
+  --gov_display_l: 6.6rem; /* 66px (rem10 기준) */
+  --gov_display_m: 5.0rem;
+  --gov_display_s: 4.0rem;
+  --gov_mo_display_l: 4.0rem;
+  --gov_mo_display_m: 3.2rem;
+  --gov_mo_display_s: 2.5rem;
+  --gov_lh: 1.5; /* 150% */
+  --gov_ls_1: 1px;
+}
+
+/* gov/_typography.scss */
+/* gov/_tokens.scss
+   rem10 기준: 1rem = 10px
+   line-height: 150% => 1.5
+*/
+:root {
+  /* shared */
+  --gov_lh_150: 1.5;
+  --gov_ls_1: 1px;
+  --gov_ls_0: 0px;
+  /* =========================
+     Display (Bold 700, ls 1px)
+     PC: 66 / 50 / 40
+     MO: 40 / 32 / 25
+  ========================= */
+  --gov_display_l: 6.6rem;
+  --gov_display_m: 5rem;
+  --gov_display_s: 4rem;
+  --gov_mo_display_l: 4rem;
+  --gov_mo_display_m: 3.2rem;
+  --gov_mo_display_s: 2.5rem;
+  /* =========================
+     Heading (Bold 700, ls 1px)
+     PC: 50 / 40 / 32
+     MO: 40 / 32 / 25
+  ========================= */
+  --gov_heading_l: 5rem;
+  --gov_heading_m: 4rem;
+  --gov_heading_s: 3.2rem;
+  --gov_mo_heading_l: 4rem;
+  --gov_mo_heading_m: 3.2rem;
+  --gov_mo_heading_s: 2.5rem;
+  /* =========================
+     Title (Bold 700)
+     Letter-spacing:
+       - XXL: 1px
+       - XL/L/M/S/XS: 0
+     PC: 32 / 25 / 21 / 19 / 17 / 15
+     MO: 25 / 25 / 21 / 19 / 17 / 15
+  ========================= */
+  --gov_title_xxl: 3.2rem;
+  --gov_title_xl: 2.5rem;
+  --gov_title_l: 2.1rem;
+  --gov_title_m: 1.9rem;
+  --gov_title_s: 1.7rem;
+  --gov_title_xs: 1.5rem;
+  --gov_mo_title_xxl: 2.5rem;
+  --gov_mo_title_xl: 2.5rem;
+  --gov_mo_title_l: 2.1rem;
+  --gov_mo_title_m: 1.9rem;
+  --gov_mo_title_s: 1.7rem;
+  --gov_mo_title_xs: 1.5rem;
+  /* =========================
+     Body (Regular 400 기본, 필요 시 Bold 가능)
+     PC: 19 / 17 / 15
+     MO: 19 / 17 / 15
+  ========================= */
+  --gov_body_l: 1.9rem;
+  --gov_body_m: 1.7rem;
+  --gov_body_s: 1.5rem;
+  --gov_mo_body_l: 1.9rem;
+  --gov_mo_body_m: 1.7rem;
+  --gov_mo_body_s: 1.5rem;
+  /* =========================
+     Detail (Regular 400)
+     PC: 17 / 15 / 13
+     MO: 17 / 15 / 13
+  ========================= */
+  --gov_detail_l: 1.7rem;
+  --gov_detail_m: 1.5rem;
+  --gov_detail_s: 1.3rem;
+  --gov_mo_detail_l: 1.7rem;
+  --gov_mo_detail_m: 1.5rem;
+  --gov_mo_detail_s: 1.3rem;
+  /* =========================
+     Label (Regular 400)
+     PC: 19 / 17 / 15 / 13
+     MO: 19 / 17 / 15 / 13
+  ========================= */
+  --gov_label_l: 1.9rem;
+  --gov_label_m: 1.7rem;
+  --gov_label_s: 1.5rem;
+  --gov_label_xs: 1.3rem;
+  --gov_mo_label_l: 1.9rem;
+  --gov_mo_label_m: 1.7rem;
+  --gov_mo_label_s: 1.5rem;
+  --gov_mo_label_xs: 1.3rem;
+  /* =========================
+     Links (Regular 400)
+     PC: 19 / 17 / 15
+     MO: 19 / 17 / 15
+  ========================= */
+  --gov_link_l: 1.9rem;
+  --gov_link_m: 1.7rem;
+  --gov_link_s: 1.5rem;
+  --gov_mo_link_l: 1.9rem;
+  --gov_mo_link_m: 1.7rem;
+  --gov_mo_link_s: 1.5rem;
+}
+
+/* 공통(가이드 고정값) */
+.gov_fw_r {
+  font-weight: 400 !important;
+}
+
+.gov_fw_b {
+  font-weight: 700 !important;
+}
+
+/* ----- Display ----- */
+.gov_display_l {
+  font-size: var(--gov_display_l);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+.gov_display_m {
+  font-size: var(--gov_display_m);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+.gov_display_s {
+  font-size: var(--gov_display_s);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+/* ----- Heading ----- */
+.gov_heading_l {
+  font-size: var(--gov_heading_l);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+.gov_heading_m {
+  font-size: var(--gov_heading_m);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+.gov_heading_s {
+  font-size: var(--gov_heading_s);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_1);
+}
+
+/* ----- Title ----- */
+.gov_title_xxl {
+  font-size: var(--gov_title_xxl);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_title_xl {
+  font-size: var(--gov_title_xl);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_title_l {
+  font-size: var(--gov_title_l);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_title_m {
+  font-size: var(--gov_title_m);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_title_s {
+  font-size: var(--gov_title_s);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_title_xs {
+  font-size: var(--gov_title_xs);
+  font-weight: 700;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+/* ----- Body ----- */
+.gov_body_l {
+  font-size: var(--gov_body_l);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_body_m {
+  font-size: var(--gov_body_m);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_body_s {
+  font-size: var(--gov_body_s);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+/* ----- Detail ----- */
+.gov_detail_l {
+  font-size: var(--gov_detail_l);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_detail_m {
+  font-size: var(--gov_detail_m);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_detail_s {
+  font-size: var(--gov_detail_s);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+/* ----- Label ----- */
+.gov_label_l {
+  font-size: var(--gov_label_l);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_label_m {
+  font-size: var(--gov_label_m);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_label_s {
+  font-size: var(--gov_label_s);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_label_xs {
+  font-size: var(--gov_label_xs);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+/* ----- Links ----- */
+.gov_link_l {
+  font-size: var(--gov_link_l);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_link_m {
+  font-size: var(--gov_link_m);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+.gov_link_s {
+  font-size: var(--gov_link_s);
+  font-weight: 400;
+  line-height: var(--gov_lh_150);
+  letter-spacing: var(--gov_ls_0);
+}
+
+/* ===== Mobile override (md 기준) ===== */
+@media (max-width: 768px) {
+  .gov_display_l {
+    font-size: var(--gov_mo_display_l);
+  }
+  .gov_display_m {
+    font-size: var(--gov_mo_display_m);
+  }
+  .gov_display_s {
+    font-size: var(--gov_mo_display_s);
+  }
+  .gov_heading_l {
+    font-size: var(--gov_mo_heading_l);
+  }
+  .gov_heading_m {
+    font-size: var(--gov_mo_heading_m);
+  }
+  .gov_heading_s {
+    font-size: var(--gov_mo_heading_s);
+  }
+  .gov_title_xxl {
+    font-size: var(--gov_mo_title_xxl);
+  }
+  .gov_title_xl {
+    font-size: var(--gov_mo_title_xl);
+  }
+  .gov_title_l {
+    font-size: var(--gov_mo_title_l);
+  }
+  .gov_title_m {
+    font-size: var(--gov_mo_title_m);
+  }
+  .gov_title_s {
+    font-size: var(--gov_mo_title_s);
+  }
+  .gov_title_xs {
+    font-size: var(--gov_mo_title_xs);
+  }
+  .gov_body_l {
+    font-size: var(--gov_mo_body_l);
+  }
+  .gov_body_m {
+    font-size: var(--gov_mo_body_m);
+  }
+  .gov_body_s {
+    font-size: var(--gov_mo_body_s);
+  }
+  .gov_detail_l {
+    font-size: var(--gov_mo_detail_l);
+  }
+  .gov_detail_m {
+    font-size: var(--gov_mo_detail_m);
+  }
+  .gov_detail_s {
+    font-size: var(--gov_mo_detail_s);
+  }
+  .gov_label_l {
+    font-size: var(--gov_mo_label_l);
+  }
+  .gov_label_m {
+    font-size: var(--gov_mo_label_m);
+  }
+  .gov_label_s {
+    font-size: var(--gov_mo_label_s);
+  }
+  .gov_label_xs {
+    font-size: var(--gov_mo_label_xs);
+  }
+  .gov_link_l {
+    font-size: var(--gov_mo_link_l);
+  }
+  .gov_link_m {
+    font-size: var(--gov_mo_link_m);
+  }
+  .gov_link_s {
+    font-size: var(--gov_mo_link_s);
+  }
+}

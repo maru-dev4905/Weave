@@ -1,0 +1,146 @@
+:root {
+  color-scheme: dark;
+  --weave-line: rgba(127, 178, 255, 0.16);
+  --weave-text: #eff5ff;
+  --weave-muted: #9baecc;
+  --weave-accent: #7cb2ff;
+  --weave-accent-2: #78eeff;
+  --weave-violet: #b099ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family:
+    "Pretendard",
+    "Noto Sans KR",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: var(--weave-text);
+  background:
+    radial-gradient(circle at top left, rgba(124, 178, 255, 0.22), transparent 28%),
+    radial-gradient(circle at 84% 16%, rgba(120, 238, 255, 0.18), transparent 24%),
+    linear-gradient(180deg, #091120 0%, #060c18 100%);
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background-image:
+    linear-gradient(var(--weave-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--weave-line) 1px, transparent 1px);
+  background-size: 54px 54px;
+  opacity: 0.65;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at center, rgba(124, 178, 255, 0.18), transparent 34%),
+    radial-gradient(circle at 56% 44%, rgba(176, 153, 255, 0.14), transparent 30%);
+  filter: blur(32px);
+  transform-origin: center;
+  animation: weaveGlowPulse 3.5s ease-in-out infinite;
+}
+
+.weave_shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 40px 24px;
+}
+
+.weave_centerpiece {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 18px;
+  text-align: center;
+}
+
+.weave_centerpiece::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.9) 0.45px, transparent 0.55px),
+    radial-gradient(rgba(124, 178, 255, 0.7) 0.4px, transparent 0.5px);
+  background-position:
+    0 0,
+    13px 17px;
+  background-size:
+    22px 22px,
+    29px 29px;
+  mix-blend-mode: screen;
+}
+
+.weave_title {
+  margin: 0;
+  font-size: clamp(88px, 22vw, 260px);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(
+    135deg,
+    #f5f8ff 0%,
+    #9cd4ff 28%,
+    #7cb2ff 52%,
+    #78eeff 76%,
+    #d9e6ff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 32px rgba(124, 178, 255, 0.18),
+    0 0 72px rgba(120, 238, 255, 0.1);
+}
+
+.weave_subtitle {
+  margin: 0;
+  color: var(--weave-muted);
+  font-size: clamp(15px, 2vw, 22px);
+  line-height: 1.6;
+  letter-spacing: 0.12em;
+  text-transform: none;
+}
+
+@keyframes weaveGlowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.88);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@media (max-width: 960px) {
+  .weave_shell {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
