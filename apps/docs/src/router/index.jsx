@@ -8,6 +8,7 @@ import { FormPage } from '../pages/FormPage.jsx';
 import { HomePage } from '../pages/HomePage.jsx';
 import { PalettePage } from '../pages/PalettePage.jsx';
 import { JsDocsPage } from '../pages/JsDocsPage.jsx';
+import { ToolsPage } from '../pages/ToolsPage.jsx';
 import { ValidationPage } from '../pages/ValidationPage.jsx';
 
 export const router = createBrowserRouter([
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: 'anim',
         element: <AnimPage />,
+      },
+      {
+        path: 'tools',
+        element: <ToolsPage />,
       },
       {
         path: 'validation',

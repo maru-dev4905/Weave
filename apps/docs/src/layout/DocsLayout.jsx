@@ -308,6 +308,11 @@ function getPageMeta(pathname) {
       title: '애니메이션 모듈 설명서',
       description: 'fade, parallax, cascade, marquee, ticker, count를 GSAP 기반으로 테스트하고 속성 규칙을 바로 확인할 수 있도록 정리했습니다.',
     },
+    '/tools': {
+      eyebrow: 'Tools',
+      title: '개발 보조 도구',
+      description: 'px to vw, px to rem, img to webp 같은 퍼블리싱 보조 도구를 한 화면에서 바로 실행할 수 있도록 정리했습니다.',
+    },
     '/validation': {
       eyebrow: 'Validation',
       title: '폼 유효성 검증 설명서',

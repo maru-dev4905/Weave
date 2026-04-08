@@ -20,6 +20,11 @@ const featureCards = [
     text: 'fade, parallax, cascade, marquee, ticker, count 애니메이션을 GSAP 기반으로 테스트할 수 있습니다.',
   },
   {
+    icon: 'TL',
+    title: 'Tools',
+    text: 'px to vw, px to rem, img to webp 같은 실무형 변환 도구를 문서 앱 안에서 바로 실행할 수 있습니다.',
+  },
+  {
     icon: 'VD',
     title: 'Validation',
     text: '폼 유효성 검증 규칙과 메시지 타겟 구조를 모듈 문서 형태로 바로 확인할 수 있습니다.',
@@ -85,6 +90,7 @@ export function HomePage() {
             <span>Docs(CSS)</span>
             <span>Docs(JS)</span>
             <span>Anim</span>
+            <span>Tools</span>
             <span>Validation</span>
             <span>Form</span>
             <span>Plate</span>
@@ -126,6 +132,10 @@ export function HomePage() {
           <Link to="/anim" className="quick_link_card surface_card">
             <strong>애니메이션 모듈 테스트</strong>
             <span>Fade, Parallax, Cascade, Ticker, Count</span>
+          </Link>
+          <Link to="/tools" className="quick_link_card surface_card">
+            <strong>퍼블리싱 보조 도구</strong>
+            <span>PX to VW, PX to REM, IMG to WEBP</span>
           </Link>
           <Link to="/validation" className="quick_link_card surface_card">
             <strong>폼 검증 규칙 문서</strong>
