@@ -12,6 +12,7 @@ import {
   modalPlugin,
   scrollToPlugin,
   tabsPlugin,
+  validationPlugin,
 } from '@weave/wv/dist/js/core.js';
 
 import { Navbar } from '../components/Navbar.jsx';
@@ -38,7 +39,50 @@ export function DocsLayout() {
         hideTodayPlugin(),
         scrollToPlugin(),
         animPlugin.fadeAnim(),
+        animPlugin.parallaxAnim({
+          responsive: {
+            disableBelow: 768,
+          },
+        }),
+        animPlugin.cascadeAnim(),
         animPlugin.marqueeAnim(),
+        animPlugin.tickerAnim(),
+        animPlugin.countAnim(),
+        validationPlugin({
+          fields: {
+            validationPhone: {
+              pattern: '^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$',
+              messages: {
+                pattern: '연락처는 010-1234-5678 또는 01012345678 형식으로 입력해주세요.',
+              },
+            },
+            validationPassword: {
+              togglePassword: true,
+              messages: {
+                minlength: '비밀번호는 8자 이상 입력해주세요.',
+              },
+            },
+            validationPasswordConfirm: {
+              togglePassword: true,
+              messages: {
+                match: '비밀번호 확인 값이 원본과 일치해야 합니다.',
+              },
+            },
+            formSignupPassword: {
+              togglePassword: true,
+            },
+            formSignupPasswordConfirm: {
+              togglePassword: true,
+              messages: {
+                match: '가입 비밀번호 확인 값이 일치하지 않습니다.',
+              },
+            },
+          },
+          passwordToggleLabels: {
+            show: '보기',
+            hide: '숨기기',
+          },
+        }),
       ],
     });
 
@@ -262,7 +306,17 @@ function getPageMeta(pathname) {
     '/anim': {
       eyebrow: 'Anim',
       title: '애니메이션 모듈 설명서',
-      description: 'fade와 marquee를 GSAP 기반으로 테스트하고 속성 규칙을 바로 확인할 수 있도록 정리했습니다.',
+      description: 'fade, parallax, cascade, marquee, ticker, count를 GSAP 기반으로 테스트하고 속성 규칙을 바로 확인할 수 있도록 정리했습니다.',
+    },
+    '/validation': {
+      eyebrow: 'Validation',
+      title: '폼 유효성 검증 설명서',
+      description: '필드 규칙, 그룹 검증, 메시지 타겟, blur/submit 흐름을 퍼블리셔 기준으로 바로 적용할 수 있게 정리했습니다.',
+    },
+    '/form': {
+      eyebrow: 'Form',
+      title: '실전형 폼 쇼케이스',
+      description: '문의 폼과 가입 폼 예시로 submit 차단, summary, 첫 에러 포커스, 성공 상태를 한 화면에서 확인할 수 있습니다.',
     },
     '/plate': {
       eyebrow: 'Plate',

@@ -17,7 +17,17 @@ const featureCards = [
   {
     icon: 'AN',
     title: 'Anim',
-    text: 'fade와 marquee 애니메이션을 GSAP 기반으로 테스트하고 속성 규칙을 함께 확인할 수 있습니다.',
+    text: 'fade, parallax, cascade, marquee, ticker, count 애니메이션을 GSAP 기반으로 테스트할 수 있습니다.',
+  },
+  {
+    icon: 'VD',
+    title: 'Validation',
+    text: '폼 유효성 검증 규칙과 메시지 타겟 구조를 모듈 문서 형태로 바로 확인할 수 있습니다.',
+  },
+  {
+    icon: 'FM',
+    title: 'Form',
+    text: '문의 폼과 가입 폼 예시로 실제 submit 흐름과 에러 처리 UX를 한 화면에서 테스트할 수 있습니다.',
   },
   {
     icon: 'PL',
@@ -68,13 +78,15 @@ export function HomePage() {
             </div>
             <div>
               <strong>ANIM</strong>
-              <span>Fade + Marquee</span>
+              <span>Anim + Validation</span>
             </div>
           </div>
           <div className="hero_preview_code">
             <span>Docs(CSS)</span>
             <span>Docs(JS)</span>
             <span>Anim</span>
+            <span>Validation</span>
+            <span>Form</span>
             <span>Plate</span>
             <span>Download</span>
           </div>
@@ -113,7 +125,15 @@ export function HomePage() {
           </Link>
           <Link to="/anim" className="quick_link_card surface_card">
             <strong>애니메이션 모듈 테스트</strong>
-            <span>Fade, Marquee, GSAP, ScrollTrigger</span>
+            <span>Fade, Parallax, Cascade, Ticker, Count</span>
+          </Link>
+          <Link to="/validation" className="quick_link_card surface_card">
+            <strong>폼 검증 규칙 문서</strong>
+            <span>Required, Match, Group, Summary</span>
+          </Link>
+          <Link to="/form" className="quick_link_card surface_card">
+            <strong>실전형 폼 제출 흐름</strong>
+            <span>Contact, Signup, Error Focus, Success</span>
           </Link>
           <Link to="/plate" className="quick_link_card surface_card">
             <strong>색상 토큰 탐색</strong>

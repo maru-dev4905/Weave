@@ -4,9 +4,11 @@ import { DocsLayout } from '../layout/DocsLayout.jsx';
 import { AnimPage } from '../pages/AnimPage.jsx';
 import { CssDocsPage } from '../pages/CssDocsPage.jsx';
 import { DownloadPage } from '../pages/DownloadPage.jsx';
+import { FormPage } from '../pages/FormPage.jsx';
 import { HomePage } from '../pages/HomePage.jsx';
 import { PalettePage } from '../pages/PalettePage.jsx';
 import { JsDocsPage } from '../pages/JsDocsPage.jsx';
+import { ValidationPage } from '../pages/ValidationPage.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: 'anim',
         element: <AnimPage />,
+      },
+      {
+        path: 'validation',
+        element: <ValidationPage />,
+      },
+      {
+        path: 'form',
+        element: <FormPage />,
       },
       {
         path: 'plate',

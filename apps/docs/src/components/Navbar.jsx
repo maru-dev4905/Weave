@@ -5,6 +5,8 @@ const links = [
   { to: '/docs/css', label: 'Docs(CSS)' },
   { to: '/docs/js', label: 'Docs(JS)' },
   { to: '/anim', label: 'Anim' },
+  { to: '/validation', label: 'Validation' },
+  { to: '/form', label: 'Form' },
   { to: '/plate', label: 'Plate' },
   { to: '/download', label: 'Download' },
 ];
