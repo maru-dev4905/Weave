@@ -1,0 +1,55 @@
+[
+  {
+    "version": "0.1.21",
+    "title": "Tools 페이지를 목록/상세 구조로 정리하고 px/rem, img/webp 도구 UI를 개선 docs 전용 테마 전환 기능을 추가하고 라이트/다크 컬러 대응, 푸터 SNS 링크, 세부 데모 영역 스타일 정리를 함께 반영",
+    "date": "2026-04-09",
+    "summary": "Tools 페이지를 목록/상세 구조로 정리하고 px/rem, img/webp 도구 UI를 개선 docs 전용 테마 전환 기능을 추가하고 라이트/다크 컬러 대응, 푸터 SNS 링크, 세부 데모 영역 스타일 정리를 함께 반영를 포함한 변경 묶음입니다.",
+    "entries": [
+      "Tools 페이지를 목록/상세 구조로 정리하고 px/rem, img/webp 도구 UI를 개선 docs 전용 테마 전환 기능을 추가하고 라이트/다크 컬러 대응, 푸터 SNS 링크, 세부 데모 영역 스타일 정리를 함께 반영",
+      "Tools 페이지를 새로 추가하고 퍼블리싱 작업에 자주 쓰는 변환 도구를 문서 앱 안으로 통합",
+      "readme.md 내용 수정",
+      "폼 유효성 검증 플러그인과 데모 페이지를 추가",
+      "GSAP anim 플러그인과 Anim 문서 페이지 추가 fade와 marquee 기반의 애니메이션 모듈을 추가하고 once/replay 옵션, marquee 루프 개선, 문서/라우트 연결까지 함께 정리",
+      "스타터 킷과 JS Docs 구조 정리 Download 페이지와 ZIP 자산 구성을 최신 기준으로 맞춤 JS Docs 예시를 보강하고 Hide Today 데모 동작 및 스타터 index 구조를 정리 2"
+    ]
+  },
+  {
+    "version": "0.1.20",
+    "title": "스타터 킷과 JS Docs 구조 정리 Download 페이지와 ZIP 자산 구성을 최신 기준으로 맞춤 JS Docs 예시를 보강하고 Hide Today 데모 동작 및 스타터 index 구조를 정리",
+    "date": "2026-04-06",
+    "summary": "스타터 킷과 JS Docs 구조 정리 Download 페이지와 ZIP 자산 구성을 최신 기준으로 맞춤 JS Docs 예시를 보강하고 Hide Today 데모 동작 및 스타터 index 구조를 정리를 포함한 변경 묶음입니다.",
+    "entries": [
+      "스타터 킷과 JS Docs 구조 정리 Download 페이지와 ZIP 자산 구성을 최신 기준으로 맞춤 JS Docs 예시를 보강하고 Hide Today 데모 동작 및 스타터 index 구조를 정리",
+      "fileDrop 플러그인과 문서 데모 추가",
+      "target button 모듈 JS 파일 추가",
+      "target button 모듈 추가 및 문서 반영",
+      "사이드바 UI 현재 보고 있는 섹션이라면 hover와 동일한 스타일 붙도록 수정",
+      "문서 UI 세부 조정"
+    ]
+  },
+  {
+    "version": "0.1.19",
+    "title": "CSS와 JS 문서 구조 보강",
+    "date": "2026-03-24",
+    "summary": "CSS와 JS 문서 구조 보강를 포함한 변경 묶음입니다.",
+    "entries": [
+      "CSS와 JS 문서 구조 보강",
+      "문서 레이아웃과 모달 정리",
+      "문서 구조 개편과 랜딩 정리",
+      "WEAVE CSS 설명서 추가",
+      "WEAVE CSS 구조 보강 및 문서 페이지 업데이트",
+      "랜딩 페이지 추가"
+    ]
+  },
+  {
+    "version": "0.1.18",
+    "title": "readmd.md 추가 및 플러그인 추가 등 기술 코드 수정 및 추가 작업",
+    "date": "2026-03-06",
+    "summary": "readmd.md 추가 및 플러그인 추가 등 기술 코드 수정 및 추가 작업를 포함한 변경 묶음입니다.",
+    "entries": [
+      "readmd.md 추가 및 플러그인 추가 등 기술 코드 수정 및 추가 작업",
+      "test commit",
+      "first commit"
+    ]
+  }
+]

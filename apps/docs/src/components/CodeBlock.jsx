@@ -1,5 +1,7 @@
 import { useId } from 'react';
 
+import { CopyButton } from './CopyButton.jsx';
+
 export function CodeBlock({
   code,
   language = 'html',
@@ -13,15 +15,7 @@ export function CodeBlock({
     <div className="code_block surface_card">
       <div className="code_block_head">
         <span>{language}</span>
-        <button
-          type="button"
-          className="copy_ghost_button weave_copy"
-          data-target={`#${targetId}`}
-          data-copy-message={message}
-          data-copy-success-label="COPIED"
-        >
-          {copyLabel}
-        </button>
+        <CopyButton label={copyLabel} target={`#${targetId}`} message={message} />
       </div>
       <pre>
         <code id={targetId}>{code}</code>

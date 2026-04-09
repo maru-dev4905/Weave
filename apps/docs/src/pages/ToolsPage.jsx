@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import JSZip from 'jszip';
 
 import { Card } from '../components/Card.jsx';
+import { CopyButton } from '../components/CopyButton.jsx';
 import { Section } from '../components/Section.jsx';
 import { Sidebar } from '../components/Sidebar.jsx';
 
@@ -59,8 +60,7 @@ export function ToolsPage() {
       <Sidebar
         title="On this page"
         items={[
-          { href: '#overview', label: '개요' },
-          { href: '#tools-list', label: 'Tools List' },
+          { href: activeTool ? '/tools' : '#tools-list', label: 'Tools List' },
           ...tools.map((tool) => ({
             href: `/tools/${tool.id}`,
             label: tool.title,
@@ -70,44 +70,55 @@ export function ToolsPage() {
       />
 
       <div className="page_content">
-        <Section
-          id="overview"
-          eyebrow="TOOLS"
-          title="개발과 퍼블리싱 작업을 돕는 보조 도구"
-          description="반복적으로 계산하거나 변환하는 작업을 문서 앱 안에서 바로 처리할 수 있습니다."
-          align="wide"
-        />
+        {!activeTool ? (
+          <>
+            <Section
+              id="overview"
+              eyebrow="TOOLS"
+              title="개발과 퍼블리싱 작업을 돕는 보조 도구"
+              description="반복적으로 계산하거나 변환하는 작업을 문서 앱 안에서 바로 처리할 수 있습니다."
+              align="wide"
+            />
 
-        <Section
-          id="tools-list"
-          eyebrow="LIST"
-          title="Tools List"
-          description="필요한 도구를 선택해 보다 빠르게 처리해보세요."
-        >
-          <div className="tools_list_grid">
-            {tools.map((tool) => (
-              <Link
-                key={tool.id}
-                to={`/tools/${tool.id}`}
-                className={activeTool?.id === tool.id ? 'tools_list_card is_active' : 'tools_list_card'}
-              >
-                <span className="badge_pill">{tool.title}</span>
-                <strong>{tool.title}</strong>
-                <p>{tool.summary}</p>
-              </Link>
-            ))}
-          </div>
-        </Section>
+            <Section
+              id="tools-list"
+              eyebrow="LIST"
+              title="Tools List"
+              description="필요한 도구를 선택해 보다 빠르게 처리해보세요."
+            >
+              <div className="tools_list_grid">
+                {tools.map((tool) => (
+                  <Link
+                    key={tool.id}
+                    to={`/tools/${tool.id}`}
+                    className={activeTool?.id === tool.id ? 'tools_list_card is_active' : 'tools_list_card'}
+                  >
+                    <span className="badge_pill">{tool.title}</span>
+                    <strong>{tool.title}</strong>
+                    <p>{tool.summary}</p>
+                  </Link>
+                ))}
+              </div>
+            </Section>
+          </>
+        ) : null}
 
         {activeTool ? (
-          <Section
-            id="tool-detail"
-            eyebrow="TOOL"
-            title={activeTool.title}
-            description={getToolDescription(activeTool.id)}
-          >
-            {renderToolPanel(activeTool.id)}
-          </Section>
+          <>
+            <div className="tools_back_row">
+              <Link to="/tools" className="secondary_link_button tools_back_button">
+                Tools List로 돌아가기
+              </Link>
+            </div>
+
+            <Section
+              id="tool-detail"
+              eyebrow="TOOL"
+              title={activeTool.title}
+            >
+              {renderToolPanel(activeTool.id)}
+            </Section>
+          </>
         ) : null}
       </div>
     </div>
@@ -128,22 +139,6 @@ function renderToolPanel(toolId) {
   }
 
   return null;
-}
-
-function getToolDescription(toolId) {
-  if (toolId === 'px-to-vw') {
-    return 'px와 vw 단위를 숫자 또는 CSS 문자열 기준으로 상호 변환할 수 있습니다.';
-  }
-
-  if (toolId === 'px-to-rem') {
-    return 'base font-size 값을 기준으로 px와 rem 계산값을 빠르게 확인할 수 있습니다.';
-  }
-
-  if (toolId === 'img-to-webp') {
-    return '브라우저 안에서 이미지를 WebP로 변환하고 개별 또는 ZIP으로 내려받을 수 있습니다.';
-  }
-
-  return '';
 }
 
 function PxToVwTool() {
@@ -219,6 +214,9 @@ function PxToVwTool() {
             <input value={decimals} onChange={(event) => setDecimals(event.target.value)} />
             <button type="button" onClick={convertPxToVw}>변환</button>
             <textarea value={vw} readOnly />
+            <div className="tools_action_row">
+              <CopyButton label="결과 복사" text={vw} message="PX to VW 결과를 복사했습니다." />
+            </div>
           </div>
 
           <div className="tools_box">
@@ -229,6 +227,9 @@ function PxToVwTool() {
             <input value={base2} onChange={(event) => setBase2(event.target.value)} />
             <button type="button" onClick={convertVwToPx}>변환</button>
             <textarea value={pxOutput} readOnly />
+            <div className="tools_action_row">
+              <CopyButton label="결과 복사" text={pxOutput} message="VW to PX 결과를 복사했습니다." />
+            </div>
           </div>
         </div>
       </Card>
@@ -256,6 +257,9 @@ function PxToVwTool() {
             </label>
             <button type="button" onClick={convertCssPxToVw}>변환</button>
             <textarea value={cssOutPx} readOnly />
+            <div className="tools_action_row">
+              <CopyButton label="결과 복사" text={cssOutPx} message="CSS PX to VW 결과를 복사했습니다." />
+            </div>
           </div>
 
           <div className="tools_box">
@@ -270,6 +274,9 @@ function PxToVwTool() {
             </label>
             <button type="button" onClick={convertCssVwToPx}>변환</button>
             <textarea value={cssOutVw} readOnly />
+            <div className="tools_action_row">
+              <CopyButton label="결과 복사" text={cssOutVw} message="CSS VW to PX 결과를 복사했습니다." />
+            </div>
           </div>
         </div>
       </Card>
@@ -341,6 +348,14 @@ function PxToRemTool() {
             <strong>{resultValue}</strong>
             <p>{resultUnit}</p>
           </div>
+
+          <div className="tools_action_row tools_action_row_center">
+            <CopyButton
+              label="결과 복사"
+              text={`${resultValue}${resultUnit.toLowerCase()}`}
+              message="PX to REM 결과를 복사했습니다."
+            />
+          </div>
         </div>
       </div>
     </Card>
@@ -357,6 +372,7 @@ function ImgToWebpTool() {
     return () => {
       files.forEach((file) => {
         URL.revokeObjectURL(file.url);
+        URL.revokeObjectURL(file.originalUrl);
       });
     };
   }, [files]);
@@ -391,6 +407,7 @@ function ImgToWebpTool() {
     setIsProcessing(true);
     files.forEach((file) => {
       URL.revokeObjectURL(file.url);
+      URL.revokeObjectURL(file.originalUrl);
     });
 
     try {
@@ -473,6 +490,11 @@ function ImgToWebpTool() {
           <button type="button" className="primary_button" onClick={downloadAll} disabled={!files.length}>
             전체 ZIP 다운로드
           </button>
+          <CopyButton
+            label="파일명 목록 복사"
+            text={files.map((file) => file.filename).join('\n')}
+            message="WEBP 파일명 목록을 복사했습니다."
+          />
           {isProcessing ? <span>변환 중...</span> : null}
         </div>
       </Card>
@@ -488,11 +510,28 @@ function ImgToWebpTool() {
         <div className="tools_results_list mt_20">
           {files.length ? files.map((file) => (
             <div key={file.filename} className="tools_result_item">
-              <div>
-                <strong>{file.originalName}</strong>
-                <p>{formatBytes(file.originalSize)} to {formatBytes(file.size)}</p>
+              <div className="tools_result_preview">
+                <div className="tools_result_thumb_group">
+                  <div className="tools_result_thumb">
+                    <img src={file.originalUrl} alt={`${file.originalName} original preview`} />
+                    <span>원본</span>
+                  </div>
+                  <div className="tools_result_thumb">
+                    <img src={file.url} alt={`${file.filename} converted preview`} />
+                    <span>WEBP</span>
+                  </div>
+                </div>
+                <div className="tools_result_copy">
+                  <strong>{file.originalName}</strong>
+                  <p>{file.width} x {file.height}</p>
+                  <p>{formatBytes(file.originalSize)} to {formatBytes(file.size)}</p>
+                  <p>{file.savingRate}% 절감</p>
+                </div>
               </div>
-              <a href={file.url} download={file.filename}>다운로드</a>
+              <div className="tools_result_actions">
+                <CopyButton label="이름 복사" text={file.filename} message="파일명을 복사했습니다." />
+                <a href={file.url} download={file.filename}>다운로드</a>
+              </div>
             </div>
           )) : <p className="tools_empty_text">아직 변환된 이미지가 없습니다.</p>}
         </div>
@@ -519,14 +558,20 @@ async function convertImageToWebp(file, quality) {
 
   const safeBlob = blob || file;
   const url = URL.createObjectURL(safeBlob);
+  const originalUrl = URL.createObjectURL(file);
+  const savingRate = Math.max(0, Math.round((1 - (safeBlob.size / Math.max(file.size, 1))) * 100));
 
   return {
     originalName: file.name,
     originalSize: file.size,
+    originalUrl,
     filename: `${file.name.split('.').slice(0, -1).join('.') || file.name}.webp`,
     blob: safeBlob,
     size: safeBlob.size,
     url,
+    width: image.width,
+    height: image.height,
+    savingRate,
   };
 }
 

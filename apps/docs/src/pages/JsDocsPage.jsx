@@ -1,5 +1,6 @@
 import { Card } from '../components/Card.jsx';
 import { CodeBlock } from '../components/CodeBlock.jsx';
+import { GuideTable } from '../components/GuideTable.jsx';
 import { Section } from '../components/Section.jsx';
 import { Sidebar } from '../components/Sidebar.jsx';
 
@@ -679,37 +680,6 @@ app.mount();`}
         </Section>
       </div>
     </div>
-  );
-}
-
-function GuideTable({ headers, rows }) {
-  return (
-    <Card className="guide_table_card">
-      <div className="guide_table_wrap">
-        <table className="guide_table">
-          <thead>
-            <tr>
-              {headers.map((header) => (
-                <th key={header}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr key={`${headers[0]}-${rowIndex}`}>
-                {row.map((cell, cellIndex) => (
-                  <td key={`${rowIndex}-${cellIndex}`}>
-                    {typeof cell === 'string' && (cell.startsWith('.') || cell.startsWith('[') || cell.startsWith('data-'))
-                      ? <code>{cell}</code>
-                      : cell}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Card>
   );
 }
 

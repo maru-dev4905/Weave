@@ -1,4 +1,5 @@
 import { Card } from '../components/Card.jsx';
+import { GuideTable } from '../components/GuideTable.jsx';
 import { Section } from '../components/Section.jsx';
 import { Sidebar } from '../components/Sidebar.jsx';
 
@@ -6,7 +7,6 @@ const sidebarItems = [
   { href: '#css-structure', label: '전체 구조' },
   { href: '#css-relationship', label: 'common.css와 wv.css' },
   { href: '#css-build', label: '빌드 포함 모듈' },
-  { href: '#css-excluded', label: '미포함 항목' },
   { href: '#css-tokens', label: '토큰 체계' },
   { href: '#css-responsive', label: '반응형 체계' },
   { href: '#css-layout', label: 'Layout / Object' },
@@ -39,12 +39,6 @@ const buildRows = [
   ['Spacing', '_utilities/_spacing.scss', '포함', '.mt_*, .pt_*'],
   ['Typography', '_utilities/_typography.scss', '포함', '.fs_*, .fw_*, .ta_*'],
   ['Color', '_utilities/_color.scss', '포함', '.fc_*, .bgc_*'],
-];
-
-const excludedRows = [
-  ['_utilities/_form.scss', '미사용', '.wv_ipt 정의만 존재'],
-  ['_settings/_css-vars.scss', '빈 파일', '실제 선언 없음'],
-  ['_settings/_config.scss', '미사용', '별도 import 없음'],
 ];
 
 const tokenRows = [
@@ -140,15 +134,6 @@ export function CssDocsPage() {
         </Section>
 
         <Section
-          id="css-excluded"
-          eyebrow="Unused"
-          title="미포함 항목"
-          description="소스는 있으나 현재 기본 빌드에는 연결되지 않은 항목입니다."
-        >
-          <GuideTable headers={['파일', '상태', '설명']} rows={excludedRows} />
-        </Section>
-
-        <Section
           id="css-tokens"
           eyebrow="Tokens"
           title="토큰 체계"
@@ -219,34 +204,5 @@ export function CssDocsPage() {
         </Section>
       </div>
     </div>
-  );
-}
-
-function GuideTable({ headers, rows }) {
-  return (
-    <Card className="guide_table_card">
-      <div className="guide_table_wrap">
-        <table className="guide_table">
-          <thead>
-            <tr>
-              {headers.map((header) => (
-                <th key={header}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr key={`${headers[0]}-${rowIndex}`}>
-                {row.map((cell, cellIndex) => (
-                  <td key={`${rowIndex}-${cellIndex}`}>
-                    {typeof cell === 'string' && cell.startsWith('.') ? <code>{cell}</code> : cell}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Card>
   );
 }

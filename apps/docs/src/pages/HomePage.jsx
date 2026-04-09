@@ -25,6 +25,11 @@ const featureCards = [
     text: 'px to vw, px to rem, img to webp 같은 실무형 변환 도구를 문서 앱 안에서 바로 실행할 수 있습니다.',
   },
   {
+    icon: 'PG',
+    title: 'Playground',
+    text: 'HTML을 직접 입력하고 preview 루트에서만 마운트해 빠르게 실험할 수 있습니다.',
+  },
+  {
     icon: 'VD',
     title: 'Validation',
     text: '폼 유효성 검증 규칙과 메시지 타겟 구조를 모듈 문서 형태로 바로 확인할 수 있습니다.',
@@ -40,6 +45,11 @@ const featureCards = [
     text: '공통 색상 토큰을 밀도 있게 확인하고 필요한 값을 바로 복사할 수 있습니다.',
   },
   {
+    icon: 'RL',
+    title: 'Release',
+    text: '빌드 전에 생성한 changelog 데이터를 기준으로 버전별 변경 이력을 확인할 수 있습니다.',
+  },
+  {
     icon: 'DL',
     title: 'Download',
     text: '배포용 압축 파일 구성과 다운로드 버튼만 남긴 단순한 다운로드 페이지입니다.',
@@ -49,60 +59,30 @@ const featureCards = [
 export function HomePage() {
   return (
     <div className="page_shell">
-      <section className="hero_panel">
-        <div className="hero_copy">
-          <span className="section_eyebrow">Publishing Docs</span>
-          <h1>문서와 테스트를 한 화면에 모은 퍼블리싱 허브</h1>
-          <p>
-            다크 톤의 문서형 레이아웃 안에서 CSS 가이드, 스크립트 모듈 데모, 색상 토큰,
-            다운로드 자산까지 한 번에 탐색할 수 있도록 정리했습니다.
-          </p>
+      <section className="hero_panel hero_panel_home">
+        <div className="hero_copy hero_copy_home">
+          <h1 className="hero_brand_title">
+            <span className="hero_brand_word">WEAVE</span>
+          </h1>
+          <p>가이드 확인부터 데모 검증, 변환 도구 실행, 스타터 다운로드까지 docs 안에서 바로 이어집니다.</p>
           <div className="hero_actions">
             <Link to="/docs/css" className="primary_link_button">
-              CSS 문서 보기
+              CSS Docs
             </Link>
             <Link to="/docs/js" className="secondary_link_button">
-              JS 모듈 보기
+              JS Docs
+            </Link>
+            <Link to="/download" className="secondary_link_button">
+              Download
             </Link>
           </div>
         </div>
-
-        <Card className="hero_preview_card">
-          <div className="hero_preview_grid">
-            <div>
-              <strong>Landing</strong>
-              <span>문서형 다크 UI</span>
-            </div>
-            <div>
-              <strong>CSS</strong>
-              <span>TOC + 표 중심 구조</span>
-            </div>
-            <div>
-              <strong>JS</strong>
-              <span>기능 테스트 + 코드 복사</span>
-            </div>
-            <div>
-              <strong>ANIM</strong>
-              <span>Anim + Validation</span>
-            </div>
-          </div>
-          <div className="hero_preview_code">
-            <span>Docs(CSS)</span>
-            <span>Docs(JS)</span>
-            <span>Anim</span>
-            <span>Tools</span>
-            <span>Validation</span>
-            <span>Form</span>
-            <span>Plate</span>
-            <span>Download</span>
-          </div>
-        </Card>
       </section>
 
       <Section
         eyebrow="Sections"
-        title="필요한 자료를 바로 찾을 수 있게 구조를 단순하게 다시 정리했습니다"
-        description="상단 GNB를 기준으로 역할이 분명하게 나뉘도록 재구성했고, 각 페이지는 하나의 목적에만 집중하도록 정리했습니다."
+        title="자주 쓰는 흐름만 짧고 명확하게 묶었습니다"
+        description="문서, 테스트, 도구, 다운로드를 중심으로 각 페이지의 목적이 바로 보이도록 정리했습니다."
       >
         <div className="feature_grid">
           {featureCards.map((feature) => (
@@ -118,40 +98,48 @@ export function HomePage() {
       <Section
         eyebrow="Quick Access"
         title="바로 이동"
-        description="실제 작업 흐름에 맞춰 자주 보는 페이지를 빠르게 열 수 있도록 링크를 분리했습니다."
+        description="문서 확인, 실험, 변환, 배포 흐름에서 자주 여는 페이지를 바로 이동할 수 있습니다."
       >
         <div className="quick_link_grid">
           <Link to="/docs/css" className="quick_link_card surface_card">
-            <strong>색상, 테이블, TOC 기반 CSS 설명서</strong>
-            <span>문서 원본 느낌을 유지한 상세 가이드</span>
+            <strong>CSS 문서</strong>
+            <span>토큰, 유틸리티, 구조 가이드</span>
           </Link>
           <Link to="/docs/js" className="quick_link_card surface_card">
-            <strong>모듈별 기능 테스트와 코드 복사</strong>
-            <span>Copy, Tabs, Accordion, Modal, Scroll, Hide Today</span>
+            <strong>JS 문서</strong>
+            <span>모듈 데모와 코드 복사</span>
           </Link>
           <Link to="/anim" className="quick_link_card surface_card">
-            <strong>애니메이션 모듈 테스트</strong>
-            <span>Fade, Parallax, Cascade, Ticker, Count</span>
+            <strong>Anim 테스트</strong>
+            <span>Fade, Parallax, Cascade, Count</span>
           </Link>
           <Link to="/tools" className="quick_link_card surface_card">
-            <strong>퍼블리싱 보조 도구</strong>
-            <span>PX to VW, PX to REM, IMG to WEBP</span>
+            <strong>Tools</strong>
+            <span>PX, REM, WEBP 변환</span>
+          </Link>
+          <Link to="/playground" className="quick_link_card surface_card">
+            <strong>Playground</strong>
+            <span>HTML editor + isolated preview</span>
           </Link>
           <Link to="/validation" className="quick_link_card surface_card">
-            <strong>폼 검증 규칙 문서</strong>
-            <span>Required, Match, Group, Summary</span>
+            <strong>Validation 문서</strong>
+            <span>필드, 그룹, 메시지 규칙</span>
           </Link>
           <Link to="/form" className="quick_link_card surface_card">
-            <strong>실전형 폼 제출 흐름</strong>
-            <span>Contact, Signup, Error Focus, Success</span>
+            <strong>Form 데모</strong>
+            <span>문의/가입 submit 흐름</span>
           </Link>
           <Link to="/plate" className="quick_link_card surface_card">
-            <strong>색상 토큰 탐색</strong>
+            <strong>Plate</strong>
             <span>토큰 값 확인과 복사</span>
           </Link>
+          <Link to="/release" className="quick_link_card surface_card">
+            <strong>Release</strong>
+            <span>버전별 변경 이력</span>
+          </Link>
           <Link to="/download" className="quick_link_card surface_card">
-            <strong>압축 파일 다운로드</strong>
-            <span>구성 안내와 단일 다운로드 버튼</span>
+            <strong>Download</strong>
+            <span>스타터 파일과 구성 안내</span>
           </Link>
         </div>
       </Section>

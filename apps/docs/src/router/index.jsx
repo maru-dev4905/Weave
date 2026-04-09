@@ -8,6 +8,8 @@ import { FormPage } from '../pages/FormPage.jsx';
 import { HomePage } from '../pages/HomePage.jsx';
 import { PalettePage } from '../pages/PalettePage.jsx';
 import { JsDocsPage } from '../pages/JsDocsPage.jsx';
+import { PlaygroundPage } from '../pages/PlaygroundPage.jsx';
+import { ReleasePage } from '../pages/ReleasePage.jsx';
 import { ToolsPage } from '../pages/ToolsPage.jsx';
 import { ValidationPage } from '../pages/ValidationPage.jsx';
 
@@ -45,6 +47,10 @@ export const router = createBrowserRouter([
         element: <ToolsPage />,
       },
       {
+        path: 'playground',
+        element: <PlaygroundPage />,
+      },
+      {
         path: 'validation',
         element: <ValidationPage />,
       },
@@ -55,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: 'plate',
         element: <PalettePage />,
+      },
+      {
+        path: 'release',
+        element: <ReleasePage />,
       },
       {
         path: 'download',

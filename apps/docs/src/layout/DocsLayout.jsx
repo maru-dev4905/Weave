@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import {
@@ -32,7 +32,6 @@ export function DocsLayout() {
     return window.localStorage.getItem('weave-docs-theme') || 'dark-blue';
   });
   const [themeOpen, setThemeOpen] = useState(false);
-  const topbarRef = useRef(null);
   const pageMeta = getPageMeta(location.pathname);
 
   useEffect(() => {
@@ -114,32 +113,6 @@ export function DocsLayout() {
   }, [activeTheme]);
 
   useEffect(() => {
-    const syncTopbarHeight = () => {
-      const nextHeight = topbarRef.current?.offsetHeight ?? 0;
-      document.documentElement.style.setProperty('--site-topbar-height', `${nextHeight}px`);
-    };
-
-    syncTopbarHeight();
-
-    if (typeof ResizeObserver === 'undefined' || !topbarRef.current) {
-      window.addEventListener('resize', syncTopbarHeight);
-
-      return () => {
-        window.removeEventListener('resize', syncTopbarHeight);
-      };
-    }
-
-    const observer = new ResizeObserver(syncTopbarHeight);
-    observer.observe(topbarRef.current);
-    window.addEventListener('resize', syncTopbarHeight);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', syncTopbarHeight);
-    };
-  }, []);
-
-  useEffect(() => {
     let timeoutId = null;
 
     const handleCopySuccess = (event) => {
@@ -179,7 +152,7 @@ export function DocsLayout() {
         }}
       />
       <div className="weave_site_stage">
-        <header ref={topbarRef} className="site_topbar">
+        <header className="site_topbar">
           <div className="site_topbar_inner">
             <div className="site_topbar_copy">
               <span className="site_topbar_eyebrow">{pageMeta.eyebrow}</span>
@@ -402,8 +375,8 @@ function getPageMeta(pathname) {
   const routeMeta = {
     '/': {
       eyebrow: 'Home',
-      title: '문서형 퍼블리싱 허브',
-      description: 'CSS 설명서의 톤과 구조를 기반으로 홈, 스크립트 문서, 토큰, 다운로드 화면을 하나의 문서 레이아웃으로 정리했습니다.',
+      title: 'WEAVE',
+      description: '웹을 짜는 가장 실전적인 방식',
     },
     '/docs/css': {
       eyebrow: 'Docs(CSS)',
@@ -425,6 +398,11 @@ function getPageMeta(pathname) {
       title: '개발 보조 도구',
       description: 'px to vw, px to rem, img to webp 같은 퍼블리싱 보조 도구를 한 화면에서 바로 실행할 수 있도록 정리했습니다.',
     },
+    '/playground': {
+      eyebrow: 'Playground',
+      title: '에디터형 미리보기 실험실',
+      description: 'HTML을 수정하고 preview 루트에만 플러그인을 마운트해 구조와 동작을 빠르게 검증할 수 있습니다.',
+    },
     '/validation': {
       eyebrow: 'Validation',
       title: '폼 유효성 검증 설명서',
@@ -439,6 +417,11 @@ function getPageMeta(pathname) {
       eyebrow: 'Plate',
       title: '색상 토큰 아카이브',
       description: '공통 토큰을 그룹별로 확인하고 필요한 값을 바로 복사할 수 있습니다.',
+    },
+    '/release': {
+      eyebrow: 'Release',
+      title: '릴리스와 변경 이력',
+      description: '빌드 전에 생성한 release 데이터를 기준으로 버전별 변경 내용을 정적 문서 안에서 확인할 수 있습니다.',
     },
     '/download': {
       eyebrow: 'Download',
