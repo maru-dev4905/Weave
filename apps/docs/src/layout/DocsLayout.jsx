@@ -15,11 +15,23 @@ import {
   validationPlugin,
 } from '@weave/wv/dist/js/core.js';
 
+import DiscordIcon from '../../../../packages/wv/src/images/Discord.svg';
+import FacebookIcon from '../../../../packages/wv/src/images/Facebook.svg';
+import GithubIcon from '../../../../packages/wv/src/images/Github.svg';
+import InstagramIcon from '../../../../packages/wv/src/images/Instagram.svg';
 import { Navbar } from '../components/Navbar.jsx';
 
 export function DocsLayout() {
   const location = useLocation();
   const [copyStatus, setCopyStatus] = useState('');
+  const [activeTheme, setActiveTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'dark-blue';
+    }
+
+    return window.localStorage.getItem('weave-docs-theme') || 'dark-blue';
+  });
+  const [themeOpen, setThemeOpen] = useState(false);
   const topbarRef = useRef(null);
   const pageMeta = getPageMeta(location.pathname);
 
@@ -98,6 +110,10 @@ export function DocsLayout() {
   }, [location.pathname]);
 
   useEffect(() => {
+    window.localStorage.setItem('weave-docs-theme', activeTheme);
+  }, [activeTheme]);
+
+  useEffect(() => {
     const syncTopbarHeight = () => {
       const nextHeight = topbarRef.current?.offsetHeight ?? 0;
       document.documentElement.style.setProperty('--site-topbar-height', `${nextHeight}px`);
@@ -151,9 +167,17 @@ export function DocsLayout() {
   }, []);
 
   return (
-    <div className="weave_site_shell">
+    <div className="weave_site_shell" data-theme={activeTheme}>
       <div className="weave_site_bg" aria-hidden="true" />
-      <Navbar />
+      <Navbar
+        themeOpen={themeOpen}
+        activeTheme={activeTheme}
+        onToggleThemePanel={() => setThemeOpen((prev) => !prev)}
+        onSelectTheme={(themeId) => {
+          setActiveTheme(themeId);
+          setThemeOpen(false);
+        }}
+      />
       <div className="weave_site_stage">
         <header ref={topbarRef} className="site_topbar">
           <div className="site_topbar_inner">
@@ -171,13 +195,77 @@ export function DocsLayout() {
 
         <footer className="site_footer">
           <div className="site_footer_inner">
-            <button
-              type="button"
-              className="copy_ghost_button"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              TOP
-            </button>
+            <div className="site_footer_contact">
+              <div className="site_footer_social_links">
+                <a
+                  href="https://www.facebook.com/profile.php?id=100016921872562&locale=ko_KR"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                  className="site_footer_social_link"
+                >
+                  <span
+                    className="site_footer_social_icon"
+                    style={{ '--social-icon': `url(${FacebookIcon})` }}
+                    aria-hidden="true"
+                  />
+                </a>
+                <a
+                  href="https://www.instagram.com/syy1_publ/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="site_footer_social_link"
+                >
+                  <span
+                    className="site_footer_social_icon"
+                    style={{ '--social-icon': `url(${InstagramIcon})` }}
+                    aria-hidden="true"
+                  />
+                </a>
+                <a
+                  href="https://discord.com/channels/@maru49"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Discord"
+                  className="site_footer_social_link"
+                >
+                  <span
+                    className="site_footer_social_icon"
+                    style={{ '--social-icon': `url(${DiscordIcon})` }}
+                    aria-hidden="true"
+                  />
+                </a>
+                <a
+                  href="https://github.com/maru-dev4905"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="site_footer_social_link"
+                >
+                  <span
+                    className="site_footer_social_icon"
+                    style={{ '--social-icon': `url(${GithubIcon})` }}
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
+              <a className="site_footer_email" href="mailto:marudev4905@gmail.com">
+                marudev4905@gmail.com
+              </a>
+            </div>
+
+            <div className="site_footer_bottom">
+              <p className="site_footer_copy">Copyright 2026. maru All rights reserved.</p>
+              <button
+                type="button"
+                className="copy_ghost_button"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                TOP
+              </button>
+            </div>
+
           </div>
         </footer>
       </div>
@@ -287,6 +375,30 @@ function formatBytes(size) {
 }
 
 function getPageMeta(pathname) {
+  if (pathname.startsWith('/tools/px-to-vw')) {
+    return {
+      eyebrow: 'Tools',
+      title: 'PX to VW',
+      description: 'px와 vw 값을 상호 변환하고 CSS 문자열까지 한 번에 계산할 수 있는 docs 전용 도구입니다.',
+    };
+  }
+
+  if (pathname.startsWith('/tools/px-to-rem')) {
+    return {
+      eyebrow: 'Tools',
+      title: 'PX to REM',
+      description: 'base font-size 기준으로 px와 rem 값을 빠르게 계산할 수 있는 docs 전용 도구입니다.',
+    };
+  }
+
+  if (pathname.startsWith('/tools/img-to-webp')) {
+    return {
+      eyebrow: 'Tools',
+      title: 'IMG to WEBP',
+      description: '브라우저 안에서 이미지를 WebP로 변환하고 개별 또는 ZIP으로 저장할 수 있는 docs 전용 도구입니다.',
+    };
+  }
+
   const routeMeta = {
     '/': {
       eyebrow: 'Home',

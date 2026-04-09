@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function Sidebar({ title, items }) {
   const [activeHref, setActiveHref] = useState(items[0]?.href || '');
@@ -75,16 +76,32 @@ export function Sidebar({ title, items }) {
       <div className="page_sidebar_card surface_card">
         <p className="page_sidebar_title">{title}</p>
         <nav className="page_sidebar_nav">
-          {items.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={(event) => handleAnchorClick(event, item.href)}
-              className={activeHref === item.href ? 'is_active' : ''}
-            >
-              {item.label}
-            </a>
-          ))}
+          {items.map((item) => {
+            const depthClass = item.depth ? `is_depth_${item.depth}` : '';
+
+            if (item.href?.startsWith('#')) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(event) => handleAnchorClick(event, item.href)}
+                  className={[activeHref === item.href ? 'is_active' : '', depthClass].filter(Boolean).join(' ')}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
+            return (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) => [isActive ? 'is_active' : '', depthClass].filter(Boolean).join(' ')}
+              >
+                {item.label}
+              </NavLink>
+            );
+          })}
         </nav>
       </div>
     </aside>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import JSZip from 'jszip';
 
@@ -46,7 +47,12 @@ const removeCssProps = [
 ];
 
 export function ToolsPage() {
-  const [activeToolId, setActiveToolId] = useState(tools[0].id);
+  const { toolId } = useParams();
+  const activeTool = toolId ? tools.find((tool) => tool.id === toolId) : null;
+
+  if (toolId && !activeTool) {
+    return <Navigate to="/tools" replace />;
+  }
 
   return (
     <div className="page_shell page_shell_with_sidebar">
@@ -55,69 +61,89 @@ export function ToolsPage() {
         items={[
           { href: '#overview', label: '개요' },
           { href: '#tools-list', label: 'Tools List' },
-          { href: '#tool-panel', label: 'Tool Panel' },
+          ...tools.map((tool) => ({
+            href: `/tools/${tool.id}`,
+            label: tool.title,
+            depth: 2,
+          })),
         ]}
       />
 
       <div className="page_content">
         <Section
           id="overview"
-          eyebrow="Tools"
+          eyebrow="TOOLS"
           title="개발과 퍼블리싱 작업을 돕는 보조 도구"
-          description="반복적으로 계산하거나 변환하는 작업을 문서 앱 안에서 바로 처리할 수 있도록 별도 Tools 페이지로 분리했습니다."
+          description="반복적으로 계산하거나 변환하는 작업을 문서 앱 안에서 바로 처리할 수 있습니다."
           align="wide"
-        >
-          <Card className="intro_banner">
-            <div>
-              <strong>Range</strong>
-              <span>PX to VW, PX to REM, IMG to WEBP</span>
-            </div>
-            <div>
-              <strong>Flow</strong>
-              <span>{'목록 선택 -> 툴 패널 실행'}</span>
-            </div>
-            <div>
-              <strong>Use Case</strong>
-              <span>실무형 퍼블리싱 보조 도구</span>
-            </div>
-          </Card>
-        </Section>
+        />
 
         <Section
           id="tools-list"
-          eyebrow="List"
+          eyebrow="LIST"
           title="Tools List"
-          description="필요한 도구를 선택하면 같은 페이지 안에서 바로 해당 패널이 열리도록 구성했습니다."
+          description="필요한 도구를 선택해 보다 빠르게 처리해보세요."
         >
           <div className="tools_list_grid">
             {tools.map((tool) => (
-              <button
+              <Link
                 key={tool.id}
-                type="button"
-                className={activeToolId === tool.id ? 'tools_list_card is_active' : 'tools_list_card'}
-                onClick={() => setActiveToolId(tool.id)}
+                to={`/tools/${tool.id}`}
+                className={activeTool?.id === tool.id ? 'tools_list_card is_active' : 'tools_list_card'}
               >
                 <span className="badge_pill">{tool.title}</span>
                 <strong>{tool.title}</strong>
                 <p>{tool.summary}</p>
-              </button>
+              </Link>
             ))}
           </div>
         </Section>
 
-        <Section
-          id="tool-panel"
-          eyebrow="Panel"
-          title={tools.find((tool) => tool.id === activeToolId)?.title || 'Tools'}
-          description="선택한 도구의 입력값과 결과를 한 화면에서 바로 확인할 수 있습니다."
-        >
-          {activeToolId === 'px-to-vw' ? <PxToVwTool /> : null}
-          {activeToolId === 'px-to-rem' ? <PxToRemTool /> : null}
-          {activeToolId === 'img-to-webp' ? <ImgToWebpTool /> : null}
-        </Section>
+        {activeTool ? (
+          <Section
+            id="tool-detail"
+            eyebrow="TOOL"
+            title={activeTool.title}
+            description={getToolDescription(activeTool.id)}
+          >
+            {renderToolPanel(activeTool.id)}
+          </Section>
+        ) : null}
       </div>
     </div>
   );
+}
+
+function renderToolPanel(toolId) {
+  if (toolId === 'px-to-vw') {
+    return <PxToVwTool />;
+  }
+
+  if (toolId === 'px-to-rem') {
+    return <PxToRemTool />;
+  }
+
+  if (toolId === 'img-to-webp') {
+    return <ImgToWebpTool />;
+  }
+
+  return null;
+}
+
+function getToolDescription(toolId) {
+  if (toolId === 'px-to-vw') {
+    return 'px와 vw 단위를 숫자 또는 CSS 문자열 기준으로 상호 변환할 수 있습니다.';
+  }
+
+  if (toolId === 'px-to-rem') {
+    return 'base font-size 값을 기준으로 px와 rem 계산값을 빠르게 확인할 수 있습니다.';
+  }
+
+  if (toolId === 'img-to-webp') {
+    return '브라우저 안에서 이미지를 WebP로 변환하고 개별 또는 ZIP으로 내려받을 수 있습니다.';
+  }
+
+  return '';
 }
 
 function PxToVwTool() {
@@ -255,21 +281,32 @@ function PxToRemTool() {
   const [px, setPx] = useState('16');
   const [rem, setRem] = useState('1');
   const [baseFont, setBaseFont] = useState('16');
+  const [resultValue, setResultValue] = useState('1');
+  const [resultUnit, setResultUnit] = useState('REM');
 
   const handlePxChange = (value) => {
+    const nextRem = formatNumber(num(value) / num(baseFont, 16));
     setPx(value);
-    setRem(formatNumber(num(value) / num(baseFont, 16)));
+    setRem(nextRem);
+    setResultValue(nextRem || '0');
+    setResultUnit('REM');
   };
 
   const handleRemChange = (value) => {
+    const nextPx = formatNumber(num(value) * num(baseFont, 16));
     setRem(value);
-    setPx(formatNumber(num(value) * num(baseFont, 16)));
+    setPx(nextPx);
+    setResultValue(nextPx || '0');
+    setResultUnit('PX');
   };
 
   const handleBaseChange = (value) => {
     setBaseFont(value);
     if (px) {
-      setRem(formatNumber(num(px) / num(value, 16)));
+      const nextRem = formatNumber(num(px) / num(value, 16));
+      setRem(nextRem);
+      setResultValue(nextRem || '0');
+      setResultUnit('REM');
     }
   };
 
@@ -282,14 +319,28 @@ function PxToRemTool() {
         </div>
       </div>
 
-      <div className="tools_panel_grid mt_20">
-        <div className="tools_box">
-          <label>PX</label>
-          <input value={px} onChange={(event) => handlePxChange(event.target.value)} />
-          <label>REM</label>
-          <input value={rem} onChange={(event) => handleRemChange(event.target.value)} />
+      <div className="tools_rem_layout mt_20">
+        <div className="tools_box tools_rem_box">
           <label>Base Font Size</label>
           <input value={baseFont} onChange={(event) => handleBaseChange(event.target.value)} />
+
+          <div className="tools_rem_inputs">
+            <div className="tools_rem_field">
+              <label>PX</label>
+              <input value={px} onChange={(event) => handlePxChange(event.target.value)} />
+            </div>
+            <span className="tools_rem_to">to</span>
+            <div className="tools_rem_field">
+              <label>REM</label>
+              <input value={rem} onChange={(event) => handleRemChange(event.target.value)} />
+            </div>
+          </div>
+
+          <div className="tools_rem_result">
+            <span className="tools_rem_result_label">RESULT</span>
+            <strong>{resultValue}</strong>
+            <p>{resultUnit}</p>
+          </div>
         </div>
       </div>
     </Card>
@@ -300,6 +351,7 @@ function ImgToWebpTool() {
   const [quality, setQuality] = useState(90);
   const [files, setFiles] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   useEffect(() => {
     return () => {
@@ -309,8 +361,30 @@ function ImgToWebpTool() {
     };
   }, [files]);
 
+  useEffect(() => {
+    if (!toastMessage) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setToastMessage('');
+    }, 1800);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [toastMessage]);
+
   const processFiles = async (inputFiles) => {
     if (!inputFiles?.length) {
+      return;
+    }
+
+    const selectedFiles = Array.from(inputFiles);
+    const hasInvalidExtension = selectedFiles.some((file) => !isImageExtensionFile(file));
+
+    if (hasInvalidExtension) {
+      setToastMessage('전송이 실패했습니다');
       return;
     }
 
@@ -319,14 +393,19 @@ function ImgToWebpTool() {
       URL.revokeObjectURL(file.url);
     });
 
-    const results = [];
-    for (const file of Array.from(inputFiles)) {
-      const converted = await convertImageToWebp(file, quality / 100);
-      results.push(converted);
-    }
+    try {
+      const results = [];
+      for (const file of selectedFiles) {
+        const converted = await convertImageToWebp(file, quality / 100);
+        results.push(converted);
+      }
 
-    setFiles(results);
-    setIsProcessing(false);
+      setFiles(results);
+    } catch {
+      setToastMessage('전송이 실패했습니다');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleFileChange = async (event) => {
@@ -385,9 +464,9 @@ function ImgToWebpTool() {
           onDragOver={(event) => event.preventDefault()}
           onDrop={handleDrop}
         >
-          <input type="file" accept="image/*" multiple onChange={handleFileChange} />
+          <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.webp" multiple onChange={handleFileChange} />
           <strong>이미지를 드롭하거나 클릭해서 선택하세요</strong>
-          <p>JPG, PNG 등 브라우저에서 읽을 수 있는 이미지 파일을 WebP로 변환합니다.</p>
+          <p>이미지 확장자 파일만 업로드할 수 있으며 변환 실패 시 토스트 메시지가 표시됩니다.</p>
         </label>
 
         <div className="tools_img_actions mt_20">
@@ -418,6 +497,8 @@ function ImgToWebpTool() {
           )) : <p className="tools_empty_text">아직 변환된 이미지가 없습니다.</p>}
         </div>
       </Card>
+
+      <div className={toastMessage ? 'tools_toast is_visible' : 'tools_toast'}>{toastMessage}</div>
     </div>
   );
 }
@@ -507,4 +588,9 @@ function formatBytes(size) {
 
   const fixed = nextSize >= 10 || unitIndex === 0 ? 0 : 1;
   return `${nextSize.toFixed(fixed)} ${units[unitIndex]}`;
+}
+
+function isImageExtensionFile(file) {
+  const extension = file.name.split('.').pop()?.toLowerCase() || '';
+  return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(extension);
 }

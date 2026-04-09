@@ -228,20 +228,13 @@ export function JsDocsPage() {
                 <h3>Live Demo</h3>
                 <p>아래 버튼을 누르면 텍스트 또는 지정된 영역 내용을 바로 복사합니다.</p>
               </div>
-              <div className="demo_inline_source" id="copy-demo-source">
-                https://docs.internal/modules/copy
-              </div>
             </div>
 
             <div className="demo_button_row">
               <button data-weave-copy data-text="문자열이 복사되었습니다." data-copy-success-label="DONE">
                 텍스트 복사
               </button>
-              <button
-                className="weave_copy"
-                data-target="#copy-demo-source"
-                data-copy-success-label="DONE"
-              >
+              <button data-weave-copy data-text="https://docs.internal/modules/copy" data-copy-success-label="DONE">
                 영역 복사
               </button>
               <button
@@ -262,7 +255,7 @@ export function JsDocsPage() {
   텍스트 복사
 </button>
 
-<button class="weave_copy" data-target="#copy-demo-source">
+<button data-weave-copy data-text="https://docs.internal/modules/copy">
   영역 복사
 </button>`}
               />

@@ -41,6 +41,10 @@ export const router = createBrowserRouter([
         element: <ToolsPage />,
       },
       {
+        path: 'tools/:toolId',
+        element: <ToolsPage />,
+      },
+      {
         path: 'validation',
         element: <ValidationPage />,
       },
