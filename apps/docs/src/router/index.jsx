@@ -1,6 +1,9 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import { DocsLayout } from '../layout/DocsLayout.jsx';
+
+const routerBasename =
+  (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '') || undefined;
 import { AnimPage } from '../pages/AnimPage.jsx';
 import { CssDocsPage } from '../pages/CssDocsPage.jsx';
 import { DownloadPage } from '../pages/DownloadPage.jsx';
@@ -13,7 +16,7 @@ import { ReleasePage } from '../pages/ReleasePage.jsx';
 import { ToolsPage } from '../pages/ToolsPage.jsx';
 import { ValidationPage } from '../pages/ValidationPage.jsx';
 
-export const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     element: <DocsLayout />,
@@ -24,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'docs',
-        element: <Navigate to="/docs/css" replace />,
+        element: <Navigate to="docs/css" replace />,
       },
       {
         path: 'docs/css',
@@ -72,4 +75,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+export const router = createBrowserRouter(
+  routes,
+  routerBasename ? { basename: routerBasename } : {}
+);

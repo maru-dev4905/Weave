@@ -1,14 +1,21 @@
 [
   {
     "version": "DOCS-2026.04.13",
-    "title": "릴리스 업데이트",
+    "title": "릴리스 외 1개 영역 정리",
     "date": "2026-04-13",
-    "summary": "릴리스 영역의 문서와 데모 구성을 정리한 릴리스입니다.",
+    "summary": "릴리스, 브랜딩/UI 중심으로 문서 구조와 데모 흐름을 다듬은 릴리스입니다.",
     "groups": [
       {
         "label": "릴리스",
         "entries": [
+          "chore(release): WEAVE 1.0.0 버전 정렬 및 wv dist 갱신",
           "build(wv): dist JS/CSS 한 줄 minify 및 저장소·버전 헤더 추가"
+        ]
+      },
+      {
+        "label": "브랜딩/UI",
+        "entries": [
+          "Footer SNS 추가"
         ]
       }
     ]

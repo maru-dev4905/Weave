@@ -3,6 +3,7 @@ import { CodeBlock } from '../components/CodeBlock.jsx';
 import { GuideTable } from '../components/GuideTable.jsx';
 import { Section } from '../components/Section.jsx';
 import { Sidebar } from '../components/Sidebar.jsx';
+import { withBase } from '../utils/withBase.js';
 
 const sidebarItems = [
   { href: '#overview', label: '개요' },
@@ -178,6 +179,8 @@ const hideTodayCheckpoints = [
 ];
 
 export function JsDocsPage() {
+  const docsCssHref = withBase('/docs/css');
+
   return (
     <div className="page_shell page_shell_with_sidebar">
       <Sidebar items={sidebarItems} />
@@ -320,7 +323,7 @@ app.mount();`}
                 </button>
                 <button
                   data-weave-link-button
-                  data-weave-link-href="/docs/css"
+                  data-weave-link-href={docsCssHref}
                   data-weave-link-blank="true"
                 >
                   새 창 열기
@@ -331,7 +334,7 @@ app.mount();`}
                 <strong>테스트 안내</strong>
                 <p>
                   현재 창 이동은 문서 내 앵커 또는 동일 사이트 경로를 기준으로 확인할 수 있고,
-                  새 창 이동은 `/docs/css`를 별도 탭으로 엽니다.
+                  새 창 이동은 <code>{docsCssHref}</code>를 별도 탭으로 엽니다.
                 </p>
               </div>
             </div>
@@ -339,7 +342,7 @@ app.mount();`}
             <ModuleReference
               htmlCode={`<button
   data-weave-link-button
-  data-weave-link-href="/docs/css"
+  data-weave-link-href="${docsCssHref}"
   data-weave-link-delay="300"
   data-weave-link-blank="true"
 >

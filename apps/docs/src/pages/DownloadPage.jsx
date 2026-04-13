@@ -1,5 +1,6 @@
 import { Card } from '../components/Card.jsx';
 import { Section } from '../components/Section.jsx';
+import { withBase } from '../utils/withBase.js';
 
 const downloadItems = [
   'index.html',
@@ -131,7 +132,7 @@ export function DownloadPage() {
               </div>
             </div>
             <a
-              href="/downloads/publishing-starter.zip"
+              href={withBase('/downloads/publishing-starter.zip')}
               download
               className="primary_button download_anchor_button"
             >
