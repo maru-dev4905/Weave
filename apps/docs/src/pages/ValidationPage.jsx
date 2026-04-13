@@ -6,10 +6,10 @@ import { Sidebar } from '../components/Sidebar.jsx';
 
 const sidebarItems = [
   { href: '#overview', label: '개요' },
-  { href: '#basic-rules', label: 'Basic Rules' },
-  { href: '#field-types', label: 'Field Types' },
-  { href: '#group-validation', label: 'Group Validation' },
-  { href: '#api-reference', label: 'API Reference' },
+  { href: '#basic-rules', label: '기본 규칙' },
+  { href: '#field-types', label: '필드 유형' },
+  { href: '#group-validation', label: '그룹 검증' },
+  { href: '#api-reference', label: 'API' },
 ];
 
 const moduleCards = [
@@ -95,7 +95,7 @@ const apiCheckpoints = [
 export function ValidationPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="On this page" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section

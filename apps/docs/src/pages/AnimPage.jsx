@@ -150,7 +150,7 @@ const countCheckpoints = [
 export function AnimPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="On this page" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section

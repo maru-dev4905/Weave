@@ -1390,6 +1390,11 @@
   flex-wrap: wrap;
 }
 
+.playground_status {
+  color: var(--theme-muted);
+  font-size: 14px;
+}
+
 .playground_preview_frame {
   min-height: 420px;
   padding: 20px;
@@ -1435,6 +1440,33 @@
 
 .release_entries {
   margin-top: 18px;
+}
+
+.release_groups {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.release_group {
+  padding: 18px;
+  border: 1px solid var(--theme-border);
+  border-radius: 18px;
+  background: var(--theme-surface-soft);
+}
+
+.release_group_label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--theme-accent-soft);
+  color: var(--theme-accent-strong);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .page_sidebar {

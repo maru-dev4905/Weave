@@ -4,15 +4,15 @@ import { Sidebar } from '../components/Sidebar.jsx';
 
 const sidebarItems = [
   { href: '#overview', label: '개요' },
-  { href: '#contact-form', label: 'Contact Form' },
-  { href: '#signup-form', label: 'Signup Form' },
-  { href: '#submit-flow', label: 'Submit Flow' },
+  { href: '#contact-form', label: '문의 폼' },
+  { href: '#signup-form', label: '가입 폼' },
+  { href: '#submit-flow', label: '제출 흐름' },
 ];
 
 export function FormPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="On this page" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section

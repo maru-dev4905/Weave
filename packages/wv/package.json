@@ -15,11 +15,12 @@
     "build:css:common": "sass src/scss/common.scss dist/css/common.css --no-source-map",
     "build:css:admin": "sass src/scss/admin.scss dist/css/admin.css --no-source-map",
     "build:css:gov": "sass src/scss/gov/index.scss dist/css/gov.css --no-source-map",
-    "build:css": "pnpm run build:css:wv && pnpm run build:css:common && pnpm run build:css:admin && pnpm run build:css:gov",
+    "build:css": "pnpm run build:css:wv && pnpm run build:css:common && pnpm run build:css:admin && pnpm run build:css:gov && node scripts/finalize-css.mjs",
     "build:js": "vite build",
     "build": "pnpm run clean && pnpm run build:css && pnpm run build:js"
   },
   "devDependencies": {
+    "esbuild": "^0.21.3",
     "rimraf": "^6.0.0",
     "sass": "^1.77.0",
     "vite": "^5.4.0"

@@ -91,7 +91,7 @@ const helperRows = [
 export function CssDocsPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="CSS" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section

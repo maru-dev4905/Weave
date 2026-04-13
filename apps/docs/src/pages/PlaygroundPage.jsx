@@ -83,6 +83,7 @@ const presets = [
 ];
 
 const defaultPresetId = presets[0].id;
+const PLAYGROUND_STORAGE_KEY = 'weave-docs-playground-state';
 const previewStyles = `
   :host {
     color: #e2e8f0;
@@ -180,11 +181,45 @@ const previewStyles = `
 export function PlaygroundPage() {
   const previewRootRef = useRef(null);
   const appRef = useRef(null);
-  const [selectedPresetId, setSelectedPresetId] = useState(defaultPresetId);
-  const [source, setSource] = useState(() => getPresetById(defaultPresetId).html);
-  const [mountedHtml, setMountedHtml] = useState(() => getPresetById(defaultPresetId).html);
+  const initialState = useMemo(() => getInitialPlaygroundState(), []);
+  const [selectedPresetId, setSelectedPresetId] = useState(initialState.selectedPresetId);
+  const [source, setSource] = useState(initialState.source);
+  const [mountedHtml, setMountedHtml] = useState(initialState.mountedHtml);
+  const [autoPreview, setAutoPreview] = useState(initialState.autoPreview);
 
   const activePreset = useMemo(() => getPresetById(selectedPresetId), [selectedPresetId]);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      window.localStorage.setItem(
+        PLAYGROUND_STORAGE_KEY,
+        JSON.stringify({
+          selectedPresetId,
+          source,
+          mountedHtml,
+          autoPreview,
+        }),
+      );
+    }, 120);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [selectedPresetId, source, mountedHtml, autoPreview]);
+
+  useEffect(() => {
+    if (!autoPreview) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setMountedHtml(source);
+    }, 240);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [autoPreview, source]);
 
   useEffect(() => {
     if (!previewRootRef.current) {
@@ -221,7 +256,9 @@ export function PlaygroundPage() {
     const preset = getPresetById(presetId);
     setSelectedPresetId(presetId);
     setSource(preset.html);
-    setMountedHtml(preset.html);
+    if (autoPreview) {
+      setMountedHtml(preset.html);
+    }
   };
 
   const handleMount = () => {
@@ -236,7 +273,7 @@ export function PlaygroundPage() {
 
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="On this page" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section
@@ -292,6 +329,15 @@ export function PlaygroundPage() {
                 </select>
               </div>
 
+              <label className="tools_check mt_20">
+                <input
+                  type="checkbox"
+                  checked={autoPreview}
+                  onChange={(event) => setAutoPreview(event.target.checked)}
+                />
+                자동 미리보기
+              </label>
+
               <div className="playground_editor mt_20">
                 <label htmlFor="playground-source">HTML Source</label>
                 <textarea
@@ -309,6 +355,9 @@ export function PlaygroundPage() {
                 <button type="button" className="secondary_link_button" onClick={handleReset}>
                   Reset Preset
                 </button>
+                <span className="playground_status">
+                  {autoPreview ? '입력 후 자동으로 preview가 반영됩니다.' : '편집 후 Mount Preview를 눌러 반영합니다.'}
+                </span>
               </div>
             </Card>
 
@@ -361,4 +410,36 @@ export function PlaygroundPage() {
 
 function getPresetById(id) {
   return presets.find((preset) => preset.id === id) || presets[0];
+}
+
+function getInitialPlaygroundState() {
+  if (typeof window === 'undefined') {
+    const preset = getPresetById(defaultPresetId);
+    return {
+      selectedPresetId: defaultPresetId,
+      source: preset.html,
+      mountedHtml: preset.html,
+      autoPreview: true,
+    };
+  }
+
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(PLAYGROUND_STORAGE_KEY) || 'null');
+    const preset = getPresetById(saved?.selectedPresetId || defaultPresetId);
+
+    return {
+      selectedPresetId: preset.id,
+      source: saved?.source || preset.html,
+      mountedHtml: saved?.mountedHtml || preset.html,
+      autoPreview: saved?.autoPreview ?? true,
+    };
+  } catch {
+    const preset = getPresetById(defaultPresetId);
+    return {
+      selectedPresetId: defaultPresetId,
+      source: preset.html,
+      mountedHtml: preset.html,
+      autoPreview: true,
+    };
+  }
 }

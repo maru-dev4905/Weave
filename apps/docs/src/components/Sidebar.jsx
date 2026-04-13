@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export function Sidebar({ title, items }) {
+export function Sidebar({ title = '이 페이지에서', items }) {
   const [activeHref, setActiveHref] = useState(items[0]?.href || '');
 
   useEffect(() => {

@@ -58,9 +58,9 @@ export function ToolsPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
       <Sidebar
-        title="On this page"
+        title="이 페이지에서"
         items={[
-          { href: activeTool ? '/tools' : '#tools-list', label: 'Tools List' },
+          { href: activeTool ? '/tools' : '#tools-list', label: '도구 목록' },
           ...tools.map((tool) => ({
             href: `/tools/${tool.id}`,
             label: tool.title,
@@ -74,7 +74,7 @@ export function ToolsPage() {
           <>
             <Section
               id="overview"
-              eyebrow="TOOLS"
+              eyebrow="도구"
               title="개발과 퍼블리싱 작업을 돕는 보조 도구"
               description="반복적으로 계산하거나 변환하는 작업을 문서 앱 안에서 바로 처리할 수 있습니다."
               align="wide"
@@ -82,8 +82,8 @@ export function ToolsPage() {
 
             <Section
               id="tools-list"
-              eyebrow="LIST"
-              title="Tools List"
+              eyebrow="목록"
+              title="도구 목록"
               description="필요한 도구를 선택해 보다 빠르게 처리해보세요."
             >
               <div className="tools_list_grid">
@@ -93,7 +93,6 @@ export function ToolsPage() {
                     to={`/tools/${tool.id}`}
                     className={activeTool?.id === tool.id ? 'tools_list_card is_active' : 'tools_list_card'}
                   >
-                    <span className="badge_pill">{tool.title}</span>
                     <strong>{tool.title}</strong>
                     <p>{tool.summary}</p>
                   </Link>
@@ -107,13 +106,13 @@ export function ToolsPage() {
           <>
             <div className="tools_back_row">
               <Link to="/tools" className="secondary_link_button tools_back_button">
-                Tools List로 돌아가기
+                도구 목록으로 돌아가기
               </Link>
             </div>
 
             <Section
               id="tool-detail"
-              eyebrow="TOOL"
+              eyebrow="도구"
               title={activeTool.title}
             >
               {renderToolPanel(activeTool.id)}
@@ -208,9 +207,9 @@ function PxToVwTool() {
             <h4>PX to VW</h4>
             <label>PX</label>
             <input value={px} onChange={(event) => setPx(event.target.value)} />
-            <label>Base Width</label>
+            <label>기준 너비</label>
             <input value={base1} onChange={(event) => setBase1(event.target.value)} />
-            <label>Decimals</label>
+            <label>소수점 자리</label>
             <input value={decimals} onChange={(event) => setDecimals(event.target.value)} />
             <button type="button" onClick={convertPxToVw}>변환</button>
             <textarea value={vw} readOnly />
@@ -223,7 +222,7 @@ function PxToVwTool() {
             <h4>VW to PX</h4>
             <label>VW</label>
             <input value={vwInput} onChange={(event) => setVwInput(event.target.value)} />
-            <label>Base Width</label>
+            <label>기준 너비</label>
             <input value={base2} onChange={(event) => setBase2(event.target.value)} />
             <button type="button" onClick={convertVwToPx}>변환</button>
             <textarea value={pxOutput} readOnly />
@@ -245,11 +244,11 @@ function PxToVwTool() {
         <div className="tools_panel_grid mt_20">
           <div className="tools_box">
             <h4>CSS PX to VW</h4>
-            <label>Source CSS</label>
+            <label>원본 CSS</label>
             <textarea value={cssSrcPx} onChange={(event) => setCssSrcPx(event.target.value)} />
-            <label>Base Width</label>
+            <label>기준 너비</label>
             <input value={cssBase1} onChange={(event) => setCssBase1(event.target.value)} />
-            <label>Decimals</label>
+            <label>소수점 자리</label>
             <input value={cssDecimals} onChange={(event) => setCssDecimals(event.target.value)} />
             <label className="tools_check">
               <input type="checkbox" checked={stripPx} onChange={(event) => setStripPx(event.target.checked)} />
@@ -264,9 +263,9 @@ function PxToVwTool() {
 
           <div className="tools_box">
             <h4>CSS VW to PX</h4>
-            <label>Source CSS</label>
+            <label>원본 CSS</label>
             <textarea value={cssSrcVw} onChange={(event) => setCssSrcVw(event.target.value)} />
-            <label>Base Width</label>
+            <label>기준 너비</label>
             <input value={cssBase2} onChange={(event) => setCssBase2(event.target.value)} />
             <label className="tools_check">
               <input type="checkbox" checked={stripVw} onChange={(event) => setStripVw(event.target.checked)} />
@@ -400,7 +399,7 @@ function ImgToWebpTool() {
     const hasInvalidExtension = selectedFiles.some((file) => !isImageExtensionFile(file));
 
     if (hasInvalidExtension) {
-      setToastMessage('전송이 실패했습니다');
+      setToastMessage('이미지 파일만 업로드할 수 있습니다');
       return;
     }
 
@@ -419,7 +418,7 @@ function ImgToWebpTool() {
 
       setFiles(results);
     } catch {
-      setToastMessage('전송이 실패했습니다');
+      setToastMessage('이미지 변환에 실패했습니다');
     } finally {
       setIsProcessing(false);
     }
@@ -460,7 +459,7 @@ function ImgToWebpTool() {
         <div className="demo_card_head">
           <div>
             <h3>IMG to WEBP</h3>
-            <p>드래그 앤 드롭 또는 파일 선택으로 이미지를 WebP로 변환하고 품질 값도 함께 제어합니다.</p>
+            <p>드래그 앤 드롭 또는 파일 선택으로 이미지를 WebP로 변환하고 품질 값을 함께 제어합니다.</p>
           </div>
         </div>
 
@@ -483,7 +482,7 @@ function ImgToWebpTool() {
         >
           <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.webp" multiple onChange={handleFileChange} />
           <strong>이미지를 드롭하거나 클릭해서 선택하세요</strong>
-          <p>이미지 확장자 파일만 업로드할 수 있으며 변환 실패 시 토스트 메시지가 표시됩니다.</p>
+          <p>이미지 파일만 업로드할 수 있으며 변환 실패 시 안내 토스트가 표시됩니다.</p>
         </label>
 
         <div className="tools_img_actions mt_20">
@@ -524,7 +523,7 @@ function ImgToWebpTool() {
                 <div className="tools_result_copy">
                   <strong>{file.originalName}</strong>
                   <p>{file.width} x {file.height}</p>
-                  <p>{formatBytes(file.originalSize)} to {formatBytes(file.size)}</p>
+                  <p>{formatBytes(file.originalSize)} -> {formatBytes(file.size)}</p>
                   <p>{file.savingRate}% 절감</p>
                 </div>
               </div>

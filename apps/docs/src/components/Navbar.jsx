@@ -30,8 +30,8 @@ export function Navbar({ themeOpen, activeTheme, onToggleThemePanel, onSelectThe
         <NavLink to="/" end className="site_brand">
           <span className="site_brand_mark">W</span>
           <span>
-            <strong>Publishing UI Kit</strong>
-            <small>CSS and Script Modules</small>
+            <strong>WEAVE</strong>
+            <small>웹을 짜는 가장 실전적인 방식</small>
           </span>
         </NavLink>
 

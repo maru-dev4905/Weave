@@ -64,7 +64,7 @@ export function HomePage() {
           <h1 className="hero_brand_title">
             <span className="hero_brand_word">WEAVE</span>
           </h1>
-          <p>가이드 확인부터 데모 검증, 변환 도구 실행, 스타터 다운로드까지 docs 안에서 바로 이어집니다.</p>
+          <p>웹을 짜는 가장 실전적인 방식으로, 문서 확인부터 데모 검증과 도구 실행, 스타터 다운로드까지 한 흐름으로 이어집니다.</p>
           <div className="hero_actions">
             <Link to="/docs/css" className="primary_link_button">
               CSS Docs
@@ -80,7 +80,7 @@ export function HomePage() {
       </section>
 
       <Section
-        eyebrow="Sections"
+        eyebrow="WEAVE"
         title="자주 쓰는 흐름만 짧고 명확하게 묶었습니다"
         description="문서, 테스트, 도구, 다운로드를 중심으로 각 페이지의 목적이 바로 보이도록 정리했습니다."
       >
@@ -96,7 +96,7 @@ export function HomePage() {
       </Section>
 
       <Section
-        eyebrow="Quick Access"
+        eyebrow="바로가기"
         title="바로 이동"
         description="문서 확인, 실험, 변환, 배포 흐름에서 자주 여는 페이지를 바로 이동할 수 있습니다."
       >
@@ -119,7 +119,7 @@ export function HomePage() {
           </Link>
           <Link to="/playground" className="quick_link_card surface_card">
             <strong>Playground</strong>
-            <span>HTML editor + isolated preview</span>
+            <span>HTML 편집과 preview 실험</span>
           </Link>
           <Link to="/validation" className="quick_link_card surface_card">
             <strong>Validation 문서</strong>

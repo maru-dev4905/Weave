@@ -401,7 +401,7 @@ function getPageMeta(pathname) {
     '/playground': {
       eyebrow: 'Playground',
       title: '에디터형 미리보기 실험실',
-      description: 'HTML을 수정하고 preview 루트에만 플러그인을 마운트해 구조와 동작을 빠르게 검증할 수 있습니다.',
+      description: 'HTML을 수정하고 자동 또는 수동으로 preview를 반영해 구조와 동작을 빠르게 검증할 수 있습니다.',
     },
     '/validation': {
       eyebrow: 'Validation',
@@ -421,7 +421,7 @@ function getPageMeta(pathname) {
     '/release': {
       eyebrow: 'Release',
       title: '릴리스와 변경 이력',
-      description: '빌드 전에 생성한 release 데이터를 기준으로 버전별 변경 내용을 정적 문서 안에서 확인할 수 있습니다.',
+      description: '빌드 전에 생성한 docs 릴리스 데이터를 기준으로 영역별 변경 흐름을 정적 문서 안에서 확인할 수 있습니다.',
     },
     '/download': {
       eyebrow: 'Download',

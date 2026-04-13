@@ -30,7 +30,7 @@ const moduleCards = [
   {
     title: 'File Drop',
     selector: '[data-weave-file-drop]',
-    summary: '드래그 앤 드랍 영역과 file input을 연결하고, 파일 유효성 검사와 리스트 렌더링을 처리합니다.',
+    summary: '드래그 앤 드롭 영역과 file input을 연결하고, 파일 유효성 검사와 리스트 렌더링을 처리합니다.',
   },
   {
     title: 'Tabs',
@@ -75,7 +75,7 @@ const linkButtonGuideRows = [
 ];
 
 const fileDropGuideRows = [
-  ['selector', '[data-weave-file-drop]', '드래그 앤 드랍 영역 루트 셀렉터입니다.'],
+  ['selector', '[data-weave-file-drop]', '드래그 앤 드롭 영역 루트 셀렉터입니다.'],
   ['zone key', 'data-weave-file-drop="docsFileDropSingle"', 'JS `zones` 객체와 연결하는 식별자입니다.'],
   ['input', 'input[type="file"] 또는 config.input', '업로드에 사용할 파일 입력 요소입니다.'],
   ['multiple', 'boolean', '다중 파일 선택 허용 여부를 제어합니다.'],
@@ -180,7 +180,7 @@ const hideTodayCheckpoints = [
 export function JsDocsPage() {
   return (
     <div className="page_shell page_shell_with_sidebar">
-      <Sidebar title="On this page" items={sidebarItems} />
+      <Sidebar items={sidebarItems} />
 
       <div className="page_content">
         <Section
