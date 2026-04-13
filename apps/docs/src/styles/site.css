@@ -3175,7 +3175,7 @@
   mask: url("/src/assets/images/Discord.svg") no-repeat center / cover;
 }
 .weave_site_shell [aria-label="GitHub"] .site_footer_social_icon{
-  mask: url("/src/assets/images/GitHub.svg") no-repeat center / cover;
+  mask: url("/src/assets/images/Github.svg") no-repeat center / cover;
 }
 
 .weave_site_shell .site_footer_email {
