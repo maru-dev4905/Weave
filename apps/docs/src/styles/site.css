@@ -3165,6 +3165,18 @@
 .weave_site_shell .site_footer_social_icon {
   background: var(--theme-accent);
 }
+.weave_site_shell [aria-label="Facebook"] .site_footer_social_icon{
+  mask: url("/src/assets/images/Facebook.svg") no-repeat center / cover;
+}
+.weave_site_shell [aria-label="Instagram"] .site_footer_social_icon{
+  mask: url("/src/assets/images/Instagram.svg") no-repeat center / cover;
+}
+.weave_site_shell [aria-label="Discord"] .site_footer_social_icon{
+  mask: url("/src/assets/images/Discord.svg") no-repeat center / cover;
+}
+.weave_site_shell [aria-label="GitHub"] .site_footer_social_icon{
+  mask: url("/src/assets/images/GitHub.svg") no-repeat center / cover;
+}
 
 .weave_site_shell .site_footer_email {
   color: var(--theme-text);

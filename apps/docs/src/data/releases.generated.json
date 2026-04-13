@@ -1,5 +1,19 @@
 [
   {
+    "version": "DOCS-2026.04.13",
+    "title": "릴리스 업데이트",
+    "date": "2026-04-13",
+    "summary": "릴리스 영역의 문서와 데모 구성을 정리한 릴리스입니다.",
+    "groups": [
+      {
+        "label": "릴리스",
+        "entries": [
+          "build(wv): dist JS/CSS 한 줄 minify 및 저장소·버전 헤더 추가"
+        ]
+      }
+    ]
+  },
+  {
     "version": "DOCS-2026.04.09",
     "title": "릴리스 외 1개 영역 정리",
     "date": "2026-04-09",
