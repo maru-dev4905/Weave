@@ -32,6 +32,7 @@ export function DocsLayout() {
     return window.localStorage.getItem('weave-docs-theme') || 'dark-blue';
   });
   const [themeOpen, setThemeOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const pageMeta = getPageMeta(location.pathname);
 
   useEffect(() => {
@@ -140,11 +141,16 @@ export function DocsLayout() {
   }, []);
 
   return (
-    <div className="weave_site_shell" data-theme={activeTheme}>
+    <div
+      className={sidebarOpen ? 'weave_site_shell' : 'weave_site_shell is_sidebar_closed'}
+      data-theme={activeTheme}
+    >
       <div className="weave_site_bg" aria-hidden="true" />
       <Navbar
         themeOpen={themeOpen}
         activeTheme={activeTheme}
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
         onToggleThemePanel={() => setThemeOpen((prev) => !prev)}
         onSelectTheme={(themeId) => {
           setActiveTheme(themeId);

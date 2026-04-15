@@ -1,5 +1,19 @@
 [
   {
+    "version": "DOCS-2026.04.15",
+    "title": "플레이그라운드 업데이트",
+    "date": "2026-04-15",
+    "summary": "플레이그라운드 영역의 문서와 데모 구성을 정리한 릴리스입니다.",
+    "groups": [
+      {
+        "label": "플레이그라운드",
+        "entries": [
+          "stabilize wv package imports and build flow"
+        ]
+      }
+    ]
+  },
+  {
     "version": "DOCS-2026.04.13",
     "title": "브랜딩/UI 외 2개 영역 정리",
     "date": "2026-04-13",

@@ -12,7 +12,6 @@ import { HomePage } from '../pages/HomePage.jsx';
 import { PalettePage } from '../pages/PalettePage.jsx';
 import { JsDocsPage } from '../pages/JsDocsPage.jsx';
 import { PlaygroundPage } from '../pages/PlaygroundPage.jsx';
-import { ReleasePage } from '../pages/ReleasePage.jsx';
 import { ToolsPage } from '../pages/ToolsPage.jsx';
 import { ValidationPage } from '../pages/ValidationPage.jsx';
 
@@ -67,7 +66,7 @@ const routes = [
       },
       {
         path: 'release',
-        element: <ReleasePage />,
+        element: <Navigate to="/" replace />,
       },
       {
         path: 'download',
