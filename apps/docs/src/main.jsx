@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import '@weave/wv/dist/css/wv.css';
-import '@weave/wv/dist/css/common.css';
+import '@weave/wv/css/wv.css';
+import '@weave/wv/css/common.css';
 import './index.css';
 import './styles/site.css';
 

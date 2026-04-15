@@ -6,7 +6,7 @@ import {
   createWeave,
   modalPlugin,
   tabsPlugin,
-} from '@weave/wv/dist/js/core.js';
+} from '@weave/wv';
 
 import { Card } from '../components/Card.jsx';
 import { CodeBlock } from '../components/CodeBlock.jsx';

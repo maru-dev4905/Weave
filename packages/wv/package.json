@@ -6,6 +6,13 @@
   "main": "./dist/js/core.js",
   "module": "./dist/js/core.js",
   "style": "./dist/css/wv.css",
+  "exports": {
+    ".": "./dist/js/core.js",
+    "./css/wv.css": "./dist/css/wv.css",
+    "./css/common.css": "./dist/css/common.css",
+    "./css/admin.css": "./dist/css/admin.css",
+    "./css/gov.css": "./dist/css/gov.css"
+  },
   "files": [
     "dist"
   ],

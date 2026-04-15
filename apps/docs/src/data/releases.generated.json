@@ -1,21 +1,28 @@
 [
   {
     "version": "DOCS-2026.04.13",
-    "title": "릴리스 외 1개 영역 정리",
+    "title": "브랜딩/UI 외 2개 영역 정리",
     "date": "2026-04-13",
-    "summary": "릴리스, 브랜딩/UI 중심으로 문서 구조와 데모 흐름을 다듬은 릴리스입니다.",
+    "summary": "브랜딩/UI, 다운로드, 릴리스 중심으로 문서 구조와 데모 흐름을 다듬은 릴리스입니다.",
     "groups": [
+      {
+        "label": "브랜딩/UI",
+        "entries": [
+          "footer github icon modify",
+          "Footer SNS 추가"
+        ]
+      },
+      {
+        "label": "다운로드",
+        "entries": [
+          "chore(docs): GitHub Pages 배포 설정 및 base 경로 대응"
+        ]
+      },
       {
         "label": "릴리스",
         "entries": [
           "chore(release): WEAVE 1.0.0 버전 정렬 및 wv dist 갱신",
           "build(wv): dist JS/CSS 한 줄 minify 및 저장소·버전 헤더 추가"
-        ]
-      },
-      {
-        "label": "브랜딩/UI",
-        "entries": [
-          "Footer SNS 추가"
         ]
       }
     ]

@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "pnpm --filter @weave/wv build",
     "dev": "node ./scripts/generate-release-data.mjs && vite",
+    "prebuild": "pnpm --filter @weave/wv build",
     "build": "node ./scripts/generate-release-data.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

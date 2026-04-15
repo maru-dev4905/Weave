@@ -13,7 +13,7 @@ import {
   scrollToPlugin,
   tabsPlugin,
   validationPlugin,
-} from '@weave/wv/dist/js/core.js';
+} from '@weave/wv';
 
 import DiscordIcon from '../../../../packages/wv/src/images/Discord.svg';
 import FacebookIcon from '../../../../packages/wv/src/images/Facebook.svg';

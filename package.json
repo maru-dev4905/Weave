@@ -2,9 +2,10 @@
   "name": "weave",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@latest",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "pnpm -r dev",
+    "dev": "pnpm -r --if-present dev",
+    "dev:docs": "pnpm --filter docs dev",
     "build": "pnpm -r build",
     "preview": "pnpm -r preview"
   },
