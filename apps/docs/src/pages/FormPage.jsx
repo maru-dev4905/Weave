@@ -74,7 +74,7 @@ export function FormPage() {
                 <div data-weave-validation-message data-weave-validation-for="form-contact-subject" hidden />
               </div>
 
-              <div className="validation_field">
+              <div className="validation_field" data-weave-text-count>
                 <label htmlFor="form-contact-message">문의 내용</label>
                 <textarea
                   id="form-contact-message"

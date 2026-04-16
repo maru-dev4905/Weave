@@ -39,6 +39,11 @@ const basicGuideRows = [
   ['root', '[data-weave-validation]', 'validation 루트 폼 셀렉터입니다.'],
   ['required', 'HTML attribute', '필수 입력 여부를 검사합니다.'],
   ['minlength / maxlength', 'HTML attribute', '텍스트 길이 제한을 검사합니다.'],
+  [
+    'text counter',
+    'data-weave-text-count + textarea[maxlength]',
+    'wrapper에 선언하면 textarea 우하단에 현재 글자수/최대값 카운터를 표시합니다.',
+  ],
   ['message target', '[data-weave-validation-message]', '필드별 메시지 출력 타겟입니다.'],
   ['summary', '[data-weave-validation-summary]', 'submit 시 첫 에러 메시지를 상단에 요약합니다.'],
 ];
@@ -70,6 +75,7 @@ const apiGuideRows = [
 const basicCheckpoints = [
   '1차 범위에서는 blur와 submit 기준으로만 검사해 흐름을 단순하게 유지합니다.',
   '필수, 길이, 이메일 같은 기본 규칙은 네이티브 HTML 속성을 그대로 재사용합니다.',
+  '`data-weave-text-count`를 textarea wrapper에 선언하면 maxlength 기준 카운터를 하단 우측에 표시할 수 있습니다.',
   '메시지 위치는 별도 타겟으로 분리해 퍼블리셔가 마크업을 제어하기 쉽게 구성합니다.',
 ];
 
@@ -158,7 +164,7 @@ export function ValidationPage() {
                 <input id="validation-email" type="email" required data-weave-validation-label="이메일" />
                 <div data-weave-validation-message data-weave-validation-for="validation-email" hidden />
               </div>
-              <div className="validation_field">
+              <div className="validation_field" data-weave-text-count>
                 <label htmlFor="validation-copy">소개</label>
                 <textarea
                   id="validation-copy"
@@ -195,6 +201,17 @@ export function ValidationPage() {
     data-weave-validation-label="이메일"
   />
   <div data-weave-validation-message data-weave-validation-for="email" hidden></div>
+
+  <div data-weave-text-count>
+    <textarea
+      id="copy"
+      required
+      minlength="10"
+      maxlength="40"
+      data-weave-validation-label="소개"
+    ></textarea>
+    <div data-weave-validation-message data-weave-validation-for="copy" hidden></div>
+  </div>
 
   <div data-weave-validation-summary hidden></div>
 </form>`}

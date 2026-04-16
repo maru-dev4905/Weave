@@ -20,6 +20,9 @@ const DEFAULT_OPTIONS = {
   },
 };
 
+const TEXT_COUNT_SELECTOR = '[data-weave-text-count]';
+const TEXT_COUNT_OUTPUT_SELECTOR = '[data-weave-text-count-output]';
+
 export function validationPlugin(userOptions = {}) {
   const options = {
     ...DEFAULT_OPTIONS,
@@ -42,18 +45,36 @@ export function validationPlugin(userOptions = {}) {
     },
 
     scan(ctx) {
-      return Array.from(ctx.root.querySelectorAll(options.selector));
+      const mounts = new Set([
+        ...Array.from(ctx.root.querySelectorAll(options.selector)),
+        ...Array.from(ctx.root.querySelectorAll(TEXT_COUNT_SELECTOR)),
+      ]);
+
+      return Array.from(mounts);
     },
 
     mount(ctx, el) {
-      return mountValidation(ctx, el, options);
+      if (el.matches(options.selector)) {
+        return mountValidation(ctx, el, options);
+      }
+
+      if (el.matches(TEXT_COUNT_SELECTOR)) {
+        return mountTextCount(ctx, el);
+      }
+
+      return null;
     },
 
     unmount(ctx, el, instance) {
       instance?.offSubmit?.();
       instance?.offBlurHandlers?.forEach((dispose) => dispose());
       instance?.cleanupEnhancements?.forEach((dispose) => dispose());
-      clearValidationState(el, options);
+      instance?.offInput?.();
+
+      if (el.matches(options.selector)) {
+        clearValidationState(el, options);
+      }
+
       ctx.logger.log('validation plugin unmounted', el);
     },
 
@@ -115,6 +136,44 @@ function mountValidation(ctx, form, options) {
     offBlurHandlers,
     cleanupEnhancements,
   };
+}
+
+function mountTextCount(ctx, wrapper) {
+  const textarea = wrapper.querySelector('textarea');
+  if (!textarea) {
+    return null;
+  }
+
+  const maxlength = parseInteger(textarea.getAttribute('maxlength'));
+  if (!Number.isInteger(maxlength) || maxlength <= 0) {
+    return null;
+  }
+
+  const output =
+    wrapper.querySelector(TEXT_COUNT_OUTPUT_SELECTOR) || createTextCountOutput(wrapper, textarea, maxlength);
+  const sync = () => {
+    output.textContent = formatTextCount(textarea.value || '', maxlength);
+  };
+
+  sync();
+  const offInput = ctx.events.listen(textarea, 'input', sync);
+
+  return {
+    offInput,
+  };
+}
+
+function createTextCountOutput(wrapper, textarea, maxlength) {
+  const output = document.createElement('div');
+  output.setAttribute('data-weave-text-count-output', '');
+  output.setAttribute('aria-live', 'polite');
+  output.textContent = formatTextCount(textarea.value || '', maxlength);
+  wrapper.appendChild(output);
+  return output;
+}
+
+function formatTextCount(value, maxlength) {
+  return `${value.length}/${maxlength}`;
 }
 
 function validateForm(form, options) {

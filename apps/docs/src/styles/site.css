@@ -1916,6 +1916,20 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
+[data-weave-text-count] {
+  position: relative;
+  padding-bottom: 38px;
+}
+
+[data-weave-text-count-output] {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1;
+}
+
 .validation_field label,
 .validation_group strong,
 .validation_group label {
