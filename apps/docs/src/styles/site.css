@@ -1791,6 +1791,18 @@
   line-height: 1.3;
 }
 
+.css_preview_box {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.css_preview_badge {
+  top: 8px;
+  right: 8px;
+}
+
 .docs_module_card p,
 .docs_note_card p {
   margin: 0;
@@ -1800,6 +1812,7 @@
   width: max-content;
   max-width: 100%;
 }
+
 
 .demo_accordion {
   padding: 0;
@@ -3103,6 +3116,12 @@
 .weave_site_shell .download_tree_head p {
   color: var(--theme-muted);
 }
+
+.weave_site_shell .css_preview_box {
+  border-color: var(--theme-border);
+  background: var(--theme-surface-soft);
+}
+
 
 .weave_site_shell .guide_table tbody tr:nth-child(odd) {
   background: var(--theme-card-glow);
