@@ -304,6 +304,17 @@ function createDocsFileDropZones() {
         renderFileDropMessage('#docs-file-drop-multi-feedback', formatFileDropErrors(errors));
       },
     },
+    assetNamingDrop: {
+      input: '#asset-naming-file-input',
+      multiple: true,
+      renderList: false,
+      onError(errors) {
+        const message = formatFileDropErrors(errors);
+        if (message) {
+          renderFileDropMessage('#asset-naming-feedback', message);
+        }
+      },
+    },
   };
 }
 

@@ -1190,7 +1190,7 @@
 }
 
 .tools_panel_grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .tools_list_card,
@@ -1247,6 +1247,8 @@
   display: grid;
   gap: 10px;
   padding: 24px;
+  width: 100%;
+  min-height: 100%;
 }
 
 .tools_box h4 {
@@ -1279,6 +1281,10 @@
 .tools_box textarea {
   min-height: 140px;
   resize: vertical;
+}
+
+.tools_tall_textarea {
+  min-height: 400px !important;
 }
 
 .tools_box button,
@@ -1396,13 +1402,97 @@
 
 .tools_action_row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 10px;
   flex-wrap: wrap;
 }
 
 .tools_action_row_center {
   justify-content: center;
+}
+
+.tools_option_hint {
+  margin: 0;
+  color: var(--theme-muted-2);
+  font-size: 13px;
+}
+
+.tools_file_edit_list {
+  display: grid;
+  gap: 10px;
+}
+
+.tools_file_edit_item {
+  display: grid;
+  gap: 6px;
+}
+
+.tools_file_name_row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.tools_file_item_row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.tools_file_item_row label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.tools_file_remove_button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-soft);
+  color: var(--theme-text);
+  cursor: pointer;
+}
+
+.tools_file_ext {
+  color: var(--theme-muted-2);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.weave_site_shell input[type='checkbox'],
+.weave_site_shell input[type='radio'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid var(--theme-border-strong);
+  border-radius: 999px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.weave_site_shell input[type='checkbox']:checked,
+.weave_site_shell input[type='radio']:checked {
+  border-color: var(--theme-accent);
+  background: var(--theme-accent);
+}
+
+.weave_site_shell input[type='checkbox']:checked::after,
+.weave_site_shell input[type='radio']:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--theme-button-text);
+  transform: translate(-50%, -50%);
 }
 
 .tools_result_preview {
