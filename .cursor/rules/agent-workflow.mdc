@@ -1,0 +1,11 @@
+---
+description: Continue tasks end-to-end and prioritize fixing runtime/build errors first
+alwaysApply: true
+---
+
+# Agent Workflow Rule
+
+- Continue requested work end-to-end without stopping at partial progress.
+- After meaningful edits, run build verification before considering work complete.
+- If any runtime/build error appears, pause feature work and resolve the error first.
+- After successful verification, provide recommended commit message(s).

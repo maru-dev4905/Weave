@@ -1,5 +1,19 @@
 [
   {
+    "version": "DOCS-2026.04.25",
+    "title": "도구 업데이트",
+    "date": "2026-04-25",
+    "summary": "도구 영역의 문서와 데모 구성을 정리한 릴리스입니다.",
+    "groups": [
+      {
+        "label": "도구",
+        "entries": [
+          "feat(docs/tools): 도구 UX 고도화 및 asset naming 워크플로우 개선"
+        ]
+      }
+    ]
+  },
+  {
     "version": "DOCS-2026.04.18",
     "title": "브랜딩/UI 업데이트",
     "date": "2026-04-18",
